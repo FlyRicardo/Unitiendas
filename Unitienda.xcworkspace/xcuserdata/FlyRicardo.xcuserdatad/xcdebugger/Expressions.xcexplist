@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "-[ViewControllerPromotionList tableView:numberOfRowsInSection:]:ViewControllerPromotionList.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[_promotions count]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[WSProfileConnectorApache stablishProfileConnectionWithUsername:]:WSProfileConnectorApache.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[[NSUserDefaults standardUserDefaults] objectForKey:@&quot;access_token&quot;]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[ViewControllerPromotionList requestGetPromotionsByStore]:ViewControllerPromotionList.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[[NSUserDefaults standardUserDefaults] valueForKey:[Constants GET_LABEL_STORE_ID]]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

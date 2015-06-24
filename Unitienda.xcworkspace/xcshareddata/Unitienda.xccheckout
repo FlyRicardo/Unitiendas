@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>D17AE245-47A2-47A2-ACC7-B02BC226BF5A</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Unitienda</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>361C45DF263D7D89AFB21C9DEB6D6ACE3E105E3E</key>
+		<string>https://github.com/FlyRicardo/Unitiendas.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Unitienda.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>361C45DF263D7D89AFB21C9DEB6D6ACE3E105E3E</key>
+		<string>..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/FlyRicardo/Unitiendas.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>361C45DF263D7D89AFB21C9DEB6D6ACE3E105E3E</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>361C45DF263D7D89AFB21C9DEB6D6ACE3E105E3E</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Unitiendas</string>
+		</dict>
+	</array>
+</dict>
+</plist>
