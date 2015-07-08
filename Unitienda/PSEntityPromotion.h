@@ -9,9 +9,9 @@
 #import "PromotionMO.h"
 #import "StoreMO.h"
 
-@protocol PromotionServices
+@protocol PSEntityPromotion
 
--(NSArray*) getPromotionsListByStore:(Store*) store;                //Gives an array of (Promotion class) related with specific (StoreMO class), saved on the persistence application tool
+-(NSArray*) getPromotionsListByStore:(StoreMO*) store;                //Gives an array of (Promotion class) related with specific (StoreMO class), saved on the persistence application tool
 
 -(PromotionMO*) getPromotionDetail:(PromotionMO*) prmotion;         //Gives an (Promotion class) object related with specific (Promotion class) attributes, saved on the persistence application tool
 

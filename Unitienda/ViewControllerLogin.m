@@ -48,14 +48,14 @@ static NSString *kSegueIdentifierPromotionList = @"ViewControllerPromotionListSe
     [_usernameTextField setText:[[NSUserDefaults standardUserDefaults] valueForKey:[Constants GET_LABEL_USER_NAME]]];
     [_passwordTextField setText:@""];
     
-    [self registerNotifyProcess];
-    [self registerForKeyboardNotifications];
-    
+    [self registerForKeyboardNotifications];    
 }
 
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    
+    [self registerNotifyProcess];
     [self initPropertiesView];
     
     NSLog(@"The access_token store : %@",[[NSUserDefaults standardUserDefaults] valueForKey:[Constants GET_LABEL_NAME_ACCESS_TOKEN]]);

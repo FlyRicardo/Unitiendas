@@ -17,7 +17,7 @@
 @property (nonatomic) NSInteger articleId;
 @property (strong, nonatomic) NSString *name;
 @property (strong, nonatomic) NSNumber *price;
-@property (strong, nonatomic) NSString *descriptionArticle;
+@property (strong, nonatomic) NSString *article_description;
 
 @property (strong, nonatomic) StoreMO *storeMO;
 @property (strong, nonatomic) PhotoMO *photoMO;

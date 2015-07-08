@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <RestKit/RestKit.h>
+#import <RestKit/CoreData.h>
 
 @interface WSConnectionApache : NSObject
 

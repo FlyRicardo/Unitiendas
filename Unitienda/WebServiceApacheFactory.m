@@ -40,17 +40,17 @@ static WebServiceApacheFactory* _instance;
 
 +(id<WSLoginConnector>) createWebServiceLoginConnection
 {
-    return[[WSLoginConnectorApache alloc] init];
+    return[WSLoginConnectorApache getInstance];
 }
 
 +(id<WSProfileConnector>) createWebServiceProfileConnection
 {
-    return[[WSProfileConnectorApache alloc] init];
+    return[WSProfileConnectorApache getInstance];
 }
 
 +(id<WSPromotionConnector>) createWebServicePromotionConnection
 {
-    return[[WSPromotionConnectorApache alloc] init];
+    return[WSPromotionConnectorApache getInstance];
 }
 
 @end

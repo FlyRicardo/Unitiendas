@@ -1,0 +1,21 @@
+//
+//  Unitienda-Prefix.pch
+//  Unitienda
+//
+//  Created by Fly on 6/23/15.
+//  Copyright (c) 2015 ___FlyInc___. All rights reserved.
+//
+
+#ifndef Unitienda_Unitienda_Prefix_pch
+#define Unitienda_Unitienda_Prefix_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#endif
+
+#ifdef __OBJC__
+    #import <UIKit/UIKit.h>
+    #import <Foundation/Foundation.h>
+    #import <CoreData/CoreData.h>
+#endif

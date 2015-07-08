@@ -12,7 +12,7 @@
 #import "CategoryMO.h"
 #import "PromotionMO.h"
 
-@protocol ArticleServices
+@protocol PSEntityArticle
 
 -(NSArray*) getArticleListByStore:(StoreMO*) storeMO;                   //Gives an array of (ArticleMO class) related with specific (StoreMO class), saved on the persistence application tool
 
@@ -20,6 +20,6 @@
 
 -(NSArray*) getAllArticles;                                             //Gives an array of all (ArticleMO class) saved on the persistence application tool, saved on the persistence application tool
 
--(Article*) getArticleByPromotion:(PromotionMO*) promotionMO;           //Gives an (ArticleMO class) object related with specific (PromotionMO class), saved on the persistence application tool
+-(ArticleMO*) getArticleByPromotion:(PromotionMO*) promotionMO;           //Gives an (ArticleMO class) object related with specific (PromotionMO class), saved on the persistence application tool
 
 @end

@@ -1,13 +1,13 @@
 //
-//  ConnectorSevices.m
+//  ConnectorSevices.h
 //  Unitienda
 //
 //  Created by Fly on 6/19/15.
 //  Copyright (c) 2015 ___FlyInc___. All rights reserved.
 //
 
-#import "ConnectorSevices.h"
+#import <Foundation/Foundation.h>
 
-@implementation ConnectorSevices
+@interface PersistentConnector : NSObject
 
 @end

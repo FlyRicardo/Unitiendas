@@ -6,9 +6,6 @@
 //  Copyright (c) 2015 ___FlyInc___. All rights reserved.
 //
 
-#ifndef Unitienda_WebServiceAbstracFactoryProtocol_h
-#define Unitienda_WebServiceAbstracFactoryProtocol_h
-
 #import "WSLoginConnector.h"
 #import "WSProfileConnector.h"
 #import "WSPromotionConnector.h"
@@ -20,6 +17,3 @@
 +(id<WSPromotionConnector>) createWebServicePromotionConnection;
 
 @end
-
-
-#endif

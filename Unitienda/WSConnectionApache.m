@@ -46,6 +46,26 @@ static WSConnectionApache* _instance;
         
         _objectManager = [[RKObjectManager alloc] initWithHTTPClient:client];
         
+        // Initialize managed object model from bundle
+        NSManagedObjectModel *managedObjectModel = [NSManagedObjectModel mergedModelFromBundles:nil];
+        // Initialize managed object store
+        RKManagedObjectStore *managedObjectStore = [[RKManagedObjectStore alloc] initWithManagedObjectModel:managedObjectModel];
+        _objectManager.managedObjectStore = managedObjectStore;
+        
+        // Complete Core Data stack initialization
+        [managedObjectStore createPersistentStoreCoordinator];
+        NSString *storePath = [RKApplicationDataDirectory() stringByAppendingPathComponent:@"Unitienda.sqlite"];
+        NSString *seedPath = [[NSBundle mainBundle] pathForResource:@"RKSeedDatabase" ofType:@"sqlite"];
+        NSError *error;
+        NSPersistentStore *persistentStore = [managedObjectStore addSQLitePersistentStoreAtPath:storePath fromSeedDatabaseAtPath:seedPath withConfiguration:nil options:nil error:&error];
+        NSAssert(persistentStore, @"Failed to add persistent store with error: %@", error);
+        
+        // Create the managed object contexts
+        [managedObjectStore createManagedObjectContexts];
+        
+        // Configure a managed object cache to ensure we do not create duplicate objects
+        managedObjectStore.managedObjectCache = [[RKInMemoryManagedObjectCache alloc] initWithManagedObjectContext:managedObjectStore.persistentStoreManagedObjectContext];
+        
     }
     return self;
 }

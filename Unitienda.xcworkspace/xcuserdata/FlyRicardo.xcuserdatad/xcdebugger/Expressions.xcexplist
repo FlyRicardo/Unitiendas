@@ -26,5 +26,27 @@
             </PersistentString>
          </PersistentStrings>
       </ContextState>
+      <ContextState
+         contextName = "-[WSPromotionConnectorApache getPromotionsByStore:]:WSPromotionConnectorApache.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[postBody accessToken]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "__57-[WSPromotionConnectorApache getPromotionsByStore:block:]_block_invoke140:WSPromotionConnectorApache.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[WSPromotionConnectorApache fetchArticlesFromContext]:WSPromotionConnectorApache.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[article name];">
+            </PersistentString>
+            <PersistentString
+               value = "[article articleId];">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
    </ContextStates>
 </VariablesViewState>

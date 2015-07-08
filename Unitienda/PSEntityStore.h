@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "StoreMO.h"
 
-@protocol StoreServices
+@protocol PSEntityStore
 
 -(StoreMO*) getStoreProfile:(StoreMO*) store;             //Gives an (StoreMO class) object related with specific (StoreMO class) attributes, saved on the persistence application tool
 

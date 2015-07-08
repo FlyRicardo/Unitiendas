@@ -12,7 +12,11 @@
 
 @protocol WSPromotionConnector
 
--(void) getPromotionsByStore:(NSInteger)storeId;   //Notify to its selector the status of promotionsByStore
-                                                   //Params: Success NSArray {@Meta class, @Promotion class}
-                                                   //        Failure @Meta class
+-(void) getPromotionsByStoreWS:(NSInteger)storeId;     //Notify to its selector the status of promotionsByStoreWS
+                                                                                //Params: Success NSArray {@Meta class, @Promotion class}
+                                                                                //        Failure @Meta class
+
+-(void) getPromotionsByStorePersistence:(NSInteger)storeId;      //Notify to its selector the status of getPromotionsByStorePersistence
+                                                                                //Params: Success NSArray {@Meta class, @Promotion class}
+                                                                                //        Failure @Meta class
 @end

@@ -79,6 +79,7 @@ static NSString *kSegueIdentifierPromotionList = @"CreateProfiileToPromotionList
 
 -(void) viewDidLoad{
     [super viewDidLoad];
+    [self registerNotifyProcess];
     [self configureNavigationBar];
     [self initiateUIComponents];
     [self hideVenuePickerCell];
@@ -87,7 +88,7 @@ static NSString *kSegueIdentifierPromotionList = @"CreateProfiileToPromotionList
 }
 
 -(void) viewWillAppear:(BOOL)animated{
-    [self registerNotifyProcess];
+
     [self signUpForKeyboardNotifications];
 }
 

@@ -15,7 +15,11 @@
 #import "PhotoMO.h"
 #import "PromotionMO.h"
 
+#import "Article.h"
+
 #import "Constants.h"
+
+#import "AppDelegate.h"
 
 @interface WSPromotionConnectorApache()
 
@@ -54,7 +58,26 @@ static WSPromotionConnectorApache* _instance;
 
 #pragma mark - Protocol methos implementation
 
--(void) getPromotionsByStore:(NSInteger)storeId
+//This Method only was a test to trying synchronizing the success response block with the returned response of the method 'getPromotionsByStore:store'
+
+/** Call to <-(void) getPromotionsByStore:(NSInteger)storeId block:(void (^)(id))block> signature
+-(void) getPromotionsByStore:(NSInteger)storeId{
+     **
+    [self getPromotionsByStore:storeId
+                         block:^(id obj) {
+                             NSArray *promotionList = obj;
+                             NSDictionary* userInfo = @{[Constants GET_LABEL_NAME_PROMOTION_BY_STORE_WS_RESPONSE]: promotionList};
+                             [[NSNotificationCenter defaultCenter] postNotificationName:[Constants GET_LABEL_NAME_PROMOTION_BY_STORE_WS_RESPONSE_NOTIFICATION] object:nil userInfo:userInfo];
+                         }
+     ];
+}
+ **
+ **/
+
+/**
+-(void) getPromotionsByStore:(NSInteger)storeId block:(void (^)(id))block
+ **/
+-(void) getPromotionsByStoreWS:(NSInteger)storeId
 {
     /**
      REQUEST DESCRIPTIOR CONFIGURATION
@@ -75,74 +98,142 @@ static WSPromotionConnectorApache* _instance;
     StoreMO* postBody = [[StoreMO alloc]init];
     
     [postBody setAccessToken:[[NSUserDefaults standardUserDefaults] objectForKey:[Constants GET_LABEL_NAME_ACCESS_TOKEN]]];
-//    [postBody setStoreId:storeId];
-    [postBody setStoreId:1];
+    [postBody setStoreId:storeId];
     
     /**
      RESPONSE DESCRIPTIOR CONFIGURATION
      **/
-    RKObjectMapping *responseMapping = [RKObjectMapping mappingForClass:[ArticleMO class]];
+    
+    //ENTITY APPROACH
+    RKEntityMapping *responseMapping = [RKEntityMapping mappingForEntityForName:@"Article" inManagedObjectStore:[[_wsConnectionApache objectManager] managedObjectStore]];
+    responseMapping.identificationAttributes = @[@"articleId"];
+    
+    //When parameters of incomming response doesn't match with parameters of destination entity,
+    //HAS to be used <addAttributeMappingsFromDictionary> method of RKEntityMapping.
+    //When parameters of incomming response match with patameters of destination entity,
+    //SHOULD to be used  <addAttributeMappingsFromArray>
     [responseMapping addAttributeMappingsFromDictionary:@{
-                                                         @"articleId":@"articleId",
-                                                         @"name":@"name",
-                                                         @"price": @"price",
-                                                         @"description": @"descriptionArticle"
-                                                         }];
+                                                     @"articleId": @"articleId",
+                                                     @"name": @"name",
+                                                     @"price": @"price",
+                                                     @"articleDescription": @"articleDescription"
+                                                     }];
     
-    // define icon objects mapping
-    RKObjectMapping *storeMapping = [RKObjectMapping mappingForClass:[StoreMO class]];
-    [storeMapping addAttributeMappingsFromArray:@[@"storeId", @"name", @"number" , @"latitude", @"longitude", @"email"]];
+    //define photo entity mapping
+    RKEntityMapping *photoMapping = [RKEntityMapping mappingForEntityForName:@"Photo" inManagedObjectStore:[[_wsConnectionApache objectManager] managedObjectStore]];
+    [photoMapping setIdentificationAttributes : @[@"photoId"]];
     
-    RKObjectMapping *photoMapping =[RKObjectMapping mappingForClass: [PhotoMO class]];
     [photoMapping addAttributeMappingsFromArray:@[@"photoId", @"name", @"url", @"type"]];
     
-    RKObjectMapping *promotionMapping = [RKObjectMapping mappingForClass: [PromotionMO class]];
-    [promotionMapping addAttributeMappingsFromArray:@[@"promotionId", @"name", @"creationDate", @"dueDate", @"percentageDiscount", @"effectiveness"]];
+    //define store entity mapping
+    RKEntityMapping *storeMapping = [RKEntityMapping mappingForEntityForName:@"Store" inManagedObjectStore:[[_wsConnectionApache objectManager] managedObjectStore]];
+    [storeMapping setIdentificationAttributes: @[@"storeId"]];
     
-    // nesting Objects mapping
-    [responseMapping addPropertyMapping:[RKRelationshipMapping relationshipMappingFromKeyPath:@"storeVO" toKeyPath:@"storeMO" withMapping:storeMapping]];
+    [storeMapping addAttributeMappingsFromArray:@[@"storeId", @"name", @"number", @"email"]];
     
-    [responseMapping addPropertyMapping:[RKRelationshipMapping relationshipMappingFromKeyPath:@"photoVO" toKeyPath:@"photoMO" withMapping:photoMapping]];
+    //define promotion entity mapping
+    RKEntityMapping *promotionMapping = [RKEntityMapping mappingForEntityForName:@"Promotion" inManagedObjectStore:[[_wsConnectionApache objectManager]managedObjectStore]];
+    [promotionMapping setIdentificationAttributes:@[@"promotionId"]];
     
-    [responseMapping addPropertyMapping:[RKRelationshipMapping relationshipMappingFromKeyPath:@"promotionVO" toKeyPath:@"promotionMO" withMapping:promotionMapping]];
+    [promotionMapping addAttributeMappingsFromArray:@[@"promotionId", @"name", @"creationDate", @"dueDate", @"percentageDiscount",@"effectiveness"]];
     
-    //Seting up response descriptor
+    //nesting Objects mapping
+    [responseMapping addPropertyMapping:[RKRelationshipMapping relationshipMappingFromKeyPath:@"storeVO" toKeyPath:@"store" withMapping:storeMapping]];
+    [responseMapping addPropertyMapping:[RKRelationshipMapping relationshipMappingFromKeyPath:@"photoVO" toKeyPath:@"photo" withMapping:photoMapping]];
+    [responseMapping addPropertyMapping:[RKRelationshipMapping relationshipMappingFromKeyPath:@"promotionVO" toKeyPath:@"promotion" withMapping:promotionMapping]];
+    //Setup response descriptor
     RKResponseDescriptor *responseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:responseMapping
                                                                                             method:RKRequestMethodPOST
-                                                                                       pathPattern:@"/CC/WS/WS_GetPromotionDetailsByStore.php"
-                                                                                           keyPath:@"response.Articles"
-                                                                                       statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
+                                                                                        pathPattern:@"/CC/WS/WS_GetPromotionDetailsByStore.php"
+                                                                                            keyPath:@"response.Articles"
+                                                                                        statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
     
     //Adding request and response descriptor to ObjectManager
     [[_wsConnectionApache objectManager] addRequestDescriptor:requestDescriptor];
     [[_wsConnectionApache objectManager] addResponseDescriptor:responseDescriptor];
     
-    
-    
     //Nesting the blocks to handle the success or failire routines
-    NSLog(@"store_id: %li, access_token: %@",[postBody storeId],[postBody accessToken]);
+    NSLog(@"store_id: %li, access_token: %@",(long)[postBody storeId],[postBody accessToken]);
     [[_wsConnectionApache objectManager]postObject:postBody
-                                              path:@"/CC/WS/WS_GetPromotionDetailsByStore.php"
-                                        parameters:nil
-                                           success:^(RKObjectRequestOperation *operation, RKMappingResult *result) {
-                                               
-                                               NSArray *resulList = result.array;
-                                               NSDictionary* userInfo = @{[Constants GET_LABEL_NAME_PROMOTION_BY_STORE_RESPONSE]: resulList};
-                                               [[NSNotificationCenter defaultCenter] postNotificationName:[Constants GET_LABEL_NAME_PROMOTION_BY_STORE_RESPONSE_NOTIFICATION] object:nil userInfo:userInfo];
-                                               
-                                           }failure:^(RKObjectRequestOperation *operation, NSError *error){
-                                               
-                                               MetaMO* responseMO = [[MetaMO alloc] init];
-                                               [responseMO setCode:[error code]];
-                                               [responseMO setErrorDetail:[[error userInfo] objectForKey:@"NSLocalizedRecoverySuggestion"]];
-                                               NSDictionary* userInfo = @{[Constants GET_LABEL_NAME_PROMOTION_BY_STORE_RESPONSE]: responseMO};
-                                               [[NSNotificationCenter defaultCenter] postNotificationName:[Constants GET_LABEL_NAME_PROMOTION_BY_STORE_RESPONSE_NOTIFICATION] object:nil userInfo:userInfo];
-                                               
-                                           }];
+                                                path:@"/CC/WS/WS_GetPromotionDetailsByStore.php"
+                                          parameters:nil
+                                             success: ^(RKObjectRequestOperation *operation, RKMappingResult *result){
+                                                [self getPromotionsByStorePersistence:storeId];
+                                                 
+                                               /**  Response using block as parameter of signature method <-(void) getPromotionsByStore:(NSInteger)storeId block:(void (^)(id))block>
+                                                
+                                                block(resulList);
+                                                
+                                                **/
+                                            }
+                                            failure:^(RKObjectRequestOperation *operation, NSError *error){
+                                                
+                                                AppDelegate *app = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+                                                if(![app.managedObjectContext save:&error]) {
+                                                    NSLog(@"Failed to save to data store: %@", [error localizedDescription]);
+                                                    NSArray* detailedErrors = [[error userInfo] objectForKey:NSDetailedErrorsKey];
+                                                    if(detailedErrors != nil && [detailedErrors count] > 0) {
+                                                        for(NSError* detailedError in detailedErrors) {
+                                                            NSLog(@"  DetailedError: %@", [detailedError userInfo]);
+                                                        }
+                                                    }
+                                                    else {
+                                                        NSLog(@"  %@", [error userInfo]);
+                                                    }
+                                                }
+                                                
+                                                MetaMO* responseMO = [[MetaMO alloc] init];
+                                                [responseMO setCode:[error code]];
+                                                [responseMO setErrorDetail:[[error userInfo] objectForKey:@"NSLocalizedRecoverySuggestion"]];
+                                                
+                                                NSDictionary* userInfo = @{[Constants GET_LABEL_NAME_PROMOTION_BY_STORE_WS_RESPONSE]: responseMO};
+                                                [[NSNotificationCenter defaultCenter] postNotificationName:[Constants GET_LABEL_NAME_PROMOTION_BY_STORE_WS_RESPONSE_NOTIFICATION] object:nil userInfo:userInfo];
+
+                                                
+                                                /**  Response using block as parameter of signature method <-(void) getPromotionsByStore:(NSInteger)storeId block:(void (^)(id))block>
+                                                 
+                                                 block(responseMO);
+                                                 
+                                                 **/
+                                            }
+    ];
     
     //Flushing the request and response descriptors
     [[_wsConnectionApache objectManager] removeRequestDescriptor:requestDescriptor];
     [[_wsConnectionApache objectManager] removeResponseDescriptor:responseDescriptor];
+    
+    // Enable Activity Indicator Spinner
+    [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
+}
+
+
+-(void) getPromotionsByStorePersistence:(NSInteger)storeId{
+    
+    // Fetching
+    NSManagedObjectContext *context = [RKManagedObjectStore defaultStore].mainQueueManagedObjectContext;
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Article"];
+    
+    // Add Sort Descriptor
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"articleId" ascending:YES];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", @"articleId", @(46)];
+    
+    [fetchRequest setSortDescriptors:@[sortDescriptor]];
+    [fetchRequest setPredicate:predicate];
+    
+    // Execute Fetch Request
+    NSError *fetchError = nil;
+    NSArray *result = [context executeFetchRequest:fetchRequest error:&fetchError];
+    
+    if (!fetchError) {
+        NSDictionary* userInfo = @{[Constants GET_LABEL_NAME_PROMOTION_BY_STORE_WS_RESPONSE]: result};
+        [[NSNotificationCenter defaultCenter] postNotificationName:[Constants GET_LABEL_NAME_PROMOTION_BY_STORE_WS_RESPONSE_NOTIFICATION]
+                                                            object:nil
+                                                          userInfo:userInfo];
+    } else {
+        NSLog(@"Error fetching data.");
+        NSLog(@"%@, %@", fetchError, fetchError.localizedDescription);
+    }
+    
 }
 
 @end

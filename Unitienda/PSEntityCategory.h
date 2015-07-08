@@ -10,7 +10,7 @@
 #import "CategoryMO.h"
 #import "IconMO.h"
 
-@protocol CategoryServices
+@protocol PSEntityCategory
 
 -(CategoryMO*) getAllCategories;                            //Gives an array of (CategoryMO class) related with specific (StoreMO class), saved on the persistence application tool
 
