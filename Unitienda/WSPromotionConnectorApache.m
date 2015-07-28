@@ -209,13 +209,14 @@ static WSPromotionConnectorApache* _instance;
 
 -(void) getPromotionsByStorePersistence:(NSInteger)storeId{
     
-    // Fetching
+    // Fetching.
     NSManagedObjectContext *context = [RKManagedObjectStore defaultStore].mainQueueManagedObjectContext;
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Article"];
     
     // Add Sort Descriptor
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"articleId" ascending:YES];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", @"articleId", @(46)];
+//    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", @"store.storeId", [[NSUserDefaults standardUserDefaults] objectForKey:[Constants GET_LABEL_STORE_ID]]];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", @"store.storeId", @(1)];
     
     [fetchRequest setSortDescriptors:@[sortDescriptor]];
     [fetchRequest setPredicate:predicate];
@@ -225,7 +226,7 @@ static WSPromotionConnectorApache* _instance;
     NSArray *result = [context executeFetchRequest:fetchRequest error:&fetchError];
     
     if (!fetchError) {
-        NSDictionary* userInfo = @{[Constants GET_LABEL_NAME_PROMOTION_BY_STORE_WS_RESPONSE]: result};
+        NSDictionary* userInfo = @{[Constants GET_LABEL_NAME_PROMOTION_BY_STORE_WS_RESPONSE]: fetchRequest};
         [[NSNotificationCenter defaultCenter] postNotificationName:[Constants GET_LABEL_NAME_PROMOTION_BY_STORE_WS_RESPONSE_NOTIFICATION]
                                                             object:nil
                                                           userInfo:userInfo];

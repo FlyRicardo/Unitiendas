@@ -75,11 +75,14 @@
 		42DAD1A51B458E9100B7A463 /* ArticleDataSyncImpl1.m in Sources */ = {isa = PBXBuildFile; fileRef = 42DAD1A41B458E9100B7A463 /* ArticleDataSyncImpl1.m */; };
 		42DAD1A81B458EA200B7A463 /* StoreDataSyncImpl1.m in Sources */ = {isa = PBXBuildFile; fileRef = 42DAD1A71B458EA200B7A463 /* StoreDataSyncImpl1.m */; };
 		42DAD1AC1B458ED000B7A463 /* CategoryDataSyncImpl1.m in Sources */ = {isa = PBXBuildFile; fileRef = 42DAD1AB1B458ED000B7A463 /* CategoryDataSyncImpl1.m */; };
-		42DF4D6F1B4C1CB000805EF3 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 42DF4D6E1B4C1CB000805EF3 /* Reachability.m */; };
+		42DCDD0D1B51719000038D20 /* CacheManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 42DCDD0C1B51719000038D20 /* CacheManager.m */; };
 		42E397231B3AFF1E00C5EB6B /* PSEntityPromotionCoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 42E397221B3AFF1E00C5EB6B /* PSEntityPromotionCoreData.m */; };
 		42E397261B3B039A00C5EB6B /* PersistenceServiceAbstractFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 42E397251B3B039A00C5EB6B /* PersistenceServiceAbstractFactory.m */; };
 		42E3972A1B3B079E00C5EB6B /* PersistenceServiceCoreDataFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 42E397291B3B079E00C5EB6B /* PersistenceServiceCoreDataFactory.m */; };
 		42E3972D1B3B07E500C5EB6B /* PresistenceServiceSqliteFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 42E3972C1B3B07E500C5EB6B /* PresistenceServiceSqliteFactory.m */; };
+		42E888871B682A0500174AB8 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 42E888861B682A0500174AB8 /* Reachability.m */; };
+		42E8888F1B682D8100174AB8 /* ReachabilityImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = 42E8888E1B682D8100174AB8 /* ReachabilityImpl.m */; };
+		42E888931B6831DA00174AB8 /* ImageHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 42E888921B6831DA00174AB8 /* ImageHandler.m */; };
 		42F2E6081B3333BD00B28623 /* TableViewCellPromotion.m in Sources */ = {isa = PBXBuildFile; fileRef = 42F2E6071B3333BD00B28623 /* TableViewCellPromotion.m */; };
 		42F9E36A1B3A246400EDF726 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42F9E3691B3A246400EDF726 /* CoreFoundation.framework */; };
 		93555F4FF250E18571B3F250 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E8CDEA86F82C53E201BCD754 /* libPods.a */; };
@@ -363,8 +366,8 @@
 		42DAD1BB1B45907900B7A463 /* ArticleDataSync.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ArticleDataSync.h; sourceTree = "<group>"; };
 		42DAD1BC1B45909200B7A463 /* StoreDataSync.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StoreDataSync.h; sourceTree = "<group>"; };
 		42DAD1BD1B4590BB00B7A463 /* CategoryDataSync.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CategoryDataSync.h; sourceTree = "<group>"; };
-		42DF4D6D1B4C1CB000805EF3 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
-		42DF4D6E1B4C1CB000805EF3 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		42DCDD0B1B51719000038D20 /* CacheManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CacheManager.h; sourceTree = "<group>"; };
+		42DCDD0C1B51719000038D20 /* CacheManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CacheManager.m; sourceTree = "<group>"; };
 		42E397211B3AFF1E00C5EB6B /* PSEntityPromotionCoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSEntityPromotionCoreData.h; sourceTree = "<group>"; };
 		42E397221B3AFF1E00C5EB6B /* PSEntityPromotionCoreData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSEntityPromotionCoreData.m; sourceTree = "<group>"; };
 		42E397241B3B039A00C5EB6B /* PersistenceServiceAbstractFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersistenceServiceAbstractFactory.h; sourceTree = "<group>"; };
@@ -374,6 +377,12 @@
 		42E397291B3B079E00C5EB6B /* PersistenceServiceCoreDataFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersistenceServiceCoreDataFactory.m; sourceTree = "<group>"; };
 		42E3972B1B3B07E500C5EB6B /* PresistenceServiceSqliteFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PresistenceServiceSqliteFactory.h; sourceTree = "<group>"; };
 		42E3972C1B3B07E500C5EB6B /* PresistenceServiceSqliteFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PresistenceServiceSqliteFactory.m; sourceTree = "<group>"; };
+		42E888851B682A0500174AB8 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		42E888861B682A0500174AB8 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		42E8888D1B682D8100174AB8 /* ReachabilityImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReachabilityImpl.h; sourceTree = "<group>"; };
+		42E8888E1B682D8100174AB8 /* ReachabilityImpl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReachabilityImpl.m; sourceTree = "<group>"; };
+		42E888911B6831DA00174AB8 /* ImageHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageHandler.h; sourceTree = "<group>"; };
+		42E888921B6831DA00174AB8 /* ImageHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageHandler.m; sourceTree = "<group>"; };
 		42ECC2771AEE8AE300FDD79F /* StoreMO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreMO.h; sourceTree = "<group>"; };
 		42ECC27A1AEE8B0000FDD79F /* UserMO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserMO.h; sourceTree = "<group>"; };
 		42ECC27D1AEE8B6F00FDD79F /* ArticleMO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleMO.h; sourceTree = "<group>"; };
@@ -835,8 +844,10 @@
 		425AD71B1AE58A7500A81515 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				42DF4D6D1B4C1CB000805EF3 /* Reachability.h */,
-				42DF4D6E1B4C1CB000805EF3 /* Reachability.m */,
+				42E888901B68318E00174AB8 /* LocalStorage */,
+				42E888841B682A0500174AB8 /* InternetConnection */,
+				42DCDD0B1B51719000038D20 /* CacheManager.h */,
+				42DCDD0C1B51719000038D20 /* CacheManager.m */,
 				425AD71C1AE58A8000A81515 /* Constants.h */,
 				425AD71D1AE58A8000A81515 /* Constants.m */,
 			);
@@ -1106,6 +1117,34 @@
 			name = Sqlite;
 			sourceTree = "<group>";
 		};
+		42E888841B682A0500174AB8 /* InternetConnection */ = {
+			isa = PBXGroup;
+			children = (
+				42E8888C1B682D3600174AB8 /* impl */,
+				42E888851B682A0500174AB8 /* Reachability.h */,
+				42E888861B682A0500174AB8 /* Reachability.m */,
+			);
+			path = InternetConnection;
+			sourceTree = "<group>";
+		};
+		42E8888C1B682D3600174AB8 /* impl */ = {
+			isa = PBXGroup;
+			children = (
+				42E8888D1B682D8100174AB8 /* ReachabilityImpl.h */,
+				42E8888E1B682D8100174AB8 /* ReachabilityImpl.m */,
+			);
+			path = impl;
+			sourceTree = "<group>";
+		};
+		42E888901B68318E00174AB8 /* LocalStorage */ = {
+			isa = PBXGroup;
+			children = (
+				42E888911B6831DA00174AB8 /* ImageHandler.h */,
+				42E888921B6831DA00174AB8 /* ImageHandler.m */,
+			);
+			path = LocalStorage;
+			sourceTree = "<group>";
+		};
 		42ECC28B1AEE933700FDD79F /* AuthMO */ = {
 			isa = PBXGroup;
 			children = (
@@ -1328,6 +1367,7 @@
 				425007A51AEEE8450003F230 /* PhotoMO.m in Sources */,
 				425007951AEEE6DE0003F230 /* RefreshTokenRequestMO.m in Sources */,
 				4250078B1AEEE3F20003F230 /* RequestMO.m in Sources */,
+				42E8888F1B682D8100174AB8 /* ReachabilityImpl.m in Sources */,
 				42D919EC1B472D9F0033149A /* Photo.m in Sources */,
 				42D919F21B472DA00033149A /* CategoryClassification.m in Sources */,
 				42D919E61B472D9F0033149A /* Article.m in Sources */,
@@ -1354,7 +1394,6 @@
 				4250079D1AEEE79E0003F230 /* StoreMO.m in Sources */,
 				425007991AEEE7310003F230 /* LogoutRequestMO.m in Sources */,
 				425007A71AEEE8660003F230 /* CategoryMO.m in Sources */,
-				42DF4D6F1B4C1CB000805EF3 /* Reachability.m in Sources */,
 				42DAD19E1B458E2300B7A463 /* DataSyncConnector.m in Sources */,
 				425AD6DC1AE588C200A81515 /* ViewControllerCreateProfile.m in Sources */,
 				425AD6051AE5713600A81515 /* main.m in Sources */,
@@ -1362,14 +1401,17 @@
 				425AD6CA1AE588A600A81515 /* UILabelWithPadding.m in Sources */,
 				425007931AEEE6B10003F230 /* ProfileMO.m in Sources */,
 				42DAD1A21B458E7C00B7A463 /* PromotionDataSyncImpl1.m in Sources */,
+				42E888931B6831DA00174AB8 /* ImageHandler.m in Sources */,
 				425AD7131AE58A3700A81515 /* WebServiceTomcatFactory.m in Sources */,
 				4250079B1AEEE75F0003F230 /* LogoutMetaMO.m in Sources */,
 				425AD6CB1AE588A600A81515 /* RefreshTokenHelper.m in Sources */,
+				42E888871B682A0500174AB8 /* Reachability.m in Sources */,
 				425007971AEEE7160003F230 /* RefreshTokenMetaMO.m in Sources */,
 				428547801B06CF84005C72E8 /* ArticleMO+ResponseMO.m in Sources */,
 				42DAD1A81B458EA200B7A463 /* StoreDataSyncImpl1.m in Sources */,
 				42B73BAC1B46E06C00805F95 /* DataSyncServiceFactoryImpl1.m in Sources */,
 				42AF4A471B34832300A57375 /* IconMO.m in Sources */,
+				42DCDD0D1B51719000038D20 /* CacheManager.m in Sources */,
 				4285476B1B0661CB005C72E8 /* WSPromotionConnectorApache.m in Sources */,
 				425007891AEEE1EB0003F230 /* AuthorizationAuthenticationRequestMO.m in Sources */,
 				4250078F1AEEE63E0003F230 /* AuthorizationAuthenticationMetaMO.m in Sources */,

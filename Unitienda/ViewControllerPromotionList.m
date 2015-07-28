@@ -22,13 +22,15 @@
 
 #import "Reachability.h"
 
-@interface ViewControllerPromotionList()
+@interface ViewControllerPromotionList()<NSFetchedResultsControllerDelegate>
 
 @property (nonatomic) RefreshTokenMetaMO* refreshTokenResponseMO;
 
 @property (nonatomic) Reachability *hostReachability;
 @property (nonatomic) Reachability *internetReachability;
 @property (nonatomic) Reachability *wifiReachability;
+
+@property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 
 @end
 
@@ -37,7 +39,7 @@
 -(void) viewDidLoad{
     
     [super viewDidLoad];
-    
+    [self configureFetchedResultsController];
     [self registerNotifyProcess];
     [self configureNavigationBar];
     [self configureReachabilityParameters];
@@ -52,6 +54,37 @@
 }
 
 #pragma mark - NavigationController configuration
+-(void) configureFetchedResultsController{
+    NSLog(@"Managed object context : %@", self.managedObjectContext);
+    
+    // Initialize Fetch Request
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Promotion"];
+    
+    // Add Sort Descriptors
+    [fetchRequest setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"promotionId" ascending:YES]]];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"%K == %@", @"article.store.storeId", @(1)]];
+    
+    // Initialize Fetched Results Controller
+    self.fetchedResultsController = [[NSFetchedResultsController alloc]
+                                     initWithFetchRequest:fetchRequest
+                                     managedObjectContext:self.managedObjectContext
+                                     sectionNameKeyPath:nil
+                                     cacheName:nil];
+    
+    
+    // Configure Fetched Results Controller
+    [self.fetchedResultsController setDelegate:self];
+    
+    // Perform Fetch
+    NSError *error = nil;
+    [self.fetchedResultsController performFetch:&error];
+    
+    if (error) {
+        NSLog(@"Unable to perform fetch.");
+        NSLog(@"%@, %@", error, error.localizedDescription);
+    }
+}
+
 -(void) configureNavigationBar{
     //Shows the navigatoin bar
     [[self navigationController] setNavigationBarHidden:NO animated:YES];
@@ -81,7 +114,7 @@
     NSLog(@"_internetReachability: %li",(long)[_internetReachability currentReachabilityStatus]);
     NSLog(@"_wifiReachability: %li",(long)[_wifiReachability currentReachabilityStatus]);
 
-    if([_hostReachability currentReachabilityStatus] !=  NotReachable){                                                             //The app could stablish connectoin with the server
+    if([_hostReachability currentReachabilityStatus] !=  NotReachable){                                                             //The app stablish connectoin with the server successfully
         [dataSyncPromotion getPromotionsListByStore:store usingWSRequest:YES];
     }else if([_internetReachability currentReachabilityStatus] == NotReachable){                                                    //Couldn't stablish TCP/IP connection
         NSLog(@"No se ha detactado conexión a internet. Por favor revise sus preferencias de conexión e intentelo nuevamente.");
@@ -113,22 +146,29 @@
 
 #pragma mark - Implemented UITableViewDelegate
 - (NSInteger)numberOfSectionsInTableView: (UITableView *)tableView{
-    return 1;
+    return [[self.fetchedResultsController sections] count];
+//    return 1;
 }
 
 - (NSInteger)tableView: (UITableView *)tableView numberOfRowsInSection: (NSInteger)section{
-    return 0;
+    
+    NSArray *sections = [self.fetchedResultsController sections];
+    
+    id<NSFetchedResultsSectionInfo> sectionInfo = [sections objectAtIndex:section];
+    
+    return [sectionInfo numberOfObjects];
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    NSString* identifier = @"promotionCell";
+    NSString* identifier = @"articleCell";
     TableViewCellPromotion* cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     
     if(cell==nil){
         cell = [[TableViewCellPromotion alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
     }
-    
+    Promotion* promotion = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    [cell setArticle:[promotion article]];
     return cell;
 }
 
@@ -137,6 +177,47 @@
     CGFloat kNormalCellHeigh = 94;
     return  kNormalCellHeigh;
 }
+
+#pragma mark - Implementing the Delegate Protocol
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
+    [self.tableView beginUpdates];
+}
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+    [self.tableView endUpdates];
+}
+
+-(void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
+    switch (type) {
+        case NSFetchedResultsChangeInsert: {
+            [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+        }
+        case NSFetchedResultsChangeDelete: {
+            [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+        }
+        case NSFetchedResultsChangeUpdate: {
+            [self configureCell:(TableViewCellPromotion*)[self.tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
+            break;
+        }
+        case NSFetchedResultsChangeMove: {
+            [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+        }
+    }
+}
+
+- (void)configureCell:(TableViewCellPromotion *)cell atIndexPath:(NSIndexPath *)indexPath {
+    // Fetch Record
+    NSManagedObject *record = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    
+    // Update Cell
+//    [cell.nameLabel setText:[record valueForKey:@"name"]];
+//    [cell.doneButton setSelected:[[record valueForKey:@"done"] boolValue]];
+}
+
 
 #pragma mark - Notifying Web Service proccess
 -(void)registerNotifyProcess{
@@ -155,20 +236,17 @@
 #pragma mark - Implement selector methods
 -(void) receivePromotionByStoreNotification:(NSNotification *) notification{
     NSDictionary *dictionary = notification.userInfo;
-    if([dictionary[[Constants GET_LABEL_NAME_PROMOTION_BY_STORE_DATASYNC_RESPONSE]] isKindOfClass:[NSArray class]]){
+    if([dictionary[[Constants GET_LABEL_NAME_PROMOTION_BY_STORE_DATASYNC_RESPONSE]] isKindOfClass:[NSFetchRequest class]]){
         
-        NSArray* promotionList = (NSArray*)dictionary[[Constants GET_LABEL_NAME_PROMOTION_BY_STORE_DATASYNC_RESPONSE]];
+//        Article* article = [promotionList objectAtIndex:0];
+//        NSSet *photoList = [article photo];
+//        Photo *photo = (Photo*)[photoList anyObject];
+//        NSLog((@"Article at index : %i, with id: %@ ,name: %@, and photo url: %@"),0,[article articleId], [article name], [photo url]);
+//        
+//        article = [promotionList objectAtIndex:1];
+//        photo = (Photo*)[photoList anyObject];
+//        NSLog((@"Article at index : %i, with id: %@ ,name: %@, and photo url: %@"),1,[article articleId], [article name], [photo url]);
         
-        Article* article = [promotionList objectAtIndex:0];
-        NSSet *photoList = [article photo];
-        Photo *photo = (Photo*)[photoList anyObject];
-        NSLog((@"Article at index : %i, with id: %@ ,name: %@, and photo url: %@"),0,[article articleId], [article name], [photo url]);
-        
-        article = [promotionList objectAtIndex:1];
-        photo = (Photo*)[photoList anyObject];
-        NSLog((@"Article at index : %i, with id: %@ ,name: %@, and photo url: %@"),1,[article articleId], [article name], [photo url]);
-
-
     }else if([dictionary[[Constants GET_LABEL_NAME_PROMOTION_BY_STORE_DATASYNC_RESPONSE]] isKindOfClass:[MetaMO class]]){
         
         MetaMO* metaMO = (MetaMO*)dictionary[[Constants GET_LABEL_NAME_PROMOTION_BY_STORE_DATASYNC_RESPONSE]];

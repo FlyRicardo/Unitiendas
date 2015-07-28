@@ -81,14 +81,14 @@ static PromotionDataSyncImpl1* _instance;
 }
 
 -(void) receivePromotionByStoreWsNotification:(NSNotification *) notification{
+    
     NSDictionary *dictionary = notification.userInfo;
-    if([dictionary[[Constants GET_LABEL_NAME_PROMOTION_BY_STORE_WS_RESPONSE]] isKindOfClass:[NSArray class]]){
+    if([dictionary[[Constants GET_LABEL_NAME_PROMOTION_BY_STORE_WS_RESPONSE]] isKindOfClass:[NSFetchRequest class]]){
         
-        NSArray* promotionList = (NSArray*)dictionary[[Constants GET_LABEL_NAME_PROMOTION_BY_STORE_WS_RESPONSE]];
-        NSLog(@"Promotions count: %lu", (unsigned long)[promotionList count]);
+        NSFetchRequest* fetchRequestPromotionList = (NSFetchRequest*)dictionary[[Constants GET_LABEL_NAME_PROMOTION_BY_STORE_WS_RESPONSE]];
         
         //Broadcast notification of DataSync
-        NSDictionary* userInfo = @{[Constants GET_LABEL_NAME_PROMOTION_BY_STORE_DATASYNC_RESPONSE]: promotionList};
+        NSDictionary* userInfo = @{[Constants GET_LABEL_NAME_PROMOTION_BY_STORE_DATASYNC_RESPONSE]: fetchRequestPromotionList};
         [[NSNotificationCenter defaultCenter] postNotificationName:[Constants GET_LABEL_NAME_PROMOTION_BY_STORE_DATASYNC_RESPONSE_NOTIFICATION] object:nil userInfo:userInfo];
         
     }else if([dictionary[[Constants GET_LABEL_NAME_PROMOTION_BY_STORE_WS_RESPONSE]] isKindOfClass:[MetaMO class]]){

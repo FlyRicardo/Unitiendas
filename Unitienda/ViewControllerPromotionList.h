@@ -11,5 +11,8 @@
 @interface ViewControllerPromotionList : UIViewController<UITableViewDelegate, UITableViewDataSource>
 
 @property (strong, nonatomic) NSMutableArray *promotions;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+
+@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 
 @end

@@ -7,8 +7,7 @@
 //
 
 #import "ViewControllerLogin.h"
-#import "ViewControllerError.h"
-#import "ViewControllerhome.h"
+#import "ViewControllerPromotionList.h"
 
 #import "Constants.h"
 
@@ -436,7 +435,6 @@ static NSString *kSegueIdentifierPromotionList = @"ViewControllerPromotionListSe
                                                    [self performSegueWithIdentifier:segue sender:self];            //Call ViewControllerCreateProfile
                                                }
                                                /**[self performSegueWithIdentifier:@"ViewControllerHomeSegue" sender:self];**/
-                                    
                                            }];
     
     [alertController addAction:destroyAction];
@@ -459,18 +457,10 @@ static NSString *kSegueIdentifierPromotionList = @"ViewControllerPromotionListSe
 #pragma mark - Navigation programatically
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     
-    if([[segue identifier] isEqualToString: @"ViewControllerHomeSegue"]){
-        
-        ViewControllerHome *vch = [segue destinationViewController];
-
-        [vch setLoginResponseMO:_loginResponseMO];
-        
-    }else if([[segue identifier] isEqualToString: kSegueIdentifierCreateProfile]){
-        NSLog(@"Go to Create Profile Segue");
-        
-    }
-    else if([[segue identifier] isEqualToString: kSegueIdentifierPromotionList]){
+    if([[segue identifier] isEqualToString: kSegueIdentifierPromotionList]){
         NSLog(@"Go to Create Promotion List Segue");
+        ViewControllerPromotionList *viewController = [segue destinationViewController];
+        [viewController setManagedObjectContext:self.managedObjectContext];
     }
 }
 

@@ -48,7 +48,7 @@
         <relationship name="article" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Article" inverseName="store" inverseEntity="Article" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Article" positionX="-423" positionY="-279" width="128" height="163"/>
+        <element name="Article" positionX="-423" positionY="-279" width="128" height="165"/>
         <element name="CategoryClassification" positionX="-146" positionY="-315" width="128" height="133"/>
         <element name="Icon" positionX="-297" positionY="-441" width="128" height="103"/>
         <element name="Photo" positionX="-189" positionY="-162" width="128" height="118"/>

@@ -3,18 +3,10 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "-[ViewControllerPromotionList tableView:numberOfRowsInSection:]:ViewControllerPromotionList.m">
+         contextName = "-[TableViewCellPromotion setArticle:]:TableViewCellPromotion.m">
          <PersistentStrings>
             <PersistentString
-               value = "[_promotions count]">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "-[WSProfileConnectorApache stablishProfileConnectionWithUsername:]:WSProfileConnectorApache.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "[[NSUserDefaults standardUserDefaults] objectForKey:@&quot;access_token&quot;]">
+               value = "[article name]">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -27,15 +19,37 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[WSPromotionConnectorApache getPromotionsByStore:]:WSPromotionConnectorApache.m">
+         contextName = "-[ViewControllerPromotionList numberOfSectionsInTableView:]:ViewControllerPromotionList.m">
          <PersistentStrings>
             <PersistentString
-               value = "[postBody accessToken]">
+               value = "[[self.fetchedResultsController sections] count]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[WSPromotionConnectorApache getPromotionsByStorePersistence:]:WSPromotionConnectorApache.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[WSProfileConnectorApache stablishProfileConnectionWithUsername:]:WSProfileConnectorApache.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[[NSUserDefaults standardUserDefaults] objectForKey:@&quot;access_token&quot;]">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "__57-[WSPromotionConnectorApache getPromotionsByStore:block:]_block_invoke140:WSPromotionConnectorApache.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[AppDelegate application:didFinishLaunchingWithOptions:]:AppDelegate.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[viewController class]">
+            </PersistentString>
+            <PersistentString
+               value = "[rootNavigationController viewControllers]">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "-[WSPromotionConnectorApache fetchArticlesFromContext]:WSPromotionConnectorApache.m">
@@ -45,6 +59,28 @@
             </PersistentString>
             <PersistentString
                value = "[article articleId];">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[ViewControllerPromotionList receivePromotionByStoreNotification:]:ViewControllerPromotionList.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[ViewControllerPromotionList tableView:numberOfRowsInSection:]:ViewControllerPromotionList.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[_promotions count]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[PromotionDataSyncImpl1 receivePromotionByStoreWsNotification:]:PromotionDataSyncImpl1.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[WSPromotionConnectorApache getPromotionsByStore:]:WSPromotionConnectorApache.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[postBody accessToken]">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
