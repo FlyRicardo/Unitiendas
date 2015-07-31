@@ -15,4 +15,6 @@
 
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 
+@property (weak, nonatomic) IBOutlet UILabel *promotionNotFoundLabel;
+
 @end

@@ -59,7 +59,6 @@ static WSPromotionConnectorApache* _instance;
 #pragma mark - Protocol methos implementation
 
 //This Method only was a test to trying synchronizing the success response block with the returned response of the method 'getPromotionsByStore:store'
-
 /** Call to <-(void) getPromotionsByStore:(NSInteger)storeId block:(void (^)(id))block> signature
 -(void) getPromotionsByStore:(NSInteger)storeId{
      **
@@ -158,7 +157,8 @@ static WSPromotionConnectorApache* _instance;
                                                 path:@"/CC/WS/WS_GetPromotionDetailsByStore.php"
                                           parameters:nil
                                              success: ^(RKObjectRequestOperation *operation, RKMappingResult *result){
-                                                [self getPromotionsByStorePersistence:storeId];
+                                                 
+                                                 //It's not necesary create an operation that writtes on DB, because RESTKit is already configurate with CoreData
                                                  
                                                /**  Response using block as parameter of signature method <-(void) getPromotionsByStore:(NSInteger)storeId block:(void (^)(id))block>
                                                 
@@ -206,35 +206,5 @@ static WSPromotionConnectorApache* _instance;
     [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
 }
 
-
--(void) getPromotionsByStorePersistence:(NSInteger)storeId{
-    
-    // Fetching.
-    NSManagedObjectContext *context = [RKManagedObjectStore defaultStore].mainQueueManagedObjectContext;
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Article"];
-    
-    // Add Sort Descriptor
-    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"articleId" ascending:YES];
-//    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", @"store.storeId", [[NSUserDefaults standardUserDefaults] objectForKey:[Constants GET_LABEL_STORE_ID]]];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", @"store.storeId", @(1)];
-    
-    [fetchRequest setSortDescriptors:@[sortDescriptor]];
-    [fetchRequest setPredicate:predicate];
-    
-    // Execute Fetch Request
-    NSError *fetchError = nil;
-    NSArray *result = [context executeFetchRequest:fetchRequest error:&fetchError];
-    
-    if (!fetchError) {
-        NSDictionary* userInfo = @{[Constants GET_LABEL_NAME_PROMOTION_BY_STORE_WS_RESPONSE]: fetchRequest};
-        [[NSNotificationCenter defaultCenter] postNotificationName:[Constants GET_LABEL_NAME_PROMOTION_BY_STORE_WS_RESPONSE_NOTIFICATION]
-                                                            object:nil
-                                                          userInfo:userInfo];
-    } else {
-        NSLog(@"Error fetching data.");
-        NSLog(@"%@, %@", fetchError, fetchError.localizedDescription);
-    }
-    
-}
 
 @end

@@ -104,4 +104,15 @@ static ImageHandler* _instance;
     return result;
 }
 
+-(NSString *) getImageNameFromURL:(NSString*) url{
+    NSArray* temp = [url componentsSeparatedByString:@"."];
+    NSArray* temp2 = [[temp objectAtIndex:0] componentsSeparatedByString:@"/"];
+    return [temp2 objectAtIndex:[temp2 count]-1];
+}
+
+-(NSString *) getExtensionFromURL:(NSString*) url{
+    NSArray* temp = [url componentsSeparatedByString:@"."];
+    return [temp objectAtIndex:1];
+}
+
 @end

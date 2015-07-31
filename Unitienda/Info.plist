@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>ServiceLocalURL</key>
-	<string>http://127.0.0.1:82/</string>
+	<string>127.0.0.1:82</string>
 	<key>ServiceURL</key>
-	<string>http://www.flyinc.co</string>
+	<string>www.flyinc.co</string>
 	<key>UIStatusBarHidden</key>
 	<false/>
 	<key>UIViewControllerBasedStatusBarAppearance</key>

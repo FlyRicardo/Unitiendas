@@ -60,6 +60,23 @@ static ReachabilityImpl* _instance;
 }
 
 /*!
+ * Use to check the reachability of a given host name.
+ */
+-(BOOL) hostIsReachable2{
+    NSURLRequest *nsrequest = [NSURLRequest requestWithURL:[NSURL URLWithString: @"http://localhost:82/CC/"]];
+    NSHTTPURLResponse *response = nil;
+    NSError *error;
+    [NSURLConnection sendSynchronousRequest:nsrequest returningResponse:&response error:&error];
+    
+    if(response.statusCode==0){
+        return NO;
+    }
+    else{
+        return YES;
+    }
+}
+
+/*!
  * Use to check the reachability of a given IP address.
  */
 -(BOOL) internetIsReachable{

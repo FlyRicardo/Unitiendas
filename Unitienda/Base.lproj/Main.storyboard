@@ -20,7 +20,7 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" restorationIdentifier="ViewControllerLogin" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GH7-jL-gDd">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <subviews>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" misplaced="YES" editable="NO" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OVD-VB-Me7">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" editable="NO" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OVD-VB-Me7">
                                         <rect key="frame" x="20" y="191" width="560" height="58"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="58" id="PA6-cj-agb"/>
@@ -29,7 +29,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" misplaced="YES" placeholderIntrinsicWidth="600" placeholderIntrinsicHeight="40" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="Contraseña" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="985-Wu-Bm9">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" placeholderIntrinsicWidth="600" placeholderIntrinsicHeight="40" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="Contraseña" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="985-Wu-Bm9">
                                         <rect key="frame" x="0.0" y="293" width="600" height="40"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <accessibility key="accessibilityConfiguration">
@@ -44,7 +44,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                     </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="244" misplaced="YES" placeholderIntrinsicWidth="38" placeholderIntrinsicHeight="30" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aMp-YI-k5w">
+                                    <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="244" placeholderIntrinsicWidth="38" placeholderIntrinsicHeight="30" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aMp-YI-k5w">
                                         <rect key="frame" x="281" y="335" width="38" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="38" id="hTt-NW-yRJ"/>
@@ -55,7 +55,7 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" misplaced="YES" placeholderIntrinsicWidth="600" placeholderIntrinsicHeight="40" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="Usuario" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tjK-Yo-qhX" userLabel="Username Text Field">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" placeholderIntrinsicWidth="600" placeholderIntrinsicHeight="40" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="Usuario" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tjK-Yo-qhX" userLabel="Username Text Field">
                                         <rect key="frame" x="0.0" y="257" width="600" height="40"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <accessibility key="accessibilityConfiguration" label="">
@@ -70,7 +70,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                                     </textField>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="login_icon" translatesAutoresizingMaskIntoConstraints="NO" id="Iqt-8V-snA">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_icon" translatesAutoresizingMaskIntoConstraints="NO" id="Iqt-8V-snA">
                                         <rect key="frame" x="240" y="50" width="120" height="121"/>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="245" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RTp-EK-Dca">
@@ -91,7 +91,7 @@
                                             <rect key="frame" x="327" y="562" width="146" height="30"/>
                                         </variation>
                                     </button>
-                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Ec0-sg-WGw">
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Ec0-sg-WGw">
                                         <rect key="frame" x="290" y="399" width="20" height="20"/>
                                     </activityIndicatorView>
                                 </subviews>
@@ -176,14 +176,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Promotions Found" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="238" translatesAutoresizingMaskIntoConstraints="NO" id="gMp-iw-dcC" userLabel="No Promotions Found">
-                                <rect key="frame" x="181" y="241" width="238" height="35"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Aquí podrá crear y administrar promociones, así como también acceder a promociones ya realizadas." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="238" translatesAutoresizingMaskIntoConstraints="NO" id="gMp-iw-dcC" userLabel="No Promotions Found">
+                                <rect key="frame" x="181" y="241" width="238" height="55"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="35" id="G2S-aL-txQ"/>
+                                    <constraint firstAttribute="height" constant="55" id="G2S-aL-txQ"/>
                                     <constraint firstAttribute="width" constant="238" id="Lwo-ui-NtV"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -309,6 +309,9 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="editProfileButton:" destination="0pE-o6-5jo" eventType="touchUpInside" id="QKj-Kx-asj"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -325,7 +328,7 @@
                             <constraint firstItem="7wW-82-Rj6" firstAttribute="top" secondItem="gMp-iw-dcC" secondAttribute="bottom" constant="260" id="rLo-iO-woS"/>
                             <constraint firstAttribute="trailingMargin" secondItem="gMp-iw-dcC" secondAttribute="trailing" constant="165" id="sMe-Gb-WUA"/>
                             <constraint firstItem="7wW-82-Rj6" firstAttribute="top" secondItem="PPY-u1-92z" secondAttribute="bottom" id="sNe-pp-pv3"/>
-                            <constraint firstAttribute="centerY" secondItem="gMp-iw-dcC" secondAttribute="centerY" constant="9.5" id="ss1-46-tsH"/>
+                            <constraint firstAttribute="centerY" secondItem="gMp-iw-dcC" secondAttribute="centerY" constant="-0.5" id="ss1-46-tsH"/>
                             <constraint firstAttribute="trailingMargin" secondItem="PPY-u1-92z" secondAttribute="trailing" constant="-16" id="tbA-JB-y1r"/>
                             <constraint firstItem="gMp-iw-dcC" firstAttribute="leading" secondItem="yTy-Iw-sTG" secondAttribute="leadingMargin" constant="165" id="wDX-Md-VdR"/>
                         </constraints>
@@ -341,7 +344,16 @@
                         </variation>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
+                    <navigationItem key="navigationItem" id="JMl-lM-PBe">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="rwm-ZX-iaR">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="addPromotionButton:" destination="0pE-o6-5jo" id="geZ-Tx-dKO"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
+                        <outlet property="promotionNotFoundLabel" destination="gMp-iw-dcC" id="Zqo-TG-pLf"/>
                         <outlet property="tableView" destination="PPY-u1-92z" id="3EP-g0-A20"/>
                     </connections>
                 </viewController>

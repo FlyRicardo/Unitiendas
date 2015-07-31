@@ -12,6 +12,7 @@
 @interface ReachabilityImpl : NSObject
 
 -(BOOL) hostIsReachable;
+-(BOOL) hostIsReachable2;
 -(BOOL) internetIsReachable;
 -(BOOL) wifiIsReachable;
 

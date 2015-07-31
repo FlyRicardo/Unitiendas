@@ -21,5 +21,6 @@
  ** UTILITIES ELEMENTS
  ***********************************************************/
 -(void) setArticle:(Article *)article;
+-(void) setPromotion:(Promotion*) promotion;
 
 @end

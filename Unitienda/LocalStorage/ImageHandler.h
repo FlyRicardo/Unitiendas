@@ -11,7 +11,12 @@
 @interface ImageHandler : NSObject
 
 -(BOOL) saveImageLocallyWithFileName:(NSString *)imageName ofType:(NSString *)extension AndURL:(NSString*)fileURL;
+
 -(UIImage *) loadImage:(NSString *)fileName ofType:(NSString *)extension;
+
+-(NSString *) getImageNameFromURL:(NSString*) url;
+
+-(NSString *) getExtensionFromURL:(NSString*) url;
 
 +(id) getInstance;
 

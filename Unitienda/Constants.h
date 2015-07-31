@@ -61,8 +61,6 @@
  ****************************************************************/
 +(NSString *) GET_LABEL_NAME_PROMOTION_BY_STORE_WS_RESPONSE_NOTIFICATION;
 +(NSString *) GET_LABEL_NAME_PROMOTION_BY_STORE_WS_RESPONSE;
-+(NSString *) GET_LABEL_NAME_PROMOTION_BY_STORE_DATASYNC_RESPONSE_NOTIFICATION;
-+(NSString *) GET_LABEL_NAME_PROMOTION_BY_STORE_DATASYNC_RESPONSE;
 
 
 /****************************************************************

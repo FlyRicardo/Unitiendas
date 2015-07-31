@@ -160,6 +160,9 @@
 }
 
 -(void) setNavigationBarApparence{
+    // Customize the back color for *all* UINavigationBars
+    [[UINavigationBar appearance]
+     setTintColor:[UIColor whiteColor]];
 }
 
 -(void) setSearchBarApparence{

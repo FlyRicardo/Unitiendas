@@ -19,6 +19,9 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "__40-[TableViewCellPromotion setCacheImage:]_block_invoke23:TableViewCellPromotion.m">
+      </ContextState>
+      <ContextState
          contextName = "-[ViewControllerPromotionList numberOfSectionsInTableView:]:ViewControllerPromotionList.m">
          <PersistentStrings>
             <PersistentString
@@ -27,7 +30,13 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "-[ImageHandler getImageNameFromURL:]:ImageHandler.m">
+      </ContextState>
+      <ContextState
          contextName = "-[WSPromotionConnectorApache getPromotionsByStorePersistence:]:WSPromotionConnectorApache.m">
+      </ContextState>
+      <ContextState
+         contextName = "__57-[WSPromotionConnectorApache getPromotionsByStore:block:]_block_invoke140:WSPromotionConnectorApache.m">
       </ContextState>
       <ContextState
          contextName = "-[WSProfileConnectorApache stablishProfileConnectionWithUsername:]:WSProfileConnectorApache.m">
@@ -38,9 +47,6 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "__57-[WSPromotionConnectorApache getPromotionsByStore:block:]_block_invoke140:WSPromotionConnectorApache.m">
-      </ContextState>
-      <ContextState
          contextName = "-[AppDelegate application:didFinishLaunchingWithOptions:]:AppDelegate.m">
          <PersistentStrings>
             <PersistentString
@@ -48,6 +54,14 @@
             </PersistentString>
             <PersistentString
                value = "[rootNavigationController viewControllers]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[TableViewCellPromotion setPromotion:]:TableViewCellPromotion.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[promotion effectiveness]">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -75,6 +89,22 @@
       </ContextState>
       <ContextState
          contextName = "-[PromotionDataSyncImpl1 receivePromotionByStoreWsNotification:]:PromotionDataSyncImpl1.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[ReachabilityImpl hostIsReachable]:ReachabilityImpl.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[_hostReachability currentReachabilityStatus]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[ViewControllerPromotionList configureElementsOnView]:ViewControllerPromotionList.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[[self.fetchedResultsController sections] count]">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "-[WSPromotionConnectorApache getPromotionsByStore:]:WSPromotionConnectorApache.m">

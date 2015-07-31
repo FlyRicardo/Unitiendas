@@ -7,13 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "PromotionMO.h"
-#import "StoreMO.h"
+#import "Promotion.h"
+#import "Store.h"
 
 @protocol PromotionDataSync
 
--(void) getPromotionsListByStore:(StoreMO*) store usingWSRequest:(BOOL) flag;              //Depends on the flag, the method use WS to get Promotion List and store on local DB ( if flag is true ), or only get the Promotion List from local DB ( if flag is false )
-
--(void) getPromotionDetail:(PromotionMO*) prmotion usingWSRequest:(BOOL) flag;         //Depends on the flag, the method use WS to get Promotion Detail and store on local DB ( if flag is true ), or only get the Promotion Detail from local DB ( if flag is false )
+-(NSArray*) getPromotionsByStore:(Store*) store;                  //Get the Promotion List from local DB ( if flag is false )
+-(Promotion*) getPromotionDetail:(Promotion*) prmotion;      //Get the Promotion Detail from local DB ( if flag is false )
 
 @end

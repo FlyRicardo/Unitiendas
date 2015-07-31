@@ -1041,10 +1041,10 @@
 		42DAD1981B458C1E00B7A463 /* Abstract */ = {
 			isa = PBXGroup;
 			children = (
-				42DAD1BA1B45905A00B7A463 /* PromotionDataSync.h */,
 				42DAD1BB1B45907900B7A463 /* ArticleDataSync.h */,
 				42DAD1BC1B45909200B7A463 /* StoreDataSync.h */,
 				42DAD1BD1B4590BB00B7A463 /* CategoryDataSync.h */,
+				42DAD1BA1B45905A00B7A463 /* PromotionDataSync.h */,
 			);
 			name = Abstract;
 			sourceTree = "<group>";
@@ -1052,9 +1052,9 @@
 		42DAD1991B458C2300B7A463 /* Concrete */ = {
 			isa = PBXGroup;
 			children = (
+				42DAD19A1B458C5A00B7A463 /* Connection */,
 				42DAD19B1B458C8300B7A463 /* Impl1 */,
 				42B73BB01B46E22200805F95 /* Impl2 */,
-				42DAD19A1B458C5A00B7A463 /* Connection */,
 			);
 			name = Concrete;
 			sourceTree = "<group>";
@@ -1071,14 +1071,14 @@
 		42DAD19B1B458C8300B7A463 /* Impl1 */ = {
 			isa = PBXGroup;
 			children = (
-				42DAD1A01B458E7C00B7A463 /* PromotionDataSyncImpl1.h */,
-				42DAD1A11B458E7C00B7A463 /* PromotionDataSyncImpl1.m */,
 				42DAD1A31B458E9100B7A463 /* ArticleDataSyncImpl1.h */,
 				42DAD1A41B458E9100B7A463 /* ArticleDataSyncImpl1.m */,
 				42DAD1A61B458EA200B7A463 /* StoreDataSyncImpl1.h */,
 				42DAD1A71B458EA200B7A463 /* StoreDataSyncImpl1.m */,
 				42DAD1AA1B458ED000B7A463 /* CategoryDataSyncImpl1.h */,
 				42DAD1AB1B458ED000B7A463 /* CategoryDataSyncImpl1.m */,
+				42DAD1A01B458E7C00B7A463 /* PromotionDataSyncImpl1.h */,
+				42DAD1A11B458E7C00B7A463 /* PromotionDataSyncImpl1.m */,
 			);
 			name = Impl1;
 			sourceTree = "<group>";
