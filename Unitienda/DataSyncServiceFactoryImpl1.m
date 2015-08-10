@@ -12,6 +12,7 @@
 #import "ArticleDataSyncImpl1.h"
 #import "StoreDataSyncImpl1.h"
 #import "CategoryDataSyncImpl1.h"
+#import "DataCheckerImpl1.h"
 
 @implementation DataSyncServiceFactoryImpl1
 
@@ -37,7 +38,13 @@ static DataSyncServiceFactoryImpl1* _instance;
     return _instance;
 }
 
+
+
 #pragma mark - interface implementations
+
++(id<DataChecker>) createDataChecker{
+    return [DataCheckerImpl1 getInstance];
+}
 
 +(id<PromotionDataSync>) createPromotionDataSycn{
     return [PromotionDataSyncImpl1 getInstance];

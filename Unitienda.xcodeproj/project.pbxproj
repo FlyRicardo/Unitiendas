@@ -64,6 +64,8 @@
 		42B73BA71B46DF5300805F95 /* DataSyncServiceAbstractFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 42B73BA61B46DF5300805F95 /* DataSyncServiceAbstractFactory.m */; };
 		42B73BAC1B46E06C00805F95 /* DataSyncServiceFactoryImpl1.m in Sources */ = {isa = PBXBuildFile; fileRef = 42B73BAB1B46E06C00805F95 /* DataSyncServiceFactoryImpl1.m */; };
 		42B73BAF1B46E08200805F95 /* DataSyncServiceFactoryImpl2.m in Sources */ = {isa = PBXBuildFile; fileRef = 42B73BAE1B46E08200805F95 /* DataSyncServiceFactoryImpl2.m */; };
+		42C89EF31B6BD6BC00433C8F /* FileHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 42C89EF21B6BD6BC00433C8F /* FileHandler.m */; };
+		42C89EFB1B6C424500433C8F /* DataCheckerImpl1.m in Sources */ = {isa = PBXBuildFile; fileRef = 42C89EFA1B6C424500433C8F /* DataCheckerImpl1.m */; };
 		42D919E61B472D9F0033149A /* Article.m in Sources */ = {isa = PBXBuildFile; fileRef = 42D919E51B472D9F0033149A /* Article.m */; };
 		42D919E91B472D9F0033149A /* Promotion.m in Sources */ = {isa = PBXBuildFile; fileRef = 42D919E81B472D9F0033149A /* Promotion.m */; };
 		42D919EC1B472D9F0033149A /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = 42D919EB1B472D9F0033149A /* Photo.m */; };
@@ -340,6 +342,11 @@
 		42B73BAB1B46E06C00805F95 /* DataSyncServiceFactoryImpl1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataSyncServiceFactoryImpl1.m; sourceTree = "<group>"; };
 		42B73BAD1B46E08200805F95 /* DataSyncServiceFactoryImpl2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataSyncServiceFactoryImpl2.h; sourceTree = "<group>"; };
 		42B73BAE1B46E08200805F95 /* DataSyncServiceFactoryImpl2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataSyncServiceFactoryImpl2.m; sourceTree = "<group>"; };
+		42C89EF11B6BD6BC00433C8F /* FileHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileHandler.h; sourceTree = "<group>"; };
+		42C89EF21B6BD6BC00433C8F /* FileHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileHandler.m; sourceTree = "<group>"; };
+		42C89EF81B6C41D000433C8F /* DataChecker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DataChecker.h; sourceTree = "<group>"; };
+		42C89EF91B6C424500433C8F /* DataCheckerImpl1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataCheckerImpl1.h; sourceTree = "<group>"; };
+		42C89EFA1B6C424500433C8F /* DataCheckerImpl1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataCheckerImpl1.m; sourceTree = "<group>"; };
 		42D919E41B472D9F0033149A /* Article.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Article.h; sourceTree = "<group>"; };
 		42D919E51B472D9F0033149A /* Article.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Article.m; sourceTree = "<group>"; };
 		42D919E71B472D9F0033149A /* Promotion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Promotion.h; sourceTree = "<group>"; };
@@ -1041,6 +1048,7 @@
 		42DAD1981B458C1E00B7A463 /* Abstract */ = {
 			isa = PBXGroup;
 			children = (
+				42C89EF81B6C41D000433C8F /* DataChecker.h */,
 				42DAD1BB1B45907900B7A463 /* ArticleDataSync.h */,
 				42DAD1BC1B45909200B7A463 /* StoreDataSync.h */,
 				42DAD1BD1B4590BB00B7A463 /* CategoryDataSync.h */,
@@ -1071,6 +1079,8 @@
 		42DAD19B1B458C8300B7A463 /* Impl1 */ = {
 			isa = PBXGroup;
 			children = (
+				42C89EF91B6C424500433C8F /* DataCheckerImpl1.h */,
+				42C89EFA1B6C424500433C8F /* DataCheckerImpl1.m */,
 				42DAD1A31B458E9100B7A463 /* ArticleDataSyncImpl1.h */,
 				42DAD1A41B458E9100B7A463 /* ArticleDataSyncImpl1.m */,
 				42DAD1A61B458EA200B7A463 /* StoreDataSyncImpl1.h */,
@@ -1141,6 +1151,8 @@
 			children = (
 				42E888911B6831DA00174AB8 /* ImageHandler.h */,
 				42E888921B6831DA00174AB8 /* ImageHandler.m */,
+				42C89EF11B6BD6BC00433C8F /* FileHandler.h */,
+				42C89EF21B6BD6BC00433C8F /* FileHandler.m */,
 			);
 			path = LocalStorage;
 			sourceTree = "<group>";
@@ -1381,6 +1393,7 @@
 				425AD6DB1AE588C200A81515 /* ViewControllerRegister.m in Sources */,
 				425AD7061AE589D100A81515 /* WSConnectionApache.m in Sources */,
 				425AD6DD1AE588C200A81515 /* ViewControllerSelectVenue.m in Sources */,
+				42C89EFB1B6C424500433C8F /* DataCheckerImpl1.m in Sources */,
 				425AD6C91AE588A600A81515 /* UiTextFieldWithPadding.m in Sources */,
 				42D919E91B472D9F0033149A /* Promotion.m in Sources */,
 				42087AF01AFBC00E00C4532D /* ViewControllerPromotionList.m in Sources */,
@@ -1401,6 +1414,7 @@
 				425AD6CA1AE588A600A81515 /* UILabelWithPadding.m in Sources */,
 				425007931AEEE6B10003F230 /* ProfileMO.m in Sources */,
 				42DAD1A21B458E7C00B7A463 /* PromotionDataSyncImpl1.m in Sources */,
+				42C89EF31B6BD6BC00433C8F /* FileHandler.m in Sources */,
 				42E888931B6831DA00174AB8 /* ImageHandler.m in Sources */,
 				425AD7131AE58A3700A81515 /* WebServiceTomcatFactory.m in Sources */,
 				4250079B1AEEE75F0003F230 /* LogoutMetaMO.m in Sources */,

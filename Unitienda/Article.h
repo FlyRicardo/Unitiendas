@@ -21,6 +21,7 @@
 @property (nonatomic, retain) NSSet *photo;
 @property (nonatomic, retain) NSSet *promotion;
 @property (nonatomic, retain) Store *store;
+
 @end
 
 @interface Article (CoreDataGeneratedAccessors)

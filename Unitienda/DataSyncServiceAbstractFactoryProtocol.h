@@ -12,9 +12,11 @@
 #import "ArticleDataSync.h"
 #import "StoreDataSync.h"
 #import "CategoryDataSync.h"
+#import "DataChecker.h"
 
 @protocol DataSyncServiceAbstractFactoryProtocol
 
++(id<DataChecker>) createDataChecker;
 +(id<PromotionDataSync>) createPromotionDataSycn;
 +(id<ArticleDataSync>) createArticleDataSycn;
 +(id<StoreDataSync>) createStoreDataSycn;

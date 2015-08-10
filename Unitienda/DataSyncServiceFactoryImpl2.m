@@ -7,6 +7,7 @@
 //
 
 #import "DataSyncServiceFactoryImpl2.h"
+#import "FileHandler.h"
 
 @implementation DataSyncServiceFactoryImpl2
 
@@ -33,6 +34,9 @@ static DataSyncServiceFactoryImpl2* _instance;
 }
 
 #pragma mark - interface implementations
++(id<DataChecker>) createDataChecker{
+    return nil;
+}
 
 +(id<PromotionDataSync>) createPromotionDataSycn{
     return nil;

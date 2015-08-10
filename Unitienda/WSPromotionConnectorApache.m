@@ -158,13 +158,15 @@ static WSPromotionConnectorApache* _instance;
                                           parameters:nil
                                              success: ^(RKObjectRequestOperation *operation, RKMappingResult *result){
                                                  
+                                                 NSLog(@"");
+                                                 
                                                  //It's not necesary create an operation that writtes on DB, because RESTKit is already configurate with CoreData
                                                  
-                                               /**  Response using block as parameter of signature method <-(void) getPromotionsByStore:(NSInteger)storeId block:(void (^)(id))block>
-                                                
-                                                block(resulList);
-                                                
-                                                **/
+                                                 /**  Response using block as parameter of signature method <-(void) getPromotionsByStore:(NSInteger)storeId block:(void (^)(id))block>
+                                                  
+                                                  block(resulList);
+                                                  
+                                                  **/
                                             }
                                             failure:^(RKObjectRequestOperation *operation, NSError *error){
                                                 

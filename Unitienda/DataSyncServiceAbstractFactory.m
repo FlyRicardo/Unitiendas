@@ -37,10 +37,26 @@ static DataSyncServiceAbstractFactory* _instance;
 
 #pragma mark - interface implementations
 
++(id<DataChecker>) createDataChecker:(DataSyncTypes)type{
+    
+    switch (type) {
+        case Impl1:
+            return [DataSyncServiceFactoryImpl1 createDataChecker];
+            break;
+            
+        case Impl2:
+            return [DataSyncServiceFactoryImpl2 createDataChecker];
+            break;
+            
+        default:
+            return [DataSyncServiceFactoryImpl1 createDataChecker];
+            break;
+    }
+}
+
 +(id<PromotionDataSync>) createPromotionDataSycn:(DataSyncTypes)type{
     
     switch (type) {
-            
         case Impl1:
             return [DataSyncServiceFactoryImpl1 createPromotionDataSycn];
             break;
@@ -57,7 +73,6 @@ static DataSyncServiceAbstractFactory* _instance;
 +(id<ArticleDataSync>) createArticleDataSycn:(DataSyncTypes)type{
     
     switch (type) {
-            
         case Impl1:
               return [DataSyncServiceFactoryImpl1 createArticleDataSycn];
             break;

@@ -46,6 +46,15 @@
         <attribute name="number" attributeType="String" syncable="YES"/>
         <attribute name="storeId" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <relationship name="article" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Article" inverseName="store" inverseEntity="Article" syncable="YES"/>
+        <relationship name="userProfile" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="UserProfile" inverseName="store" inverseEntity="UserProfile" syncable="YES"/>
+    </entity>
+    <entity name="UserProfile" representedClassName="UserProfile" syncable="YES">
+        <attribute name="accessToken" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="firstName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="refreshToken" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="userName" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="store" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Store" inverseName="userProfile" inverseEntity="Store" syncable="YES"/>
     </entity>
     <elements>
         <element name="Article" positionX="-423" positionY="-279" width="128" height="165"/>
@@ -53,6 +62,7 @@
         <element name="Icon" positionX="-297" positionY="-441" width="128" height="103"/>
         <element name="Photo" positionX="-189" positionY="-162" width="128" height="118"/>
         <element name="Promotion" positionX="-216" positionY="-4" width="128" height="148"/>
-        <element name="Store" positionX="-614" positionY="-234" width="128" height="118"/>
+        <element name="Store" positionX="-614" positionY="-234" width="128" height="133"/>
+        <element name="UserProfile" positionX="-819" positionY="-234" width="128" height="133"/>
     </elements>
 </model>

@@ -8,6 +8,7 @@
 //
 
 #import "ViewControllerPromotionList.h"
+#import "WebServiceAbstractFactory.h"
 #import "DataSyncServiceAbstractFactory.h"
 
 #import "RefreshTokenMetaMO.h"
@@ -20,10 +21,18 @@
 #import "TableViewCellPromotion.h"
 #import "ReachabilityImpl.h"
 
+#import <CoreData/CoreData.h>
+
 @interface ViewControllerPromotionList()<NSFetchedResultsControllerDelegate>
 
 @property (nonatomic) RefreshTokenMetaMO* refreshTokenResponseMO;
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
+
+@property DataSyncServiceAbstractFactory* dataSyncServiceAbstractFactory;
+
+@property id dataSyncPromotion;
+@property id dataChecker;
+@property id wsPromotionConnector;
 
 @end
 
@@ -31,50 +40,60 @@
 
 -(void) viewDidLoad{
     [super viewDidLoad];
-    [self configureFetchedResultsController];
     [self configureNavigationBar];
-    [self requestGetPromotionsByStore];
     [self configureElementsOnView];
+    [self requestGetPromotionsByStore];
 }
+
+
+/**
+ *  Use to instantiate a the fetchedResultsController
+ **/
+- (NSFetchedResultsController *)fetchedResultsController{
+    if (!_fetchedResultsController) {
+        NSLog(@"Managed object context : %@", self.managedObjectContext);
+        
+        // Initialize Fetch Request
+        //    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Promotion"];
+        NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:NSStringFromClass([Promotion class])];
+        
+        // Add Sort Descriptors
+        [fetchRequest setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"promotionId" ascending:YES]]];
+        [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"%K == %@", @"article.store.storeId", @(1)]];
+        
+        // Initialize Fetched Results Controller
+        self.fetchedResultsController = [[NSFetchedResultsController alloc]
+                                         initWithFetchRequest:fetchRequest
+                                         managedObjectContext:[RKManagedObjectStore defaultStore].mainQueueManagedObjectContext
+                                         //                                     managedObjectContext:self.managedObjectContext
+                                         sectionNameKeyPath:nil
+                                         cacheName:nil];
+        
+        
+        // Configure this VC as Fetched Results Controller
+        [self.fetchedResultsController setDelegate:self];
+        
+        // Perform Fetch
+        NSError *error = nil;
+        [self.fetchedResultsController performFetch:&error];
+        
+        if (error) {
+            NSLog(@"Unable to perform fetch.");
+            NSLog(@"%@, %@", error, error.localizedDescription);
+        }
+    }
+    return _fetchedResultsController;
+}
+
 
 #pragma mark - configuration of elements view
 -(void) configureElementsOnView{
+//    _tableView.contentInset = UIEdgeInsetsMake(0,0,0,-10);
+    
     if([[self.fetchedResultsController sections] count]>0){
         [[self promotionNotFoundLabel] setHidden:YES];
     }else{
         [[self promotionNotFoundLabel] setHidden:NO];
-    }
-}
-
-#pragma mark - NavigationController configuration
--(void) configureFetchedResultsController{
-    NSLog(@"Managed object context : %@", self.managedObjectContext);
-    
-    // Initialize Fetch Request
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Promotion"];
-    
-    // Add Sort Descriptors
-    [fetchRequest setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"promotionId" ascending:YES]]];
-    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"%K == %@", @"article.store.storeId", @(1)]];
-    
-    // Initialize Fetched Results Controller
-    self.fetchedResultsController = [[NSFetchedResultsController alloc]
-                                     initWithFetchRequest:fetchRequest
-                                     managedObjectContext:self.managedObjectContext
-                                     sectionNameKeyPath:nil
-                                     cacheName:nil];
-    
-    
-    // Configure Fetched Results Controller
-    [self.fetchedResultsController setDelegate:self];
-    
-    // Perform Fetch
-    NSError *error = nil;
-    [self.fetchedResultsController performFetch:&error];
-    
-    if (error) {
-        NSLog(@"Unable to perform fetch.");
-        NSLog(@"%@, %@", error, error.localizedDescription);
     }
 }
 
@@ -95,18 +114,24 @@
 }
 
 #pragma mark - Call Web services
-
 -(void) requestGetPromotionsByStore{
     
-    id dataSyncPromotion = [DataSyncServiceAbstractFactory createPromotionDataSycn:Impl1];
+    _dataSyncPromotion = [DataSyncServiceAbstractFactory createPromotionDataSycn:Impl1];
+    _dataChecker = [DataSyncServiceAbstractFactory createDataChecker:Impl1];
+    _wsPromotionConnector = [WebServiceAbstractFactory createWebServicePromotionConnection:ApacheType];
+    
     NSLog(@"Store id: %li",(long)[[[NSUserDefaults standardUserDefaults] valueForKey:[Constants GET_LABEL_STORE_ID]] integerValue]);
     
     Store* store = (Store*)[NSEntityDescription
                                     insertNewObjectForEntityForName:@"Store"
                                     inManagedObjectContext:self.managedObjectContext];
-    
     [store setStoreId:[NSNumber numberWithInt:1]];
-    [dataSyncPromotion getPromotionsByStore:store];
+    
+    if(![_dataChecker hasData:self.managedObjectContext]){                                                                    //If dataChecker component doesnt detect any data, then force sync with WS
+        [_wsPromotionConnector getPromotionsByStoreWS:1];
+    }
+    
+    [_dataSyncPromotion getPromotionsByStore:store];
 
     if([[ReachabilityImpl getInstance] internetIsReachable]){                                                                 //Couldn't stablish TCP/IP connection
         [self showAlertControllerWithTittle:@"No hay conexion a internet"
@@ -126,6 +151,22 @@
 }
 
 #pragma mark - Implemented UITableViewDelegate
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+    if ([tableView respondsToSelector:@selector(setSeparatorInset:)]) {
+        [tableView setSeparatorInset:UIEdgeInsetsZero];
+    }
+    if ([tableView respondsToSelector:@selector(setLayoutMargins:)]) {
+        [tableView setLayoutMargins:UIEdgeInsetsZero];
+    }
+    if ([tableView respondsToSelector:@selector(setLayoutMargins:)]) {
+        cell.preservesSuperviewLayoutMargins = NO;
+        [cell setLayoutMargins:UIEdgeInsetsZero];
+    }
+    if ([cell respondsToSelector:@selector(setSeparatorInset:)]){
+        [cell setSeparatorInset:UIEdgeInsetsZero];
+    }
+}
+
 - (NSInteger)numberOfSectionsInTableView: (UITableView *)tableView{
     return [[self.fetchedResultsController sections] count];
 }
@@ -148,7 +189,6 @@
         cell = [[TableViewCellPromotion alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
     }
     Promotion* promotion = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    [cell setArticle:[promotion article]];
     [cell setPromotion:promotion];
     return cell;
 }

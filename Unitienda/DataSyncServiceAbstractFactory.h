@@ -12,6 +12,7 @@
 #import "ArticleDataSync.h"
 #import "StoreDataSync.h"
 #import "CategoryDataSync.h"
+#import "DataChecker.h"
 
 typedef enum DataSyncTypes {
     Impl1,
@@ -20,6 +21,7 @@ typedef enum DataSyncTypes {
 
 @interface DataSyncServiceAbstractFactory : NSObject
 
++(id<DataChecker>) createDataChecker:(DataSyncTypes)type;
 +(id<PromotionDataSync>) createPromotionDataSycn:(DataSyncTypes)type;
 +(id<ArticleDataSync>) createArticleDataSycn:(DataSyncTypes)type;
 +(id<StoreDataSync>) createStoreDataSycn:(DataSyncTypes)type;

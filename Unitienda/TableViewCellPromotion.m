@@ -14,15 +14,19 @@
 #import "ReachabilityImpl.h"
 #import "ImageHandler.h"
 
+@interface TableViewCellPromotion()
+
+@property (weak, nonatomic) IBOutlet UIView *contentViewMain;
+
+@end
+
 @implementation TableViewCellPromotion
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        // Initialization code
     }
-    
     return self;
 }
 
@@ -34,11 +38,15 @@
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected animated:animated];
-    
     // Configure the view for the selected state
 }
 
-- (void) setCacheImage:(NSSet*)photos{
+//-(void) layoutSubviews{
+//    [super layoutSubviews];
+//    self.contentViewMain.frame = CGRectMake(-10.0f, 0, self.contentViewMain.frame.size.width, self.contentViewMain.frame.size.height);
+//}
+
+-(void) setCacheImage:(NSSet*)photos{
     __block Photo* photo;
     [photos enumerateObjectsUsingBlock:^(id obj, BOOL *stop) { // This block is the advised way to iterate over a Set (structure that doesn't has iterators)
         photo = (Photo*)obj;
@@ -88,8 +96,15 @@
 }
 
 -(void) setPromotion:(Promotion *)promotion{
-    [[self rowPercentageEffectivenessLabel] setText:[NSString stringWithFormat:@"%@%% porcein de efectividad",[[promotion effectiveness] stringValue]]];
-    [[self rowDueDateLabel] setText:[self customFormatDate:[promotion dueDate]]];
+    [[self rowPercentageEffectivenessLabel] setText:[NSString stringWithFormat:@"%d%% de efectividad",[[promotion effectiveness] intValue]]];
+
+    int daysFromDate = [self daysFromDate:[promotion dueDate]];
+    if(daysFromDate >=0){                                                                                                               //If promotion is still valid
+        [[self rowDueDateLabel] setText:[NSString stringWithFormat:@"%d día(s) de vigencia",[self daysFromDate:[promotion dueDate]]]];
+    }else{
+        [[self rowDueDateLabel] setText:@"La promoción ha expirado"];
+    }
+    [self setArticle:[promotion article]];
 }
 
 -(NSString*) customFormatDate:(NSDate*) date{
@@ -98,5 +113,21 @@
     [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     return [dateFormat stringFromDate:date];
 }
+
+/**
+ * Returns number of days (absolute value) from another date (as number of midnights beween these dates)
+ **/
+- (int)daysFromDate:(NSDate *)pDate {
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSDate* currentDate = [NSDate date];
+    NSInteger startDay=[calendar ordinalityOfUnit:NSCalendarUnitDay
+                                           inUnit:NSCalendarUnitEra
+                                          forDate:currentDate];
+    NSInteger endDay=[calendar ordinalityOfUnit:NSCalendarUnitDay
+                                         inUnit:NSCalendarUnitEra
+                                        forDate:pDate];
+    return endDay-startDay;
+}
+
 
 @end

@@ -12,7 +12,7 @@
 
 @protocol PromotionDataSync
 
--(NSArray*) getPromotionsByStore:(Store*) store;                  //Get the Promotion List from local DB ( if flag is false )
+-(NSArray*) getPromotionsByStore:(Store*) store;             //Get the Promotion List from local DB ( if flag is false )
 -(Promotion*) getPromotionDetail:(Promotion*) prmotion;      //Get the Promotion Detail from local DB ( if flag is false )
 
 @end

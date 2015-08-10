@@ -9,6 +9,10 @@
 #import <Foundation/Foundation.h>
 #import "DataSyncServiceAbstractFactoryProtocol.h"
 
+
+/**
+ * This concrete factory represents the CoreData Implementation
+ **/
 @interface DataSyncServiceFactoryImpl1 : NSObject<DataSyncServiceAbstractFactoryProtocol>
 
 +(id)getInstance;

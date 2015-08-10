@@ -19,13 +19,32 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "__40-[TableViewCellPromotion setCacheImage:]_block_invoke23:TableViewCellPromotion.m">
+         contextName = "-[ViewControllerPromotionList configureElementsOnView]:ViewControllerPromotionList.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[[self.fetchedResultsController sections] count]">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "-[ViewControllerPromotionList numberOfSectionsInTableView:]:ViewControllerPromotionList.m">
          <PersistentStrings>
             <PersistentString
                value = "[[self.fetchedResultsController sections] count]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[TableViewCellPromotion daysFromDate:]:TableViewCellPromotion.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[NSDate date]">
+            </PersistentString>
+            <PersistentString
+               value = "currentDate">
+            </PersistentString>
+            <PersistentString
+               value = "endDay-startDay">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -99,20 +118,15 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[ViewControllerPromotionList configureElementsOnView]:ViewControllerPromotionList.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "[[self.fetchedResultsController sections] count]">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
          contextName = "-[WSPromotionConnectorApache getPromotionsByStore:]:WSPromotionConnectorApache.m">
          <PersistentStrings>
             <PersistentString
                value = "[postBody accessToken]">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "__40-[TableViewCellPromotion setCacheImage:]_block_invoke23:TableViewCellPromotion.m">
       </ContextState>
    </ContextStates>
 </VariablesViewState>
