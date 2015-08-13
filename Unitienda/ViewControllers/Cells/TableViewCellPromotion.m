@@ -14,9 +14,12 @@
 #import "ReachabilityImpl.h"
 #import "ImageHandler.h"
 
+#import "DataSyncServiceAbstractFactory.h"
+
 @interface TableViewCellPromotion()
 
 @property (weak, nonatomic) IBOutlet UIView *contentViewMain;
+@property id dataChecker;
 
 @end
 
@@ -26,6 +29,7 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
+        _dataChecker = [DataSyncServiceAbstractFactory createDataChecker:Impl1];
     }
     return self;
 }
@@ -47,6 +51,7 @@
 //}
 
 -(void) setCacheImage:(NSSet*)photos{
+    
     __block Photo* photo;
     [photos enumerateObjectsUsingBlock:^(id obj, BOOL *stop) { // This block is the advised way to iterate over a Set (structure that doesn't has iterators)
         photo = (Photo*)obj;
@@ -65,10 +70,11 @@
             UIImage *image;
             NSString* extension =[[ImageHandler getInstance] getExtensionFromURL:[photo url]];
             NSString* fileName =[[ImageHandler getInstance] getImageNameFromURL:[photo url]];
+            
+            image = [[ImageHandler getInstance] loadImage:fileName ofType:extension];
+            
+            if( image == nil && ([[ReachabilityImpl getInstance] wifiIsAvailable] || [[ReachabilityImpl getInstance] tcpIpIsAvailable]) && [[ReachabilityImpl getInstance] hostIsReachable]){                                      // If the image is not saved locally , and the host is reachable
 
-            if(![[ReachabilityImpl getInstance] hostIsReachable2]){
-                image = [[ImageHandler getInstance] loadImage:fileName ofType:extension];
-            }else{
                 NSURL * imageURL = [NSURL URLWithString:photo.url];
                 NSData * imageData = [NSData dataWithContentsOfURL:imageURL];
                 
@@ -77,11 +83,14 @@
                     [[ImageHandler getInstance] saveImageLocallyWithFileName:fileName ofType:extension AndURL:[photo url]];
                 }
                 image = [UIImage imageWithData:imageData];
+                
             }
+            
             dispatch_sync(dispatch_get_main_queue(), ^{
                 [_rowArticleImageView setImage: image];
                 [[CacheManager sharedCacheController] setCachedImage:image name:[NSString stringWithFormat:@"image-%@", [photo url]]];
             });
+            
         });
     }
 }
@@ -95,7 +104,10 @@
     [self setCacheImage:[article photo]];
 }
 
--(void) setPromotion:(Promotion *)promotion{
+-(void) setPromotion:(Promotion *)promotion AndManagedObjectContext:(NSManagedObjectContext *)managedObjectContext{
+    
+    _managedObjectContext = managedObjectContext;
+    
     [[self rowPercentageEffectivenessLabel] setText:[NSString stringWithFormat:@"%d%% de efectividad",[[promotion effectiveness] intValue]]];
 
     int daysFromDate = [self daysFromDate:[promotion dueDate]];

@@ -13,8 +13,8 @@
 
 -(BOOL) hostIsReachable;
 -(BOOL) hostIsReachable2;
--(BOOL) internetIsReachable;
--(BOOL) wifiIsReachable;
+-(BOOL) tcpIpIsAvailable;
+-(BOOL) wifiIsAvailable;
 
 +(id) getInstance;
 

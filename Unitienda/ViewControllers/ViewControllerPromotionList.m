@@ -11,7 +11,8 @@
 #import "WebServiceAbstractFactory.h"
 #import "DataSyncServiceAbstractFactory.h"
 
-#import "ViewControllerCreateProfile.h"
+#import "ViewControllerCreateEditProfile.h"
+#import "ViewControllerCreateEditPromotion.h"
 
 #import "RefreshTokenMetaMO.h"
 
@@ -45,10 +46,13 @@ static NSString *kSegueIdentifierEditProfileSegue = @"EditUserProfileSegue";
 @implementation ViewControllerPromotionList
 
 -(void) viewDidLoad{
-    [super viewDidLoad];
-    [self configureNavigationBar];
     [self configureElementsOnView];
     [self requestGetPromotionsByStore];
+}
+
+-(void) viewWillAppear:(BOOL)animated{
+    [super viewDidLoad];
+    [self configureNavigationBar];
 }
 
 
@@ -65,7 +69,13 @@ static NSString *kSegueIdentifierEditProfileSegue = @"EditUserProfileSegue";
         
         // Add Sort Descriptors
         [fetchRequest setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"promotionId" ascending:YES]]];
-        [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"%K == %@", @"article.store.storeId", @(1)]];
+        
+        // Add Sort Predicate
+        [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"%K == %@", @"article.store.storeId",
+//                                    @(1)
+                                    @([[NSUserDefaults standardUserDefaults]
+                                       integerForKey:[Constants GET_LABEL_STORE_ID]])
+                                    ]];
         
         // Initialize Fetched Results Controller
         self.fetchedResultsController = [[NSFetchedResultsController alloc]
@@ -112,6 +122,7 @@ static NSString *kSegueIdentifierEditProfileSegue = @"EditUserProfileSegue";
     UINavigationBar *navigationBar =[[navigationController navigationController] navigationBar];
     UINavigationItem* navigationItem = [navigationController navigationItem];
     
+    [navigationBar setTintColor:[UIColor whiteColor]];
     [navigationBar setBarTintColor:[UIColor colorWithRed:(240.0/255.0) green:(141.0/255.0) blue:(36.0/255.0) alpha:1]];
     [navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
     
@@ -126,23 +137,28 @@ static NSString *kSegueIdentifierEditProfileSegue = @"EditUserProfileSegue";
     _dataChecker = [DataSyncServiceAbstractFactory createDataChecker:Impl1];
     _wsPromotionConnector = [WebServiceAbstractFactory createWebServicePromotionConnection:ApacheType];
     
-    NSLog(@"Store id: %li",(long)[[[NSUserDefaults standardUserDefaults] valueForKey:[Constants GET_LABEL_STORE_ID]] integerValue]);
-    
     Store* store = (Store*)[NSEntityDescription
                                     insertNewObjectForEntityForName:@"Store"
                                     inManagedObjectContext:self.managedObjectContext];
-    [store setStoreId:[NSNumber numberWithInt:1]];
+    
+//    [store setStoreId:[NSNumber numberWithInt: 1]];
+    [store setStoreId:[NSNumber numberWithInt:(int)[[NSUserDefaults standardUserDefaults]
+                                                    integerForKey:[Constants GET_LABEL_STORE_ID]]]];
+    
     
     if(![_dataChecker hasData:self.managedObjectContext]){                                                                    //If dataChecker component doesnt detect any data, then force sync with WS
-        [_wsPromotionConnector getPromotionsByStoreWS:1];
+        
+//        [_wsPromotionConnector getPromotionsByStoreWS:1];
+        [_wsPromotionConnector getPromotionsByStoreWS:[[NSUserDefaults standardUserDefaults]
+                                                       integerForKey:[Constants GET_LABEL_STORE_ID]]];
     }
     
     [_dataSyncPromotion getPromotionsByStore:store];
 
-    if([[ReachabilityImpl getInstance] internetIsReachable]){                                                                 //Couldn't stablish TCP/IP connection
+    if(![[ReachabilityImpl getInstance] wifiIsAvailable] && ![[ReachabilityImpl getInstance] tcpIpIsAvailable]){                                                                 //Couldn't stablish TCP/IP connection
         [self showAlertControllerWithTittle:@"No hay conexion a internet"
                                  AndMessage:@"No se ha detactado conexión a internet. Por favor revise sus preferencias de conexión e intentelo nuevamente."];
-    }else{                                                                                                                    //Stablish TCP/IP connection, but couldn't stablish connection to the server
+    }else if(![[ReachabilityImpl getInstance] hostIsReachable]){                                                                                                                    //Stablish TCP/IP connection, but couldn't stablish connection to the server
         [self showAlertControllerWithTittle:@"Error en los servidores de Unitienda"
                                  AndMessage:@"No se ha podido establecer conección con el servidor, por favor pongase en contacto con el administador"];
     }
@@ -194,7 +210,7 @@ static NSString *kSegueIdentifierEditProfileSegue = @"EditUserProfileSegue";
         cell = [[TableViewCellPromotion alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
     }
     Promotion* promotion = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    [cell setPromotion:promotion];
+    [cell setPromotion:promotion AndManagedObjectContext:_managedObjectContext];
     return cell;
 }
 
@@ -273,15 +289,51 @@ static NSString *kSegueIdentifierEditProfileSegue = @"EditUserProfileSegue";
     [self performSegueWithIdentifier:kSegueIdentifierEditCreatePromotion sender:self];
 }
 
+
+/**
+ *  User this method to force sync with WS
+ **/
+- (IBAction)refreshPromotionFromWS:(id)sender {
+    [_wsPromotionConnector getPromotionsByStoreWS:[[NSUserDefaults standardUserDefaults]
+                                                        integerForKey:[Constants GET_LABEL_STORE_ID]]];
+}
+
 #pragma mark - Navigation programatically
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if([[segue identifier] isEqualToString: kSegueIdentifierEditProfileSegue]){
         
-        ViewControllerCreateProfile *viewController = [segue destinationViewController];
+        ViewControllerCreateEditProfile *viewController = [segue destinationViewController];
         
+//      Get entity description and set it on ManagedObjectContext
+//        NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:NSStringFromClass([Store class])];
+        NSEntityDescription *entityDescription = [NSEntityDescription
+                                                  entityForName:@"Store" inManagedObjectContext:_managedObjectContext];
+        
+        // Initialize Fetch Request
+        NSFetchRequest *request = [[NSFetchRequest alloc] init];
+        [request setEntity:entityDescription];
+        
+        // Add Sort Predicate
+        [request setPredicate:[NSPredicate predicateWithFormat:@"%K == %@", @"storeId",
+                                    @([[NSUserDefaults standardUserDefaults]
+                                       integerForKey:[Constants GET_LABEL_STORE_ID]])
+                                    ]];
+        NSError *error;
+        NSArray *array = [_managedObjectContext executeFetchRequest:request error:&error];
+        if (array == nil){
+            NSLog(@"Error getting info of store with id: %lu. Error: %@",[[NSUserDefaults standardUserDefaults]
+                                                               integerForKey:[Constants GET_LABEL_STORE_ID]],
+                  error);
+        }
+        Store *store = [array objectAtIndex:0];
+        
+        [viewController setStore:store];
+        [viewController setCreationMode:NO];
         
     }if([[segue identifier] isEqualToString: kSegueIdentifierEditCreatePromotion]){
-        View
+        
+        ViewControllerCreateEditPromotion *viewController = [segue destinationViewController];
+        
     }
 }
 

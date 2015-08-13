@@ -10,8 +10,9 @@
 #import "ProfileRequestMO.h"
 #import "WSConnectionApache.h"
 #import "StoreMO+RequestMO.h"
+#import "Store.h"
 #import "MetaMO.h"
-#import "MainMO.h"
+
 #import "ProfileMO.h"
 
 #import "Constants.h"
@@ -160,7 +161,7 @@ static WSProfileConnectorApache* _instance;
 }
 
 
--(void) createProfileWithStoreInfo:(StoreMO *)store{
+-(void) createProfileWithStoreInfo:(Store *)store{
     /**
      REQUEST DESCRIPTIOR CONFIGURATION
      **/
@@ -300,7 +301,7 @@ static WSProfileConnectorApache* _instance;
     
     RKObjectMapping *responseMapping = [RKObjectMapping mappingForClass:[StoreMO class]];
     [responseMapping addAttributeMappingsFromDictionary:@{
-                                                          @"id":@"storeId",
+                                                          @"storeId":@"storeId",
                                                           @"name":@"name",
                                                           @"number":@"number",
                                                           @"latitude":@"latitude",

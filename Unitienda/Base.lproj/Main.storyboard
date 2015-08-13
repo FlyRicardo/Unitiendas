@@ -173,11 +173,11 @@
                         <viewControllerLayoutGuide type="bottom" id="7wW-82-Rj6"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="yTy-Iw-sTG">
-                        <rect key="frame" x="0.0" y="64" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Aquí podrá crear y administrar promociones, así como también acceder a promociones ya realizadas." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="238" translatesAutoresizingMaskIntoConstraints="NO" id="gMp-iw-dcC" userLabel="No Promotions Found">
-                                <rect key="frame" x="181" y="273" width="238" height="55"/>
+                                <rect key="frame" x="181" y="241" width="238" height="55"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="55" id="G2S-aL-txQ"/>
@@ -187,7 +187,7 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="PPY-u1-92z">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="PPY-u1-92z">
                                 <rect key="frame" x="0.0" y="20" width="600" height="580"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -199,13 +199,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bBA-ea-nei" userLabel="ContentViewMain">
-                                                    <rect key="frame" x="0.0" y="10" width="700" height="74"/>
+                                                    <rect key="frame" x="0.0" y="10" width="700" height="84"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zAP-tx-ITG">
-                                                            <rect key="frame" x="0.0" y="0.0" width="74" height="74"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="84" height="84"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" constant="74" id="Bd5-RF-fO2"/>
+                                                                <constraint firstAttribute="width" constant="84" id="Bd5-RF-fO2"/>
                                                             </constraints>
                                                         </imageView>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NKP-bX-jUx">
@@ -257,9 +257,9 @@
                                                         <constraint firstItem="NKP-bX-jUx" firstAttribute="centerY" secondItem="zAP-tx-ITG" secondAttribute="centerY" constant="-0.5" id="1D5-17-ptm"/>
                                                         <constraint firstItem="zAP-tx-ITG" firstAttribute="top" secondItem="bBA-ea-nei" secondAttribute="top" id="7wo-8X-PO3"/>
                                                         <constraint firstItem="zAP-tx-ITG" firstAttribute="leading" secondItem="bBA-ea-nei" secondAttribute="leading" id="Hvb-oP-BuE"/>
-                                                        <constraint firstItem="NKP-bX-jUx" firstAttribute="leading" secondItem="zAP-tx-ITG" secondAttribute="trailing" constant="7" id="KNd-ts-JOM"/>
+                                                        <constraint firstItem="NKP-bX-jUx" firstAttribute="leading" secondItem="zAP-tx-ITG" secondAttribute="trailing" constant="-3" id="KNd-ts-JOM"/>
                                                         <constraint firstItem="NKP-bX-jUx" firstAttribute="top" secondItem="bBA-ea-nei" secondAttribute="top" id="N9u-nU-uPr"/>
-                                                        <constraint firstAttribute="bottom" secondItem="NKP-bX-jUx" secondAttribute="bottom" id="OLv-Mn-otY"/>
+                                                        <constraint firstAttribute="bottom" secondItem="NKP-bX-jUx" secondAttribute="bottom" constant="10" id="OLv-Mn-otY"/>
                                                         <constraint firstItem="NKP-bX-jUx" firstAttribute="top" secondItem="bBA-ea-nei" secondAttribute="top" id="R6S-nQ-DD5"/>
                                                         <constraint firstAttribute="trailing" secondItem="NKP-bX-jUx" secondAttribute="trailing" constant="139" id="VMY-VR-ik3"/>
                                                         <constraint firstAttribute="bottom" secondItem="NKP-bX-jUx" secondAttribute="bottom" id="edJ-Lh-iBl"/>
@@ -281,7 +281,7 @@
                                                 <constraint firstItem="bBA-ea-nei" firstAttribute="leading" secondItem="57R-3z-tfb" secondAttribute="leadingMargin" constant="-8" id="KvN-86-44G"/>
                                                 <constraint firstItem="bBA-ea-nei" firstAttribute="top" secondItem="57R-3z-tfb" secondAttribute="topMargin" constant="2" id="hec-H7-rWl"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="bBA-ea-nei" secondAttribute="trailing" constant="-141" id="na7-m8-qn0"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="bBA-ea-nei" secondAttribute="bottom" constant="2" id="uoX-DZ-H1R"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="bBA-ea-nei" secondAttribute="bottom" constant="-8" id="uoX-DZ-H1R"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -301,7 +301,7 @@
                                 </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a7j-VY-GXf">
-                                <rect key="frame" x="0.0" y="553" width="600" height="30"/>
+                                <rect key="frame" x="0.0" y="489" width="600" height="30"/>
                                 <color key="backgroundColor" white="0.85786290320000003" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="luX-Ag-sJu"/>
@@ -346,6 +346,12 @@
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" id="JMl-lM-PBe">
+                        <barButtonItem key="leftBarButtonItem" systemItem="refresh" id="tPZ-08-fNO">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="refreshPromotionFromWS:" destination="0pE-o6-5jo" id="kYQ-oE-UbC"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="rwm-ZX-iaR">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
@@ -356,13 +362,13 @@
                     <connections>
                         <outlet property="promotionNotFoundLabel" destination="gMp-iw-dcC" id="Zqo-TG-pLf"/>
                         <outlet property="tableView" destination="PPY-u1-92z" id="3EP-g0-A20"/>
-                        <segue destination="Oav-Xs-QoO" kind="show" identifier="EditCreatePromotionSegue" id="oRx-84-ncs"/>
-                        <segue destination="77h-fi-hEg" kind="show" identifier="EditUserProfileSegue" id="JGl-vC-wWJ"/>
+                        <segue destination="77h-fi-hEg" kind="show" identifier="EditUserProfileSegue" id="tp0-yy-NCe"/>
+                        <segue destination="Oav-Xs-QoO" kind="show" identifier="EditCreatePromotionSegue" id="SZ3-2B-M5D"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ETs-7M-GUK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3675" y="-249"/>
+            <point key="canvasLocation" x="3675" y="-209"/>
         </scene>
         <!--View Controller Edit Create Promotion-->
         <scene sceneID="nrC-Dz-vOU">
@@ -380,12 +386,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZfJ-IK-Wj6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4476" y="-249"/>
+            <point key="canvasLocation" x="4476" y="-209"/>
         </scene>
         <!--ViewControllerCreateProfile-->
         <scene sceneID="9hO-9s-vRF">
             <objects>
-                <tableViewController id="77h-fi-hEg" userLabel="ViewControllerCreateProfile" customClass="ViewControllerCreateProfile" sceneMemberID="viewController">
+                <tableViewController id="77h-fi-hEg" userLabel="ViewControllerCreateProfile" customClass="ViewControllerCreateEditProfile" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" rowHeight="55" sectionHeaderHeight="22" sectionFooterHeight="22" id="WJX-Pw-SLe">
                         <rect key="frame" x="0.0" y="64" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -816,7 +822,7 @@
                                                         <color key="titleShadowColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <connections>
-                                                        <action selector="saveProfileAction:" destination="77h-fi-hEg" eventType="touchUpInside" id="A0K-F5-e8S"/>
+                                                        <action selector="saveEditProfileAction:" destination="77h-fi-hEg" eventType="touchUpInside" id="tvL-SF-6x6"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -835,8 +841,13 @@
                             <outlet property="delegate" destination="77h-fi-hEg" id="MjX-AK-XIU"/>
                         </connections>
                     </tableView>
-                    <extendedEdge key="edgesForExtendedLayout"/>
-                    <navigationItem key="navigationItem" id="sIC-Px-QEg"/>
+                    <navigationItem key="navigationItem" id="sIC-Px-QEg">
+                        <barButtonItem key="rightBarButtonItem" title="Cerrar sesión" id="zud-W6-nAl">
+                            <connections>
+                                <action selector="logoutAction:" destination="77h-fi-hEg" id="FKf-sy-z5l"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="contentPasswordFields" destination="dX0-ay-HJY" id="rO8-v0-Utf"/>
                         <outlet property="contentPickerView" destination="8Ij-0a-L1J" id="lyZ-yh-h9d"/>
@@ -1190,7 +1201,7 @@
         <image name="login_icon" width="120" height="121"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="83Z-MH-kcz"/>
         <segue reference="TqP-I0-fe3"/>
-        <segue reference="JGl-vC-wWJ"/>
     </inferredMetricsTieBreakers>
 </document>

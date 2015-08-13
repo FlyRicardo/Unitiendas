@@ -44,7 +44,7 @@ static FileHandler* _instance;
 #pragma mark - methods
 
 /**
- *  Use to check if exist at leas one register on Promotion entity on CoreData. If it exists, it assume there are data on local model storage, since promotion are the heart of the model.
+ *  Use to check if exist at least one register on Promotion entity on CoreData. If it exists, it assume there are data on local model storage, since promotion are the heart of the model.
  **/
 -(BOOL) checkExistingData:(NSManagedObjectContext*) managedObjectContext{
     

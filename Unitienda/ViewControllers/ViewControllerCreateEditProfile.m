@@ -6,14 +6,14 @@
 //  Copyright (c) 2015 ___FlyInc___. All rights reserved.
 //
 
-#import "ViewControllerCreateProfile.h"
+#import "ViewControllerCreateEditProfile.h"
 
 #import "WSLoginConnector.h"
 #import "RefreshTokenMetaMO.h"
 #import "LogoutMetaMO.h"
 #import "WebServiceAbstractFactory.h"
 
-#import "StoreMO.h"
+#import "Store.h"
 
 #import "ViewControllerSelectVenue.h"
 #import "ViewControllerPromotionList.h"
@@ -37,7 +37,7 @@
 static NSString *kSegueIdentifierInMap = @"selectVenueInMapSegue";
 static NSString *kSegueIdentifierPromotionList = @"CreateProfiileToPromotionListSegue";
 
-@interface ViewControllerCreateProfile()
+@interface ViewControllerCreateEditProfile()
     
 @property (nonatomic) RefreshTokenMetaMO* refreshTokenResponseMO;
 @property (nonatomic) LogoutMetaMO*  logoutResponseMO;
@@ -76,12 +76,11 @@ static NSString *kSegueIdentifierPromotionList = @"CreateProfiileToPromotionList
 @end
 
 
-@implementation ViewControllerCreateProfile
+@implementation ViewControllerCreateEditProfile
 
 -(void) viewDidLoad{
     [super viewDidLoad];
     [self registerNotifyProcess];
-    [self configureNavigationBar];
     [self initiateUIComponents];
     [self hideVenuePickerCell];
     [self hidePasswordFieldsCell];
@@ -89,7 +88,7 @@ static NSString *kSegueIdentifierPromotionList = @"CreateProfiileToPromotionList
 }
 
 -(void) viewWillAppear:(BOOL)animated{
-
+    [self configureNavigationBar];
     [self signUpForKeyboardNotifications];
 }
 
@@ -126,7 +125,9 @@ static NSString *kSegueIdentifierPromotionList = @"CreateProfiileToPromotionList
     _dataPicker= [Constants GET_NUMBER_STORES];
     _dictionaryStorePoint = [Constants GET_POSITION_DICTIONARY_STORE_NUMBER_AS_KEY];
     
-    //Init email Text field
+    ////Init the form of store info
+    [_nameTextField setText:[_store name]];
+    [_labelValueVenue setText:[_store number]];
     [_emailTextField setText:[[NSUserDefaults standardUserDefaults]valueForKey:[Constants GET_LABEL_USER_NAME]]];
     
     //Init stock of alert controllers
@@ -150,7 +151,7 @@ static NSString *kSegueIdentifierPromotionList = @"CreateProfiileToPromotionList
     [navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
     
     [navigationItem setTitle: @"Crear perfilr"];
-    [navigationItem setHidesBackButton:YES];
+    [navigationItem setHidesBackButton:NO];
 }
 
 #pragma mark - protocol methods of UIPickerViewDataSource, UIPickerViewDelegate
@@ -381,6 +382,13 @@ static NSString *kSegueIdentifierPromotionList = @"CreateProfiileToPromotionList
                                              selector:@selector(receiveChangePasswordNotification:)
                                                  name:[Constants GET_LABEL_NAME_PROFILE_CHANGE_PASSWORD_RESPONSE_NOTIFICATION]
                                                object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(receiveLogoutNotification:)
+                                                 name:[Constants GET_LABEL_NAME_LOGOUT_RESPONSE_NOTIFICATION]
+                                               object:nil];
+    
+    //register to notify logout proccess
 }
 
 -(void) unregisterNotifyProcess{
@@ -396,6 +404,10 @@ static NSString *kSegueIdentifierPromotionList = @"CreateProfiileToPromotionList
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                  name:[Constants GET_LABEL_NAME_PROFILE_CHANGE_PASSWORD_RESPONSE_NOTIFICATION]
                                                object:nil];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:[Constants GET_LABEL_NAME_LOGOUT_RESPONSE_NOTIFICATION]
+                                                  object:nil];
 
 }
 
@@ -489,6 +501,22 @@ static NSString *kSegueIdentifierPromotionList = @"CreateProfiileToPromotionList
                                                                                                             // Notification of Create promotion
                                                                                                             // Notification of Change password
         [self showAlertControllerUsingNSError];
+    }
+    
+}
+
+-(void) receiveLogoutNotification:(NSNotification*) notification{
+    
+    NSDictionary *dictionary = notification.userInfo;
+    MetaMO *meta = (MetaMO*) dictionary[[Constants GET_LABEL_NAME_LOGOUT_RESPONSE]];
+    
+    if([meta code] == 200){
+        
+        /**Pops all the view controllers on the stack except the root view controller and updates the display**/
+        [[self navigationController] popToRootViewControllerAnimated:NO];
+        
+    }else{
+        [self showAlertControllerWithTitle:@"Error cerrando sesión" message: [meta errorDetail]];
     }
     
 }
@@ -596,8 +624,39 @@ static NSString *kSegueIdentifierPromotionList = @"CreateProfiileToPromotionList
       }
 }
 
+/**
+ *  Use to show an Alert Controller that call a method of specific WS product
+ **/
+-(void) showAlertControllerUsingWSProduct:(id)wsLoginConnection{
+    UIAlertAction *destroyAction;
+    UIAlertAction *otherAction;
+    
+    UIAlertController * alertController= [UIAlertController alertControllerWithTitle:@"Confirma que desea cerrar sessión?"
+                                                                             message:nil
+                                                                      preferredStyle:UIAlertControllerStyleAlert];
+    
+    destroyAction = [UIAlertAction actionWithTitle:@"Si"
+                                             style:UIAlertActionStyleDefault
+                                           handler:^(UIAlertAction *action) {
+                                               [wsLoginConnection executeLogout];
+                                           }];
+    
+    otherAction = [UIAlertAction actionWithTitle:@"No"
+                                           style:UIAlertActionStyleDefault
+                                         handler:^(UIAlertAction *action) {
+                                             [alertController dismissViewControllerAnimated:YES completion:nil];
+                                         }];
+    
+    [alertController addAction:destroyAction];
+    [alertController addAction:otherAction];
+    [alertController setModalPresentationStyle:UIModalPresentationCurrentContext];
+    
+    [self presentViewController:alertController animated:YES completion:nil];
+}
+
 #pragma mark - UI component's actions
-- (IBAction)saveProfileAction:(id)sender {
+
+- (IBAction)saveEditProfileAction:(id)sender {
     
     if([[_nameTextField text] isEqualToString:@""] || [[_labelValueVenue text]isEqualToString:@""]
        || [[_emailTextField text] isEqualToString:@""]){
@@ -612,10 +671,13 @@ static NSString *kSegueIdentifierPromotionList = @"CreateProfiileToPromotionList
                                    message:@"Si desea cambiar la contraseña, diligencie todos los campos"];
         
     }else{
-        
         [self showAlertControllerConfirmRequest];
-        
     }
+}
+
+- (IBAction)logoutAction:(id)sender {
+        id wsLoginConnector =  [WebServiceAbstractFactory createWebServiceLoginConnection:ApacheType];
+    [self showAlertControllerUsingWSProduct: wsLoginConnector];
 }
 
 #pragma mark - Call Web Services
@@ -623,13 +685,15 @@ static NSString *kSegueIdentifierPromotionList = @"CreateProfiileToPromotionList
 -(void) requestCreateStoreProfile{
     id wsProfileConnector = [WebServiceAbstractFactory createWebServiceProfileConnection:ApacheType];
     
-    StoreMO* storeMO = [[StoreMO alloc]init];
+    Store* store = (Store*)[NSEntityDescription
+                            insertNewObjectForEntityForName:@"Store"
+                            inManagedObjectContext:self.managedObjectContext];
     
-    [storeMO setName:[_nameTextField text]];
-    [storeMO setNumber:[_labelValueVenue text]];
-    [storeMO setEmail:[_emailTextField text]];
+    [store setName:[_nameTextField text]];
+    [store setNumber:[_labelValueVenue text]];
+    [store setEmail:[_emailTextField text]];
     
-    [wsProfileConnector createProfileWithStoreInfo:storeMO];
+    [wsProfileConnector createProfileWithStoreInfo:store];
 }
 
 -(void) requestChangePassword{

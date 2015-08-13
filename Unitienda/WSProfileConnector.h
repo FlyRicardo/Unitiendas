@@ -10,11 +10,11 @@
 #import "ProfileMO.h"
 
 #import "UserMO.h"
-#import "StoreMO.h"
+#import "Store.h"
 
 @protocol WSProfileConnector
 
--(void) createProfileWithStoreInfo:(StoreMO*) store;            //Notify request for creation profile status,
+-(void) createProfileWithStoreInfo:(Store*) store;            //Notify request for creation profile status,
                                                                 //Params: Success @Meta class
                                                                 //        Failure @Meta class
 

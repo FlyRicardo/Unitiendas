@@ -24,6 +24,11 @@
         <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CategoryClassification" inverseName="icon" inverseEntity="CategoryClassification" syncable="YES"/>
     </entity>
+    <entity name="Meta" representedClassName="Meta" syncable="YES">
+        <attribute name="code" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="errorDetail" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="errorType" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="Photo" representedClassName="Photo" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="photoId" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
@@ -48,7 +53,7 @@
         <relationship name="article" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Article" inverseName="store" inverseEntity="Article" syncable="YES"/>
         <relationship name="userProfile" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="UserProfile" inverseName="store" inverseEntity="UserProfile" syncable="YES"/>
     </entity>
-    <entity name="UserProfile" representedClassName="UserProfile" syncable="YES">
+    <entity name="UserProfile" representedClassName="UserProfile" parentEntity="Meta" syncable="YES">
         <attribute name="accessToken" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="firstName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
@@ -64,5 +69,6 @@
         <element name="Promotion" positionX="-216" positionY="-4" width="128" height="148"/>
         <element name="Store" positionX="-614" positionY="-234" width="128" height="133"/>
         <element name="UserProfile" positionX="-819" positionY="-234" width="128" height="133"/>
+        <element name="Meta" positionX="-819" positionY="-0" width="128" height="88"/>
     </elements>
 </model>

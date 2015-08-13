@@ -8,7 +8,7 @@
 
 #import "ViewControllerLogin.h"
 #import "ViewControllerPromotionList.h"
-#import "ViewControllerCreateProfile.h"
+#import "ViewControllerCreateEditProfile.h"
 
 #import "Constants.h"
 
@@ -20,8 +20,6 @@
 #import "ProfileMO.h"
 
 #import "WebServiceAbstractFactory.h"
-
-#define indexViewNavigationController 0
 
 static NSString *kSegueIdentifierCreateProfile = @"ViewControllerCreateProfileSegue";
 static NSString *kSegueIdentifierPromotionList = @"ViewControllerPromotionListSegue";
@@ -44,6 +42,8 @@ static NSString *kSegueIdentifierPromotionList = @"ViewControllerPromotionListSe
 @implementation ViewControllerLogin
 
 -(void) viewWillAppear:(BOOL)animated{
+    
+    [self configureNavigationBar];
     
     [_usernameTextField setText:[[NSUserDefaults standardUserDefaults] valueForKey:[Constants GET_LABEL_USER_NAME]]];
     [_passwordTextField setText:@""];
@@ -91,6 +91,7 @@ static NSString *kSegueIdentifierPromotionList = @"ViewControllerPromotionListSe
 
 -(void) viewWillDisappear:(BOOL)animated
 {
+
     [self unregisterNotifyProcess];
     [self unregisterForKeyboardNotifications];
 }
@@ -105,8 +106,8 @@ static NSString *kSegueIdentifierPromotionList = @"ViewControllerPromotionListSe
 }
 
 -(void) initPropertiesView{
-    //Hide the back-button on login frame
-    [self configureNavigationBar];
+
+
     
     //Create WS LogginConnection product with the AbstractFactory
     _wsLoginConnection =  [WebServiceAbstractFactory createWebServiceLoginConnection:ApacheType];
@@ -144,7 +145,7 @@ static NSString *kSegueIdentifierPromotionList = @"ViewControllerPromotionListSe
     [[self navigationController] setNavigationBarHidden:YES animated:YES];
     
     //The index of View controllers, for this case, should be : 1 , or the second view Added to the Navigation Controler
-    UINavigationController *navigationController = [self.navigationController.viewControllers objectAtIndex:indexViewNavigationController];
+    UINavigationController *navigationController = [self.navigationController.viewControllers lastObject];
     UINavigationBar *navigationBar =[[navigationController navigationController] navigationBar];
     UINavigationItem* navigationItem = [navigationController navigationItem];
     
@@ -152,9 +153,6 @@ static NSString *kSegueIdentifierPromotionList = @"ViewControllerPromotionListSe
     [navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
     
     [navigationItem setTitle: @"Login"];
-    
-    //Hide the back-button on login frame
-//    [[self navigationController] setNavigationBarHidden:YES animated:YES];
 }
 
 #pragma mark - Spping waiter
@@ -462,12 +460,17 @@ static NSString *kSegueIdentifierPromotionList = @"ViewControllerPromotionListSe
 #pragma mark - Navigation programatically
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if([[segue identifier] isEqualToString: kSegueIdentifierCreateProfile]){
-        ViewControllerCreateProfile *viewController = [segue destinationViewController];
+        
+        ViewControllerCreateEditProfile *viewController = [segue destinationViewController];
         [viewController setManagedObjectContext:self.managedObjectContext];
+        [viewController setCreationMode:YES];
+        
     }else if([[segue identifier] isEqualToString: kSegueIdentifierPromotionList]){
+        
         NSLog(@"Go to Create Promotion List Segue");
         ViewControllerPromotionList *viewController = [segue destinationViewController];
         [viewController setManagedObjectContext:self.managedObjectContext];
+        
     }
 }
 

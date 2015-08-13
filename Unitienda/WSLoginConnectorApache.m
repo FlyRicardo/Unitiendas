@@ -367,10 +367,9 @@ static WSLoginConnectorApache* _instance;
     RKObjectMapping *responseMapping = [RKObjectMapping mappingForClass:[LogoutMetaMO class]];
     
     //Add Atributes to ObjectMapping
-    [responseMapping addAttributeMappingsFromDictionary:@{ @"success" : @"statusCode",
-                                                           @"message":@"statusDescription",
-                                                           @"error":@"errorCode",
-                                                           @"error_description": @"errorDescription"
+    [responseMapping addAttributeMappingsFromDictionary:@{ @"code" : @"code",
+                                                           @"errorType":@"errorType",
+                                                           @"errorDetail":@"errorDetail"
                                                            }];
     
     //Seting up response descriptor

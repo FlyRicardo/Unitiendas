@@ -11,8 +11,8 @@
 @interface ReachabilityImpl()
 
 @property (nonatomic) Reachability *hostReachability;
-@property (nonatomic) Reachability *internetReachability;
-@property (nonatomic) Reachability *wifiReachability;
+@property (nonatomic) Reachability *internetAvailable;
+@property (nonatomic) Reachability *wifiAvailable;
 
 @end
 
@@ -41,8 +41,8 @@ static ReachabilityImpl* _instance;
     if(self){
         NSString *remoteHostName = [[[NSBundle mainBundle] infoDictionary] valueForKey:@"ServiceLocalURL"];
         _hostReachability = [Reachability reachabilityWithHostName:remoteHostName];
-        _internetReachability = [Reachability reachabilityForInternetConnection];
-        _wifiReachability = [Reachability reachabilityForLocalWiFi];
+        _internetAvailable = [Reachability reachabilityForInternetConnection];
+        _wifiAvailable = [Reachability reachabilityForLocalWiFi];
     }
     return self;
 }
@@ -63,7 +63,7 @@ static ReachabilityImpl* _instance;
  * Use to check the reachability of a given host name.
  */
 -(BOOL) hostIsReachable2{
-    NSURLRequest *nsrequest = [NSURLRequest requestWithURL:[NSURL URLWithString: @"http://localhost:82/CC/"]];
+    NSURLRequest *nsrequest = [NSURLRequest requestWithURL:[NSURL URLWithString: [[[NSBundle mainBundle] infoDictionary] valueForKey:@"ServiceLocalURL"]]];
     NSHTTPURLResponse *response = nil;
     NSError *error;
     [NSURLConnection sendSynchronousRequest:nsrequest returningResponse:&response error:&error];
@@ -79,14 +79,14 @@ static ReachabilityImpl* _instance;
 /*!
  * Use to check the reachability of a given IP address.
  */
--(BOOL) internetIsReachable{
-    return ([_internetReachability currentReachabilityStatus] != NotReachable)?YES:NO;
+-(BOOL) tcpIpIsAvailable{
+    return ([_internetAvailable currentReachabilityStatus] != NotReachable)?YES:NO;
 }
 
 /*!
  * Checks whether a local WiFi connection is available.
  */
--(BOOL) wifiIsReachable{
-    return ([_wifiReachability currentReachabilityStatus] != NotReachable)?YES:NO;
+-(BOOL) wifiIsAvailable{
+    return ([_wifiAvailable currentReachabilityStatus] != NotReachable)?YES:NO;
 }
 @end

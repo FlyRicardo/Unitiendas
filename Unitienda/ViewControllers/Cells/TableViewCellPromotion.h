@@ -16,10 +16,11 @@
 @property (weak, nonatomic) IBOutlet UILabel *rowArticleNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *rowPercentageEffectivenessLabel;
 @property (weak, nonatomic) IBOutlet UILabel *rowDueDateLabel;
+@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 
 /************************************************************
  ** UTILITIES ELEMENTS
  ***********************************************************/
--(void) setPromotion:(Promotion*) promotion;
+-(void) setPromotion:(Promotion*) promotion AndManagedObjectContext:(NSManagedObjectContext*) managedObjectContext;
 
 @end

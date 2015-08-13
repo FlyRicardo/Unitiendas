@@ -3,20 +3,23 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "-[TableViewCellPromotion setArticle:]:TableViewCellPromotion.m">
+         contextName = "-[ViewControllerPromotionList tableView:numberOfRowsInSection:]:ViewControllerPromotionList.m">
          <PersistentStrings>
             <PersistentString
-               value = "[article name]">
+               value = "[_promotions count]">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[ViewControllerPromotionList requestGetPromotionsByStore]:ViewControllerPromotionList.m">
+         contextName = "-[WSPromotionConnectorApache getPromotionsByStore:]:WSPromotionConnectorApache.m">
          <PersistentStrings>
             <PersistentString
-               value = "[[NSUserDefaults standardUserDefaults] valueForKey:[Constants GET_LABEL_STORE_ID]]">
+               value = "[postBody accessToken]">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[PromotionDataSyncImpl1 receivePromotionByStoreWsNotification:]:PromotionDataSyncImpl1.m">
       </ContextState>
       <ContextState
          contextName = "-[ViewControllerPromotionList configureElementsOnView]:ViewControllerPromotionList.m">
@@ -27,12 +30,70 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "-[ReachabilityImpl hostIsReachable]:ReachabilityImpl.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[_hostReachability currentReachabilityStatus]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "__40-[TableViewCellPromotion setCacheImage:]_block_invoke23:TableViewCellPromotion.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[ViewControllerCreateProfile prepareForSegue:sender:]:ViewControllerCreateProfile.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[WSPromotionConnectorApache fetchArticlesFromContext]:WSPromotionConnectorApache.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[article name];">
+            </PersistentString>
+            <PersistentString
+               value = "[article articleId];">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[ImageHandler getImageNameFromURL:]:ImageHandler.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[TableViewCellPromotion setPromotion:]:TableViewCellPromotion.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[promotion effectiveness]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[ViewControllerLogin prepareForSegue:sender:]:ViewControllerLogin.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[segue identifier] ">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "-[ViewControllerPromotionList numberOfSectionsInTableView:]:ViewControllerPromotionList.m">
          <PersistentStrings>
             <PersistentString
                value = "[[self.fetchedResultsController sections] count]">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "__55-[WSProfileConnectorApache createProfileWithStoreInfo:]_block_invoke:WSProfileConnectorApache.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[WSProfileConnectorApache stablishProfileConnectionWithUsername:]:WSProfileConnectorApache.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[[NSUserDefaults standardUserDefaults] objectForKey:@&quot;access_token&quot;]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[ViewControllerPromotionList receivePromotionByStoreNotification:]:ViewControllerPromotionList.m">
       </ContextState>
       <ContextState
          contextName = "-[TableViewCellPromotion daysFromDate:]:TableViewCellPromotion.m">
@@ -49,19 +110,30 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[ImageHandler getImageNameFromURL:]:ImageHandler.m">
+         contextName = "__44-[WSProfileConnectorApache getProfileStore:]_block_invoke:WSProfileConnectorApache.m">
       </ContextState>
       <ContextState
-         contextName = "-[WSPromotionConnectorApache getPromotionsByStorePersistence:]:WSPromotionConnectorApache.m">
+         contextName = "-[TableViewCellPromotion setCacheImage:]:TableViewCellPromotion.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[photo url]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[WSPromotionConnectorApache getPromotionsByStoreWS:]:WSPromotionConnectorApache.m">
       </ContextState>
       <ContextState
          contextName = "__57-[WSPromotionConnectorApache getPromotionsByStore:block:]_block_invoke140:WSPromotionConnectorApache.m">
       </ContextState>
       <ContextState
-         contextName = "-[WSProfileConnectorApache stablishProfileConnectionWithUsername:]:WSProfileConnectorApache.m">
+         contextName = "-[WSPromotionConnectorApache getPromotionsByStorePersistence:]:WSPromotionConnectorApache.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[ViewControllerPromotionList requestGetPromotionsByStore]:ViewControllerPromotionList.m">
          <PersistentStrings>
             <PersistentString
-               value = "[[NSUserDefaults standardUserDefaults] objectForKey:@&quot;access_token&quot;]">
+               value = "[[NSUserDefaults standardUserDefaults] valueForKey:[Constants GET_LABEL_STORE_ID]]">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -77,56 +149,45 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[TableViewCellPromotion setPromotion:]:TableViewCellPromotion.m">
+         contextName = "-[ViewControllerPromotionList prepareForSegue:sender:]:ViewControllerPromotionList.m">
          <PersistentStrings>
             <PersistentString
-               value = "[promotion effectiveness]">
+               value = "[store number]">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[WSPromotionConnectorApache fetchArticlesFromContext]:WSPromotionConnectorApache.m">
+         contextName = "-[ViewControllerCreateEditProfile receiveLogoutNotification:]:ViewControllerCreateEditProfile.m">
          <PersistentStrings>
             <PersistentString
-               value = "[article name];">
+               value = "_navigationController">
             </PersistentString>
             <PersistentString
-               value = "[article articleId];">
+               value = "">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[ViewControllerPromotionList receivePromotionByStoreNotification:]:ViewControllerPromotionList.m">
+         contextName = "__53-[WSPromotionConnectorApache getPromotionsByStoreWS:]_block_invoke:WSPromotionConnectorApache.m">
       </ContextState>
       <ContextState
-         contextName = "-[ViewControllerPromotionList tableView:numberOfRowsInSection:]:ViewControllerPromotionList.m">
+         contextName = "-[ViewControllerLogin receivedProfileStoreNotification:]:ViewControllerLogin.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[TableViewCellPromotion setArticle:]:TableViewCellPromotion.m">
          <PersistentStrings>
             <PersistentString
-               value = "[_promotions count]">
+               value = "[article name]">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[PromotionDataSyncImpl1 receivePromotionByStoreWsNotification:]:PromotionDataSyncImpl1.m">
-      </ContextState>
-      <ContextState
-         contextName = "-[ReachabilityImpl hostIsReachable]:ReachabilityImpl.m">
+         contextName = "-[ViewControllerPromotionList refreshPromotionFromWS:]:ViewControllerPromotionList.m">
          <PersistentStrings>
             <PersistentString
-               value = "[_hostReachability currentReachabilityStatus]">
+               value = "[[NSUserDefaults standardUserDefaults] valueForKey:[Constants GET_LABEL_STORE_ID]]">
             </PersistentString>
          </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "-[WSPromotionConnectorApache getPromotionsByStore:]:WSPromotionConnectorApache.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "[postBody accessToken]">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "__40-[TableViewCellPromotion setCacheImage:]_block_invoke23:TableViewCellPromotion.m">
       </ContextState>
    </ContextStates>
 </VariablesViewState>

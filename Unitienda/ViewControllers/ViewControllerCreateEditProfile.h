@@ -8,9 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "SelectVenueDelegate.h"
+#import "Store.h"
 
-@interface ViewControllerCreateProfile : UITableViewController <UIPickerViewDelegate, UIPickerViewDataSource,UITextFieldDelegate,SelectVenueDelegate>
+@interface ViewControllerCreateEditProfile : UITableViewController <UIPickerViewDelegate, UIPickerViewDataSource,UITextFieldDelegate,SelectVenueDelegate>
 
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic) Store* store;
+@property (nonatomic) BOOL creationMode;
 
 @end
