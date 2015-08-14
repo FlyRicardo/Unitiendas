@@ -228,8 +228,8 @@ static WSProfileConnectorApache* _instance;
                                                    if([[profileResponse objectAtIndex:0] isKindOfClass:[MetaMO class]]){
                                                        MetaMO* response = (MetaMO*) [profileResponse objectAtIndex:0];
                                                        
-                                                       NSDictionary* userInfo = @{[Constants GET_LABEL_NAME_PROFILE_CREATOR_RESPONSE]: response};
-                                                       [[NSNotificationCenter defaultCenter] postNotificationName:[Constants GET_LABEL_NAME_PROFILE_CREATOR_RESPONSE_NOTIFICATION] object:nil userInfo:userInfo];
+                                                       NSDictionary* userInfo = @{[Constants GET_LABEL_NAME_PROFILE_CREATOR_UPDATER_RESPONSE]: response};
+                                                       [[NSNotificationCenter defaultCenter] postNotificationName:[Constants GET_LABEL_NAME_PROFILE_CREATOR_UPDATER_RESPONSE_NOTIFICATION] object:nil userInfo:userInfo];
                                                    }else{
                                                        NSLog(@"Error converting the response to ResponseMO class");
                                                    }
@@ -242,8 +242,8 @@ static WSProfileConnectorApache* _instance;
                                                MetaMO* response = [[MetaMO alloc]init];
                                                [NSString stringWithFormat:@"%li",(long)[error code]];
                                                [response setErrorDetail:[[error userInfo] objectForKey:@"NSLocalizedRecoverySuggestion"]];
-                                               NSDictionary* userInfo = @{[Constants GET_LABEL_NAME_PROFILE_CREATOR_RESPONSE]: response};
-                                               [[NSNotificationCenter defaultCenter] postNotificationName:[Constants GET_LABEL_NAME_PROFILE_CREATOR_RESPONSE_NOTIFICATION] object:nil userInfo:userInfo];
+                                               NSDictionary* userInfo = @{[Constants GET_LABEL_NAME_PROFILE_CREATOR_UPDATER_RESPONSE]: response};
+                                               [[NSNotificationCenter defaultCenter] postNotificationName:[Constants GET_LABEL_NAME_PROFILE_CREATOR_UPDATER_RESPONSE_NOTIFICATION] object:nil userInfo:userInfo];
                                                
                                            }];
     
@@ -251,6 +251,100 @@ static WSProfileConnectorApache* _instance;
     [[_wsConnectionApache objectManager] removeRequestDescriptor:requestDescriptor];
     [[_wsConnectionApache objectManager] removeResponseDescriptor:responseDescriptor];
     
+}
+
+-(void) updateProfileWithStoreInfo:(Store *)store{
+    
+    /**
+     REQUEST DESCRIPTIOR CONFIGURATION
+     **/
+    
+    //Construct a request mapping for our class
+    RKObjectMapping *requestMapping = [RKObjectMapping requestMapping];
+    [requestMapping addAttributeMappingsFromDictionary:@{
+                                                         @"accessToken":@"access_token",
+                                                         @"storeId":@"id",
+                                                         @"name":@"name",
+                                                         @"number":@"number",
+                                                         @"email":@"email"
+                                                         }];
+    
+    RKRequestDescriptor *requestDescriptor = [RKRequestDescriptor requestDescriptorWithMapping:requestMapping
+                                                                                   objectClass:[StoreMO class]
+                                                                                   rootKeyPath:nil
+                                                                                        method:RKRequestMethodPOST];
+    
+    StoreMO* postBody = [[StoreMO alloc]init];
+    
+    [postBody setAccessToken:(NSString*)[[NSUserDefaults standardUserDefaults] objectForKey:[Constants GET_LABEL_NAME_ACCESS_TOKEN]]];
+    [postBody setStoreId:[[store storeId] intValue]];
+    [postBody setName:[store name]];
+    [postBody setNumber:[store number]];
+    [postBody setEmail: [store email]];
+    
+    
+    /**
+     RESPONSE DESCRIPTIOR CONFIGURATION
+     **/
+    
+    //Construct a response mapping for our class
+    RKObjectMapping *responseMapping = [RKObjectMapping mappingForClass:[MetaMO class]];
+    
+    //Add Atributes to ObjectMapping
+    [responseMapping addAttributeMappingsFromDictionary:@{
+                                                          @"code":@"code",
+                                                          @"errorType":@"errorType",
+                                                          @"errorDetail":@"errorDetail"
+                                                          }];
+    
+    
+    //Seting up response descriptor
+    RKResponseDescriptor *responseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:responseMapping
+                                                                                            method:RKRequestMethodPOST
+                                                                                       pathPattern:nil
+                                                                                           keyPath:@"meta"
+                                                                                       statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
+    
+    //Adding request and response descriptor to ObjectManager
+    [[_wsConnectionApache objectManager] addRequestDescriptor:requestDescriptor];
+    [[_wsConnectionApache objectManager] addResponseDescriptor:responseDescriptor];
+    
+    
+    
+    //Nesting the blocks to handle the success or failire routines
+    [[_wsConnectionApache objectManager]postObject:postBody
+                                              path:@"/CC/WS/WS_UpdateStoreProfile.php"
+                                        parameters:nil
+                                           success:^(RKObjectRequestOperation *operation, RKMappingResult *result) {
+                                               
+                                               NSArray* profileResponse = nil;
+                                               profileResponse = [result array];
+                                               if([profileResponse count]>0){
+                                                   if([[profileResponse objectAtIndex:0] isKindOfClass:[MetaMO class]]){
+                                                       MetaMO* response = (MetaMO*) [profileResponse objectAtIndex:0];
+                                                       
+                                                       NSDictionary* userInfo = @{[Constants GET_LABEL_NAME_PROFILE_CREATOR_UPDATER_RESPONSE]: response};
+                                                       [[NSNotificationCenter defaultCenter] postNotificationName:[Constants GET_LABEL_NAME_PROFILE_CREATOR_UPDATER_RESPONSE_NOTIFICATION] object:nil userInfo:userInfo];
+                                                   }else{
+                                                       NSLog(@"Error converting the response to ResponseMO class");
+                                                   }
+                                               }else{
+                                                   NSLog(@"Error, no object attached on response");
+                                               }
+                                               
+                                           }failure:^(RKObjectRequestOperation *operation, NSError *error){
+                                               
+                                               MetaMO* response = [[MetaMO alloc]init];
+                                               [NSString stringWithFormat:@"%li",(long)[error code]];
+                                               [response setErrorDetail:[[error userInfo] objectForKey:@"NSLocalizedRecoverySuggestion"]];
+                                               NSDictionary* userInfo = @{[Constants GET_LABEL_NAME_PROFILE_CREATOR_UPDATER_RESPONSE]: response};
+                                               [[NSNotificationCenter defaultCenter] postNotificationName:[Constants GET_LABEL_NAME_PROFILE_CREATOR_UPDATER_RESPONSE_NOTIFICATION] object:nil userInfo:userInfo];
+                                               
+                                           }];
+    
+    //Flushing the request and response descriptors
+    [[_wsConnectionApache objectManager] removeRequestDescriptor:requestDescriptor];
+    [[_wsConnectionApache objectManager] removeResponseDescriptor:responseDescriptor];
 }
 
 

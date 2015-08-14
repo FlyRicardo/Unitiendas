@@ -18,6 +18,11 @@
                                                                 //Params: Success @Meta class
                                                                 //        Failure @Meta class
 
+-(void) updateProfileWithStoreInfo:(Store*) store;            //Notify request for creation profile status,
+                                                              //Params: Success @Meta class
+                                                              //        Failure @Meta class
+
+
 -(void) getProfielResponseMOWithUsername:(NSString*)username;   //Notify to its selector the status of request for profile
                                                                 //Params: Success NSArray {@Meta class, @ProfileStore class}
                                                                 //        Failure @Meta class

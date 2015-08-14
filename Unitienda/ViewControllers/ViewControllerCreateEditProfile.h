@@ -14,6 +14,8 @@
 
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic) Store* store;
-@property (nonatomic) BOOL creationMode;
+@property (nonatomic) BOOL isCreationModeOn;
+
+-(void) setManagedObjectStore:(Store*) store;
 
 @end

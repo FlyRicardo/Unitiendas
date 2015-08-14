@@ -41,12 +41,14 @@ static NSString *kSegueIdentifierEditProfileSegue = @"EditUserProfileSegue";
 @property id dataChecker;
 @property id wsPromotionConnector;
 
+@property (nonatomic) Store* store;
+
 @end
 
 @implementation ViewControllerPromotionList
 
 -(void) viewDidLoad{
-    [self configureElementsOnView];
+    [self initiateElementsOnView];
     [self requestGetPromotionsByStore];
 }
 
@@ -102,16 +104,17 @@ static NSString *kSegueIdentifierEditProfileSegue = @"EditUserProfileSegue";
 }
 
 
-#pragma mark - configuration of elements view
--(void) configureElementsOnView{
+#pragma mark - configuration of elements view & Core Data
+-(void) initiateElementsOnView{
 //    _tableView.contentInset = UIEdgeInsetsMake(0,0,0,-10);
-    
     if([[self.fetchedResultsController sections] count]>0){
         [[self promotionNotFoundLabel] setHidden:YES];
     }else{
         [[self promotionNotFoundLabel] setHidden:NO];
     }
 }
+
+
 
 -(void) configureNavigationBar{
     //Shows the navigatoin bar
@@ -130,21 +133,12 @@ static NSString *kSegueIdentifierEditProfileSegue = @"EditUserProfileSegue";
     [navigationItem setHidesBackButton:YES];
 }
 
-#pragma mark - Call Web services
+#pragma mark - Call Web service of promotions
 -(void) requestGetPromotionsByStore{
     
     _dataSyncPromotion = [DataSyncServiceAbstractFactory createPromotionDataSycn:Impl1];
     _dataChecker = [DataSyncServiceAbstractFactory createDataChecker:Impl1];
     _wsPromotionConnector = [WebServiceAbstractFactory createWebServicePromotionConnection:ApacheType];
-    
-    Store* store = (Store*)[NSEntityDescription
-                                    insertNewObjectForEntityForName:@"Store"
-                                    inManagedObjectContext:self.managedObjectContext];
-    
-//    [store setStoreId:[NSNumber numberWithInt: 1]];
-    [store setStoreId:[NSNumber numberWithInt:(int)[[NSUserDefaults standardUserDefaults]
-                                                    integerForKey:[Constants GET_LABEL_STORE_ID]]]];
-    
     
     if(![_dataChecker hasData:self.managedObjectContext]){                                                                    //If dataChecker component doesnt detect any data, then force sync with WS
         
@@ -152,8 +146,6 @@ static NSString *kSegueIdentifierEditProfileSegue = @"EditUserProfileSegue";
         [_wsPromotionConnector getPromotionsByStoreWS:[[NSUserDefaults standardUserDefaults]
                                                        integerForKey:[Constants GET_LABEL_STORE_ID]]];
     }
-    
-    [_dataSyncPromotion getPromotionsByStore:store];
 
     if(![[ReachabilityImpl getInstance] wifiIsAvailable] && ![[ReachabilityImpl getInstance] tcpIpIsAvailable]){                                                                 //Couldn't stablish TCP/IP connection
         [self showAlertControllerWithTittle:@"No hay conexion a internet"
@@ -305,35 +297,13 @@ static NSString *kSegueIdentifierEditProfileSegue = @"EditUserProfileSegue";
         ViewControllerCreateEditProfile *viewController = [segue destinationViewController];
         
 //      Get entity description and set it on ManagedObjectContext
-//        NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:NSStringFromClass([Store class])];
-        NSEntityDescription *entityDescription = [NSEntityDescription
-                                                  entityForName:@"Store" inManagedObjectContext:_managedObjectContext];
-        
-        // Initialize Fetch Request
-        NSFetchRequest *request = [[NSFetchRequest alloc] init];
-        [request setEntity:entityDescription];
-        
-        // Add Sort Predicate
-        [request setPredicate:[NSPredicate predicateWithFormat:@"%K == %@", @"storeId",
-                                    @([[NSUserDefaults standardUserDefaults]
-                                       integerForKey:[Constants GET_LABEL_STORE_ID]])
-                                    ]];
-        NSError *error;
-        NSArray *array = [_managedObjectContext executeFetchRequest:request error:&error];
-        if (array == nil){
-            NSLog(@"Error getting info of store with id: %lu. Error: %@",[[NSUserDefaults standardUserDefaults]
-                                                               integerForKey:[Constants GET_LABEL_STORE_ID]],
-                  error);
-        }
-        Store *store = [array objectAtIndex:0];
-        
-        [viewController setStore:store];
-        [viewController setCreationMode:NO];
+
+        [viewController setManagedObjectContext:_managedObjectContext];
+        [viewController setIsCreationModeOn:NO];
+
         
     }if([[segue identifier] isEqualToString: kSegueIdentifierEditCreatePromotion]){
-        
         ViewControllerCreateEditPromotion *viewController = [segue destinationViewController];
-        
     }
 }
 

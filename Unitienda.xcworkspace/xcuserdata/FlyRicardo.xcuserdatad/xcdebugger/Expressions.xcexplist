@@ -38,10 +38,19 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "-[PromotionDataSyncImpl1 getPromotionsByStore:]:PromotionDataSyncImpl1.m">
+      </ContextState>
+      <ContextState
          contextName = "__40-[TableViewCellPromotion setCacheImage:]_block_invoke23:TableViewCellPromotion.m">
       </ContextState>
       <ContextState
+         contextName = "-[ViewControllerCreateEditProfile receiveCreateProfileNotification:]:ViewControllerCreateEditProfile.m">
+      </ContextState>
+      <ContextState
          contextName = "-[ViewControllerCreateProfile prepareForSegue:sender:]:ViewControllerCreateProfile.m">
+      </ContextState>
+      <ContextState
+         contextName = "__88-[WSLoginConnectorApache stablishLoginConnectionThroughRestKitWithUsername:andPassword:]_block_invoke:WSLoginConnectorApache.m">
       </ContextState>
       <ContextState
          contextName = "-[WSPromotionConnectorApache fetchArticlesFromContext]:WSPromotionConnectorApache.m">
@@ -152,7 +161,10 @@
          contextName = "-[ViewControllerPromotionList prepareForSegue:sender:]:ViewControllerPromotionList.m">
          <PersistentStrings>
             <PersistentString
-               value = "[store number]">
+               value = "[[NSUserDefaults standardUserDefaults] valueForKey:[Constants GET_LABEL_STORE_ID]]]]">
+            </PersistentString>
+            <PersistentString
+               value = "[store name]">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -171,15 +183,15 @@
          contextName = "__53-[WSPromotionConnectorApache getPromotionsByStoreWS:]_block_invoke:WSPromotionConnectorApache.m">
       </ContextState>
       <ContextState
-         contextName = "-[ViewControllerLogin receivedProfileStoreNotification:]:ViewControllerLogin.m">
-      </ContextState>
-      <ContextState
          contextName = "-[TableViewCellPromotion setArticle:]:TableViewCellPromotion.m">
          <PersistentStrings>
             <PersistentString
                value = "[article name]">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[ViewControllerLogin receivedProfileStoreNotification:]:ViewControllerLogin.m">
       </ContextState>
       <ContextState
          contextName = "-[ViewControllerPromotionList refreshPromotionFromWS:]:ViewControllerPromotionList.m">

@@ -80,7 +80,7 @@ static NSString *kSegueIdentifierPromotionList = @"CreateProfiileToPromotionList
 
 -(void) viewDidLoad{
     [super viewDidLoad];
-    [self registerNotifyProcess];
+    [self initiateCoreDataComponet];
     [self initiateUIComponents];
     [self hideVenuePickerCell];
     [self hidePasswordFieldsCell];
@@ -88,6 +88,7 @@ static NSString *kSegueIdentifierPromotionList = @"CreateProfiileToPromotionList
 }
 
 -(void) viewWillAppear:(BOOL)animated{
+    [self registerNotifyProcess];
     [self configureNavigationBar];
     [self signUpForKeyboardNotifications];
 }
@@ -119,6 +120,8 @@ static NSString *kSegueIdentifierPromotionList = @"CreateProfiileToPromotionList
     return height;
 }
 
+#pragma mark - setup components of ViewController
+
 -(void) initiateUIComponents{
     
     //Init venue element
@@ -135,6 +138,45 @@ static NSString *kSegueIdentifierPromotionList = @"CreateProfiileToPromotionList
     _wasChangePasswordNotified = NO;
     _wasCreateProfielNotified = NO;
 
+}
+
+-(void) initiateCoreDataComponet{
+    
+    NSEntityDescription *entityDescription = [NSEntityDescription
+                                              entityForName:@"Store"
+                                              inManagedObjectContext:_managedObjectContext];
+    
+    // Initialize Fetch Request
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:entityDescription];
+    
+    // Add Sort Predicate
+    [request setPredicate:[NSPredicate predicateWithFormat:@"%K == %@", @"storeId",
+                           [[NSUserDefaults standardUserDefaults]
+                            valueForKey:[Constants GET_LABEL_STORE_ID]]
+                           ]];
+    
+//            [request setPredicate:[NSPredicate predicateWithFormat:@"storeId == %@",
+//                                   [[NSUserDefaults standardUserDefaults]
+//                                    valueForKey:[Constants GET_LABEL_STORE_ID]]
+//                                   ]];
+
+    NSError *error;
+    NSArray *array = [_managedObjectContext executeFetchRequest:request error:&error];
+    if (array == nil || [array count] == 0){
+        NSLog(@"Error getting info of store with id: %lu. Error: %@",(long)[[NSUserDefaults standardUserDefaults]
+                                                                            integerForKey:[Constants GET_LABEL_STORE_ID]],error);
+    }
+
+    for (int i = 0 ; i < [array count]; i++) {                                        // This was neccesary, because the NSPredicate senteces, was returning the array result with an extra object with all its parameters as nil
+        Store *temp = [array objectAtIndex:i];
+        NSLog(@"store name : %@, store number: %@, store email: %@, with id : %lu",[temp name],[temp number],[temp email], (long)[[temp storeId]integerValue]);
+        if([temp name] != nil){
+            _store = temp;
+            break;
+        }
+    }
+    
 }
 
 #pragma mark - NavigationController configuration
@@ -314,8 +356,6 @@ static NSString *kSegueIdentifierPromotionList = @"CreateProfiileToPromotionList
 }
 
 #pragma mark - Effect moving content TableView when KeyBoard showing/hiding
-
-
 - (void) moveUpTableViewContent:(NSNotification*)aNotification                                                  // Move the tableView content up 100 units
                                                                                                                 // Called when the UIKeyboardDidShowNotification is sent
 {
@@ -375,7 +415,7 @@ static NSString *kSegueIdentifierPromotionList = @"CreateProfiileToPromotionList
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(receiveCreateProfileNotification:)
-                                                 name:[Constants GET_LABEL_NAME_PROFILE_CREATOR_RESPONSE_NOTIFICATION]
+                                                 name:[Constants GET_LABEL_NAME_PROFILE_CREATOR_UPDATER_RESPONSE_NOTIFICATION]
                                                object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -398,7 +438,7 @@ static NSString *kSegueIdentifierPromotionList = @"CreateProfiileToPromotionList
                                                   object:nil];
     
     [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                 name:[Constants GET_LABEL_NAME_PROFILE_CREATOR_RESPONSE_NOTIFICATION]
+                                                 name:[Constants GET_LABEL_NAME_PROFILE_CREATOR_UPDATER_RESPONSE_NOTIFICATION]
                                                object:nil];
     
     [[NSNotificationCenter defaultCenter] removeObserver:self
@@ -439,9 +479,14 @@ static NSString *kSegueIdentifierPromotionList = @"CreateProfiileToPromotionList
     _wasCreateProfielNotified = YES;
     
     NSDictionary *dictionary = notification.userInfo;
-    MetaMO *meta = (MetaMO*) dictionary[[Constants GET_LABEL_NAME_PROFILE_CREATOR_RESPONSE]];
+    MetaMO *meta = (MetaMO*) dictionary[[Constants GET_LABEL_NAME_PROFILE_CREATOR_UPDATER_RESPONSE]];
     
     if([meta code] == 200){
+        /**Once notified the success update of register on server, has to be saved the NSManagedObject Store updated**/
+        NSError *error = nil;
+        if(![_managedObjectContext save:&error]){
+            NSLog(@"Could not save store: %@", [error userInfo]);
+        }
         
         _wasCreateProfielSuccessfully = YES;
         [self showAlertControllerWithTitle:@"Su perfil fue guardado exitosamente" message:@""];
@@ -545,7 +590,13 @@ static NSString *kSegueIdentifierPromotionList = @"CreateProfiileToPromotionList
                                                _wasChangePasswordNotified = NO;                                     //Ws change password has not notifying yet
                                                
                                                if(!_wasChangePasswordSuccessfully)[self requestChangePassword];     //In case of not been changed the password successfully, call ws
-                                               if(!_wasCreateProfielSuccessfully)[self requestCreateStoreProfile];  //In case of not been created the profile successfully, call ws
+                                               if(!_wasCreateProfielSuccessfully){                                   //In case of not been created the profile successfully, call ws
+                                                   if(_isCreationModeOn){
+                                                       [self requestCreateStoreProfile];
+                                                   }else{
+                                                       [self requestUpdateStoreProfile];
+                                                   }
+                                               }
                                            }];
     
     otherAction = [UIAlertAction actionWithTitle:@"No"
@@ -685,15 +736,24 @@ static NSString *kSegueIdentifierPromotionList = @"CreateProfiileToPromotionList
 -(void) requestCreateStoreProfile{
     id wsProfileConnector = [WebServiceAbstractFactory createWebServiceProfileConnection:ApacheType];
     
-    Store* store = (Store*)[NSEntityDescription
-                            insertNewObjectForEntityForName:@"Store"
-                            inManagedObjectContext:self.managedObjectContext];
+    [_store setValue:[_nameTextField text] forKey:@"name"];
+    [_store setValue:[_labelValueVenue text] forKey:@"number"];
+    [_store setValue:[_emailTextField text] forKey:@"email"];
     
-    [store setName:[_nameTextField text]];
-    [store setNumber:[_labelValueVenue text]];
-    [store setEmail:[_emailTextField text]];
+    [wsProfileConnector createProfileWithStoreInfo:_store];
+}
+
+-(void) requestUpdateStoreProfile{
+    id wsProfileConnector = [WebServiceAbstractFactory createWebServiceProfileConnection:ApacheType];
+    NSLog(@"storeId : %i", [[_store storeId] intValue]);
+
+    /**Save on property store of self**/
+    [_store setValue:[_nameTextField text] forKey:@"name"];
+    [_store setValue:[_labelValueVenue text] forKey:@"number"];
+    [_store setValue:[_emailTextField text] forKey:@"email"];
     
-    [wsProfileConnector createProfileWithStoreInfo:store];
+    //Update ws routine
+    [wsProfileConnector updateProfileWithStoreInfo:_store];
 }
 
 -(void) requestChangePassword{
@@ -740,14 +800,18 @@ static NSString *kSegueIdentifierPromotionList = @"CreateProfiileToPromotionList
 #pragma mark - Segues
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:kSegueIdentifierInMap]){
+        
         ViewControllerSelectVenue *controller =[segue destinationViewController];
         [controller setDelegate:self];
         CGPoint point = [[_dictionaryStorePoint objectForKey:_venueSelected] CGPointValue];;
         [controller setPoint:point];
+        
     }else if([[segue identifier] isEqualToString:kSegueIdentifierPromotionList]){
+        
         NSLog(@"Go to Create Promotion List Segue");
         ViewControllerPromotionList *viewController = [segue destinationViewController];
         [viewController setManagedObjectContext:self.managedObjectContext];
+        
     }
 }
 

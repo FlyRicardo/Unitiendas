@@ -42,20 +42,16 @@ static NSString *kSegueIdentifierPromotionList = @"ViewControllerPromotionListSe
 @implementation ViewControllerLogin
 
 -(void) viewWillAppear:(BOOL)animated{
-    
+    [self registerNotifyProcess];
     [self configureNavigationBar];
-    
     [_usernameTextField setText:[[NSUserDefaults standardUserDefaults] valueForKey:[Constants GET_LABEL_USER_NAME]]];
     [_passwordTextField setText:@""];
-    
     [self registerForKeyboardNotifications];    
 }
 
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-    
-    [self registerNotifyProcess];
     [self initPropertiesView];
     
     NSLog(@"The access_token store : %@",[[NSUserDefaults standardUserDefaults] valueForKey:[Constants GET_LABEL_NAME_ACCESS_TOKEN]]);
@@ -463,7 +459,7 @@ static NSString *kSegueIdentifierPromotionList = @"ViewControllerPromotionListSe
         
         ViewControllerCreateEditProfile *viewController = [segue destinationViewController];
         [viewController setManagedObjectContext:self.managedObjectContext];
-        [viewController setCreationMode:YES];
+        [viewController setIsCreationModeOn:YES];
         
     }else if([[segue identifier] isEqualToString: kSegueIdentifierPromotionList]){
         

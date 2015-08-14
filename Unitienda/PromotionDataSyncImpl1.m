@@ -58,7 +58,8 @@ static PromotionDataSyncImpl1* _instance;
 
 #pragma mark - Protocol methos implementation
 /**
- *  Use to get the promotions of specific store
+ *  Use to get the promotions of specific store. 
+ *  CURRENTLY THIS METHOD IS NOT BEEN USED, BECAUSE THE NSFetchResultController approach
  **/
 -(NSArray*) getPromotionsByStore:(Store*) store{
     // Fetching.
