@@ -8,14 +8,17 @@
 
 #import "ViewControllerCreateEditPromotion.h"
 
-#define kStartDateLabelIndex 4
-#define kEndDateLabelIndex 6
+#define kStartDateLabelIndex 5
+#define kEndDateLabelIndex 7
 
-#define kStartDatePickerViewIndex 5
-#define kEndDatePickerViewIndex 7
+#define kStartDatePickerViewIndex 6
+#define kEndDatePickerViewIndex 8
 
 #define kNumberOfSections 1
-#define kNumberOfRowsInSection 8
+#define kNumberOfRowsInSection 9
+
+#define kLabelCellHeight 20
+#define kFieldTextCellHeight 40
 
 #define kDatePickerCellHeight 162
 
@@ -72,8 +75,8 @@
     UIBarButtonItem *doneBtn=[[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStylePlain target:self action:@selector(hideKeyboard)];
     UIBarButtonItem *space=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     [toolBar setItems:[NSArray arrayWithObjects:space,doneBtn, nil]];
-    [[self itemNameTextField] setInputAccessoryView:toolBar];
     [[self percentageDiscountTextField] setInputAccessoryView:toolBar];
+    [[self itemNameTextField] setInputAccessoryView:toolBar];
 }
 
 #pragma mark - Table view data source
@@ -114,6 +117,8 @@
         height = self.startDatePickerIsShowing ? kDatePickerCellHeight:0.0f;
     }else if(indexPath.row == kEndDatePickerViewIndex){
         height = self.endDatePickerIsShowing ? kDatePickerCellHeight:0.0f;
+    }else if(indexPath.row % 2 ==0){
+        height = kLabelCellHeight;
     }
     return height;
 }
