@@ -16,6 +16,4 @@
 @property (nonatomic) Store* store;
 @property (nonatomic) BOOL isCreationModeOn;
 
--(void) setManagedObjectStore:(Store*) store;
-
 @end

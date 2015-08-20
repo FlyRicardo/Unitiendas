@@ -8,51 +8,61 @@
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>2</integer>
 		</dict>
 		<key>Pods-RestKit.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>3</integer>
 		</dict>
 		<key>Pods-SOCKit.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>4</integer>
 		</dict>
 		<key>Pods-TransitionKit.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>5</integer>
 		</dict>
 		<key>Pods.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>1</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>14D27C49D19FB779C3DBEF12</key>
+		<key>1BF3A4A6E182C99EE9E07F53</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>3EAAFDF86400978A6D8DB586</key>
+		<key>754E50568691638272CA0E7D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>439E8CAD69C5F2C88172CE1A</key>
+		<key>B6F5DC64C128095AF2058512</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>6B46ED063FA03FFE4952395E</key>
+		<key>BF28AAD08A0317D5242E0C0B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>91324972018481955B0C920B</key>
+		<key>EF8F895DD667A26EF8F9521D</key>
 		<dict>
 			<key>primary</key>
 			<true/>

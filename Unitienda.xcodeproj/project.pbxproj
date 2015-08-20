@@ -1577,6 +1577,20 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Unitienda/Unitienda-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/AFNetworking\"",
+					"\"${PODS_ROOT}/Headers/Public/RestKit\"",
+					"\"${PODS_ROOT}/Headers/Public/RestKit/RestKit\"",
+					"\"${PODS_ROOT}/Headers/Public/RestKit/RestKit/CoreData\"",
+					"\"${PODS_ROOT}/Headers/Public/RestKit/RestKit/Network\"",
+					"\"${PODS_ROOT}/Headers/Public/RestKit/RestKit/ObjectMapping\"",
+					"\"${PODS_ROOT}/Headers/Public/RestKit/RestKit/Support\"",
+					"\"${PODS_ROOT}/Headers/Public/SOCKit\"",
+					"\"${PODS_ROOT}/Headers/Public/TransitionKit\"",
+					"\"/Users/FlyRicardo/Documents/FlyInc/Prototypes/iOs/Unitiendas/tapkulibrary/src\"",
+				);
 				INFOPLIST_FILE = Unitienda/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1601,6 +1615,20 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Unitienda/Unitienda-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/AFNetworking\"",
+					"\"${PODS_ROOT}/Headers/Public/RestKit\"",
+					"\"${PODS_ROOT}/Headers/Public/RestKit/RestKit\"",
+					"\"${PODS_ROOT}/Headers/Public/RestKit/RestKit/CoreData\"",
+					"\"${PODS_ROOT}/Headers/Public/RestKit/RestKit/Network\"",
+					"\"${PODS_ROOT}/Headers/Public/RestKit/RestKit/ObjectMapping\"",
+					"\"${PODS_ROOT}/Headers/Public/RestKit/RestKit/Support\"",
+					"\"${PODS_ROOT}/Headers/Public/SOCKit\"",
+					"\"${PODS_ROOT}/Headers/Public/TransitionKit\"",
+					"\"/Users/FlyRicardo/Documents/FlyInc/Prototypes/iOs/Unitiendas/tapkulibrary/src\"",
+				);
 				INFOPLIST_FILE = Unitienda/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

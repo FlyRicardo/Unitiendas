@@ -137,7 +137,17 @@ static NSString *kSegueIdentifierPromotionList = @"CreateProfiileToPromotionList
     _errors = [[NSMutableArray alloc]init];
     _wasChangePasswordNotified = NO;
     _wasCreateProfielNotified = NO;
-
+    
+    //Init toolbar with Done button to all textFields enable to input text
+    UIToolbar *toolBar=[[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 44)];
+    [toolBar setTintColor:[UIColor grayColor]];
+    UIBarButtonItem *doneBtn=[[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStylePlain target:self action:@selector(hideKeyboard)];
+    UIBarButtonItem *space=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    [toolBar setItems:[NSArray arrayWithObjects:space,doneBtn, nil]];
+    [[self nameTextField] setInputAccessoryView:toolBar];
+    [[self textFieldCurrentPassword] setInputAccessoryView:toolBar];
+    [[self textFieldNewPassword] setInputAccessoryView:toolBar];
+    [[self textFieldConfirmNewPassword] setInputAccessoryView:toolBar];
 }
 
 -(void) initiateCoreDataComponet{
@@ -249,12 +259,9 @@ static NSString *kSegueIdentifierPromotionList = @"CreateProfiileToPromotionList
     
     self.contentPickerView.hidden = NO;
     self.contentPickerView.alpha = 0.0f;
-
     
     [UIView animateWithDuration:0.25 animations:^{
-        
         self.contentPickerView.alpha = 1.0f;
-        
     }];
 }
 
@@ -276,11 +283,10 @@ static NSString *kSegueIdentifierPromotionList = @"CreateProfiileToPromotionList
 }
 
 #pragma mark - UI View effects to change passwords fields
-
 - (void)showPasswordFieldsCell {
     
     self.passwordFieldsAreShowing = YES;
-    [self. tableViewCreateProfile beginUpdates];
+    [self.tableViewCreateProfile beginUpdates];
     [self.tableViewCreateProfile endUpdates];
     
     self.contentPasswordFields.hidden= NO;
@@ -354,6 +360,12 @@ static NSString *kSegueIdentifierPromotionList = @"CreateProfiileToPromotionList
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
     return [_activeTextField resignFirstResponder];
 }
+
+#pragma mark - Resign hide keyboard
+-(void) hideKeyboard{
+    [self.activeTextField resignFirstResponder];
+}
+
 
 #pragma mark - Effect moving content TableView when KeyBoard showing/hiding
 - (void) moveUpTableViewContent:(NSNotification*)aNotification                                                  // Move the tableView content up 100 units

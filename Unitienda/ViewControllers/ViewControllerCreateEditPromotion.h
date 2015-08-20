@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewControllerCreateEditPromotion : UITableViewController
+@interface ViewControllerCreateEditPromotion : UITableViewController<UITextFieldDelegate>
 
 @end

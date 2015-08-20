@@ -12,6 +12,8 @@
 	<dict>
 		<key>361C45DF263D7D89AFB21C9DEB6D6ACE3E105E3E</key>
 		<string>https://github.com/FlyRicardo/Unitiendas.git</string>
+		<key>EE5017F42780957232AFF14DD75D9A51833942BE</key>
+		<string>https://github.com/devinross/tapkulibrary.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>Unitienda.xcworkspace</string>
@@ -19,6 +21,8 @@
 	<dict>
 		<key>361C45DF263D7D89AFB21C9DEB6D6ACE3E105E3E</key>
 		<string>..</string>
+		<key>EE5017F42780957232AFF14DD75D9A51833942BE</key>
+		<string>../tapkulibrary</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/FlyRicardo/Unitiendas.git</string>
@@ -28,6 +32,14 @@
 	<string>361C45DF263D7D89AFB21C9DEB6D6ACE3E105E3E</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>EE5017F42780957232AFF14DD75D9A51833942BE</string>
+			<key>IDESourceControlWCCName</key>
+			<string>tapkulibrary</string>
+		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
