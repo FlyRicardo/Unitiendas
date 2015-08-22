@@ -152,9 +152,9 @@ static NSString *kSegueIdentifierPromotionList = @"ViewControllerPromotionListSe
 }
 
 #pragma mark - Spping waiter
--(void) configureActivityIndicatorWithFlag:(Boolean) shouldShowed
+-(void) configureActivityIndicatorWithFlag:(Boolean) shouldBeShowed
 {
-    if(shouldShowed){
+    if(shouldBeShowed){
         [self.view setUserInteractionEnabled:NO];
         [self.activityIndicator startAnimating];
     }else{
@@ -288,9 +288,7 @@ static NSString *kSegueIdentifierPromotionList = @"ViewControllerPromotionListSe
                                     Segue:@""];
                 
             }
-            
-
-            
+           
         }else if([profileResponse count] >1){                                                                       //If the response has more than 1 object attached,
                                                                                                                     //it means it was a success server response
             int indexMeta = 0;

@@ -158,15 +158,23 @@ static WSPromotionConnectorApache* _instance;
                                           parameters:nil
                                              success: ^(RKObjectRequestOperation *operation, RKMappingResult *result){
                                                  
-                                                 NSLog(@"");
-                                                 
                                                  //It's not necesary create an operation that writtes on DB, because RESTKit is already configurate with CoreData
+                                                 //Just for Log intents, the success notify to its listernes the success response
+                                                 
+                                                 NSArray *promotionList = [result array];
+                                                 if([promotionList count]>0){
+                                                     NSDictionary* userInfo = @{[Constants GET_LABEL_NAME_PROMOTIONS_BY_STORE_WS_RESPONSE]: promotionList};
+                                                     [[NSNotificationCenter defaultCenter] postNotificationName:[Constants GET_LABEL_NAME_PROMOTIONS_BY_STORE_WS_RESPONSE_NOTIFICATION] object:nil userInfo:userInfo];
+                                                 }else{
+                                                     NSLog(@"Error, no object attached on response");
+                                                 }
                                                  
                                                  /**  Response using block as parameter of signature method <-(void) getPromotionsByStore:(NSInteger)storeId block:(void (^)(id))block>
                                                   
                                                   block(resulList);
                                                   
                                                   **/
+                                                 
                                             }
                                             failure:^(RKObjectRequestOperation *operation, NSError *error){
                                                 
@@ -188,8 +196,8 @@ static WSPromotionConnectorApache* _instance;
                                                 [responseMO setCode:[error code]];
                                                 [responseMO setErrorDetail:[[error userInfo] objectForKey:@"NSLocalizedRecoverySuggestion"]];
                                                 
-                                                NSDictionary* userInfo = @{[Constants GET_LABEL_NAME_PROMOTION_BY_STORE_WS_RESPONSE]: responseMO};
-                                                [[NSNotificationCenter defaultCenter] postNotificationName:[Constants GET_LABEL_NAME_PROMOTION_BY_STORE_WS_RESPONSE_NOTIFICATION] object:nil userInfo:userInfo];
+                                                NSDictionary* userInfo = @{[Constants GET_LABEL_NAME_PROMOTIONS_BY_STORE_WS_RESPONSE]: responseMO};
+                                                [[NSNotificationCenter defaultCenter] postNotificationName:[Constants GET_LABEL_NAME_PROMOTIONS_BY_STORE_WS_RESPONSE_NOTIFICATION] object:nil userInfo:userInfo];
 
                                                 
                                                 /**  Response using block as parameter of signature method <-(void) getPromotionsByStore:(NSInteger)storeId block:(void (^)(id))block>

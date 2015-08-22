@@ -197,19 +197,19 @@ static NSString* ERROR_FOUND_STORE_BY_ID = @"Non store found with the key :";
 /****************************************************************
  PROMOTION CONSTANTS
  ****************************************************************/
-static NSString* LABEL_NAME_PROMOTION_BY_STORE_WS_RESPONSE_NOTIFICATION = @"promotionByStoreWsResponseNotification";
-static NSString* LABEL_NAME_PROMOTION_BY_STORE_WS_RESPONSE = @"promotionByStoreWsResponse";
+static NSString* LABEL_NAME_PROMOTIONS_BY_STORE_WS_RESPONSE_NOTIFICATION = @"promotionsByStoreWsResponseNotification";
+static NSString* LABEL_NAME_PROMOTIONS_BY_STORE_WS_RESPONSE = @"promotionsByStoreWsResponse";
 
-static NSString* LABEL_NAME_PROMOTION_BY_STORE_DATASYNC_RESPONSE_NOTIFICATION = @"promotionByStorePersistenceResponseNotification";
-static NSString* LABEL_NAME_PROMOTION_BY_STORE_DATASYNC_RESPONSE = @"promotionByStorePersistenceResponse";
+static NSString* LABEL_NAME_PROMOTIONS_BY_STORE_DATASYNC_RESPONSE_NOTIFICATION = @"promotionsByStorePersistenceResponseNotification";
+static NSString* LABEL_NAME_PROMOTIONS_BY_STORE_DATASYNC_RESPONSE = @"promotionsByStorePersistenceResponse";
 
 
-+(NSString *) GET_LABEL_NAME_PROMOTION_BY_STORE_WS_RESPONSE_NOTIFICATION{
-    return LABEL_NAME_PROMOTION_BY_STORE_WS_RESPONSE_NOTIFICATION;
++(NSString *) GET_LABEL_NAME_PROMOTIONS_BY_STORE_WS_RESPONSE_NOTIFICATION{
+    return LABEL_NAME_PROMOTIONS_BY_STORE_WS_RESPONSE_NOTIFICATION;
 }
 
-+(NSString *) GET_LABEL_NAME_PROMOTION_BY_STORE_WS_RESPONSE{
-    return LABEL_NAME_PROMOTION_BY_STORE_WS_RESPONSE;
++(NSString *) GET_LABEL_NAME_PROMOTIONS_BY_STORE_WS_RESPONSE{
+    return LABEL_NAME_PROMOTIONS_BY_STORE_WS_RESPONSE;
 }
 
 

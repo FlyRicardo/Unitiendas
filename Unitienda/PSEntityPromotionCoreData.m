@@ -74,24 +74,24 @@ static PSEntityPromotionCoreData* _instance;
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(receivePromotionsByStoreNotification:)
-                                                 name:[Constants GET_LABEL_NAME_PROMOTION_BY_STORE_WS_RESPONSE_NOTIFICATION]
+                                                 name:[Constants GET_LABEL_NAME_PROMOTIONS_BY_STORE_WS_RESPONSE_NOTIFICATION]
                                                object:nil];
     
 }
 
 -(void) unregisterNotifyProcess{
     [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:[Constants GET_LABEL_NAME_PROMOTION_BY_STORE_WS_RESPONSE_NOTIFICATION]
+                                                    name:[Constants GET_LABEL_NAME_PROMOTIONS_BY_STORE_WS_RESPONSE_NOTIFICATION]
                                                   object:nil];
 }
 
 -(void)receivePromotionsByStoreNotification:(NSNotification *) notification{
     NSDictionary *dictionary = notification.userInfo;
-    if([dictionary[[Constants GET_LABEL_NAME_PROMOTION_BY_STORE_WS_RESPONSE]] isKindOfClass:[NSArray class]]){
-        NSArray* promotionList = (NSArray*)dictionary[[Constants GET_LABEL_NAME_PROMOTION_BY_STORE_WS_RESPONSE]];
+    if([dictionary[[Constants GET_LABEL_NAME_PROMOTIONS_BY_STORE_WS_RESPONSE]] isKindOfClass:[NSArray class]]){
+        NSArray* promotionList = (NSArray*)dictionary[[Constants GET_LABEL_NAME_PROMOTIONS_BY_STORE_WS_RESPONSE]];
         NSLog(@"Promotions count: %lu", (unsigned long)[promotionList count]);
-    }else if([dictionary[[Constants GET_LABEL_NAME_PROMOTION_BY_STORE_WS_RESPONSE]] isKindOfClass:[MetaMO class]]){
-        MetaMO* metaMO = (MetaMO*)dictionary[[Constants GET_LABEL_NAME_PROMOTION_BY_STORE_WS_RESPONSE]];
+    }else if([dictionary[[Constants GET_LABEL_NAME_PROMOTIONS_BY_STORE_WS_RESPONSE]] isKindOfClass:[MetaMO class]]){
+        MetaMO* metaMO = (MetaMO*)dictionary[[Constants GET_LABEL_NAME_PROMOTIONS_BY_STORE_WS_RESPONSE]];
     }
 }
 

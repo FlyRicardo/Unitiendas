@@ -32,7 +32,6 @@ static NSString *kSegueIdentifierEditProfileSegue = @"EditUserProfileSegue";
 
 @interface ViewControllerPromotionList()<NSFetchedResultsControllerDelegate>
 
-@property (nonatomic) RefreshTokenMetaMO* refreshTokenResponseMO;
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 
 @property DataSyncServiceAbstractFactory* dataSyncServiceAbstractFactory;
@@ -55,8 +54,12 @@ static NSString *kSegueIdentifierEditProfileSegue = @"EditUserProfileSegue";
 -(void) viewWillAppear:(BOOL)animated{
     [super viewDidLoad];
     [self configureNavigationBar];
+    [self registerNotifyProcess];
 }
 
+-(void) viewWillDisappear:(BOOL)animated{
+    [self unregisterNotifyProcess];
+}
 
 /**
  *  Use to instantiate a the fetchedResultsController
@@ -158,9 +161,8 @@ static NSString *kSegueIdentifierEditProfileSegue = @"EditUserProfileSegue";
 
 
 -(void) requestRefreshToken{
-//    id _wsLoginConnection = [WebServiceAbstractFactory createWebServiceLoginConnection:ApacheType];
-//    [_wsLoginConnection refreshTokenWithRefreshToken:[[NSUserDefaults standardUserDefaults] valueForKey:[Constants GET_GRANT_TYPE_REFRESH_TOKEN]]];
-    
+    id _wsLoginConnection = [WebServiceAbstractFactory createWebServiceLoginConnection:ApacheType];
+    [_wsLoginConnection refreshTokenWithRefreshToken:[[NSUserDefaults standardUserDefaults] valueForKey:[Constants GET_GRANT_TYPE_REFRESH_TOKEN]]];
 }
 
 #pragma mark - Implemented UITableViewDelegate
@@ -304,6 +306,65 @@ static NSString *kSegueIdentifierEditProfileSegue = @"EditUserProfileSegue";
         
     }if([[segue identifier] isEqualToString: kSegueIdentifierEditCreatePromotion]){
         ViewControllerCreateEditPromotion *viewController = [segue destinationViewController];
+    }
+}
+
+#pragma mark - Notifying Web services proccess
+-(void)registerNotifyProcess{
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(receiveRefreshNotification:)
+                                                 name:[Constants GET_LABEL_NAME_REFRESH_TOKEN_RESPONSE_NOTIFICATOIN]
+                                               object:nil];
+    
+    /**This ViewController has to be register to wait notification of WS <PromotionsByStore>, not because it will watting for response (because RESTkit and CoreData are already linked), it just because to known if the <access_token> provide to call WS is still valid.
+     ** In other words, viewController receives PromotionsByStore notification, it means ocurred an error with the WS response
+     **/
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(receivePromotionsByStoreNotification:)
+                                                 name:[Constants GET_LABEL_NAME_PROMOTIONS_BY_STORE_WS_RESPONSE_NOTIFICATION]
+                                               object:nil];
+
+}
+
+-(void) unregisterNotifyProcess{
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:[Constants GET_LABEL_NAME_REFRESH_TOKEN_RESPONSE_NOTIFICATOIN]
+                                                  object:nil];
+}
+
+-(void)receiveRefreshNotification:(NSNotification *) notification{
+    NSDictionary *dictionary = notification.userInfo;
+    RefreshTokenMetaMO* refreshTokenResponseMO = (RefreshTokenMetaMO*) dictionary[[Constants GET_LABEL_NAME_REFRESH_TOKEN_RESPONSE]];
+    
+    if([[refreshTokenResponseMO errorDetail ] containsString: [Constants GET_ERROR_DESCRIPTION_EXPIRED_REFRESH_TOKEN_VALUE] ]){     //Refresh token has expired. The authentication proccess has to star again.
+        
+        //Return application to loggin (remove as many view as viewController had sotored)
+        NSMutableArray *viewControllers = [NSMutableArray arrayWithArray:[[self navigationController] viewControllers]];
+        [viewControllers removeLastObject];
+        [[self navigationController] setViewControllers:viewControllers animated:YES];
+        
+        
+    }else if([refreshTokenResponseMO errorDetail] == 0){         //Not error reported
+        
+        //Save the access token, and username
+        [[NSUserDefaults standardUserDefaults]setObject:[refreshTokenResponseMO accessToken] forKey:[Constants GET_LABEL_NAME_ACCESS_TOKEN]];
+        [self refreshPromotionFromWS:nil];
+    }
+}
+
+-(void) receivePromotionsByStoreNotification:(NSNotification *) notification{
+    NSDictionary *dictionary = notification.userInfo;
+    NSArray* array = dictionary[[Constants GET_LABEL_NAME_PROMOTIONS_BY_STORE_WS_RESPONSE]];
+    
+    if([array count] == 1 && [[array objectAtIndex:0] isKindOfClass:[MetaMO class]]){
+        MetaMO* meta = (MetaMO*)[array objectAtIndex:0];
+        if([meta code] == 401 && [[meta errorDetail] isEqualToString:[Constants GET_ERROR_DESCRIPTION_EXPIRED_TOKEN_VALUE]]){
+            [self requestRefreshToken];
+        }
+    }else if([array count] > 1){
+        NSLog(@"Success sync");
     }
 }
 

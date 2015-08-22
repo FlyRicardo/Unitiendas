@@ -10,4 +10,6 @@
 
 @interface ViewControllerCreateEditPromotion : UITableViewController<UITextFieldDelegate>
 
+@property (nonatomic) BOOL isCreationModeOn;
+
 @end

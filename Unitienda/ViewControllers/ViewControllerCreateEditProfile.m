@@ -38,8 +38,7 @@ static NSString *kSegueIdentifierInMap = @"selectVenueInMapSegue";
 static NSString *kSegueIdentifierPromotionList = @"CreateProfiileToPromotionListSegue";
 
 @interface ViewControllerCreateEditProfile()
-    
-@property (nonatomic) RefreshTokenMetaMO* refreshTokenResponseMO;
+
 @property (nonatomic) LogoutMetaMO*  logoutResponseMO;
 
 @property (strong, nonatomic) IBOutlet UITableView *tableViewCreateProfile;
@@ -202,7 +201,7 @@ static NSString *kSegueIdentifierPromotionList = @"CreateProfiileToPromotionList
     [navigationBar setBarTintColor:[UIColor colorWithRed:(255.0/255.0) green:(210.0/255.0) blue:(9.0/255.0) alpha:1]];
     [navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
     
-    [navigationItem setTitle: @"Crear perfilr"];
+    [navigationItem setTitle: ([self isCreationModeOn])?@"Creat perfil":@"Editar perfil"];
     [navigationItem setHidesBackButton:NO];
 }
 
@@ -465,9 +464,9 @@ static NSString *kSegueIdentifierPromotionList = @"CreateProfiileToPromotionList
 
 -(void)receiveRefreshNotification:(NSNotification *) notification{
     NSDictionary *dictionary = notification.userInfo;
-    _refreshTokenResponseMO = (RefreshTokenMetaMO*) dictionary[[Constants GET_LABEL_NAME_REFRESH_TOKEN_RESPONSE]];
+    RefreshTokenMetaMO* refreshTokenResponseMO = (RefreshTokenMetaMO*) dictionary[[Constants GET_LABEL_NAME_REFRESH_TOKEN_RESPONSE]];
     
-    if([[_refreshTokenResponseMO errorDetail ] containsString: [Constants GET_ERROR_DESCRIPTION_EXPIRED_REFRESH_TOKEN_VALUE] ]){     //Refresh token has expired. The authentication proccess has to star again.
+    if([[refreshTokenResponseMO errorDetail ] containsString: [Constants GET_ERROR_DESCRIPTION_EXPIRED_REFRESH_TOKEN_VALUE] ]){     //Refresh token has expired. The authentication proccess has to star again.
         
         //Return application to loggin (remove as many view as viewController had sotored)
         NSMutableArray *viewControllers = [NSMutableArray arrayWithArray:[[self navigationController] viewControllers]];
@@ -475,10 +474,10 @@ static NSString *kSegueIdentifierPromotionList = @"CreateProfiileToPromotionList
         [[self navigationController] setViewControllers:viewControllers animated:YES];
         
         
-    }else if([_refreshTokenResponseMO errorDetail] == 0){         //Not error reported
+    }else if([refreshTokenResponseMO errorDetail] == 0){         //Not error reported
         
-        //Save the access and refresh token, and username
-        [[NSUserDefaults standardUserDefaults]setObject:[_refreshTokenResponseMO accessToken] forKey:@"access_token"];
+        //Save the access token, and username
+        [[NSUserDefaults standardUserDefaults]setObject:[refreshTokenResponseMO accessToken] forKey:[Constants GET_LABEL_NAME_ACCESS_TOKEN]];
         
         [self requestCreateStoreProfile];
         [self requestChangePassword];
@@ -568,7 +567,6 @@ static NSString *kSegueIdentifierPromotionList = @"CreateProfiileToPromotionList
     MetaMO *meta = (MetaMO*) dictionary[[Constants GET_LABEL_NAME_LOGOUT_RESPONSE]];
     
     if([meta code] == 200){
-        
         /**Pops all the view controllers on the stack except the root view controller and updates the display**/
         [[self navigationController] popToRootViewControllerAnimated:NO];
         
