@@ -640,8 +640,8 @@
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="constraints">
-                                                    <exclude reference="ygL-rD-EpA"/>
                                                     <exclude reference="v36-l1-f52"/>
+                                                    <exclude reference="ygL-rD-EpA"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
@@ -1344,10 +1344,10 @@
                                 <rect key="frame" x="0.0" y="0.0" width="10" height="10"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tfL-Io-mAf">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tfL-Io-mAf">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="44L-pZ-Mab" customClass="SVGKFastImageView">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="44L-pZ-Mab" customClass="SVGKFastImageView">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
@@ -1663,7 +1663,7 @@
         <image name="login_icon" width="120" height="121"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="83Z-MH-kcz"/>
         <segue reference="vFP-gY-qcW"/>
-        <segue reference="tp0-yy-NCe"/>
     </inferredMetricsTieBreakers>
 </document>

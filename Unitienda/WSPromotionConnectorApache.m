@@ -102,7 +102,6 @@ static WSPromotionConnectorApache* _instance;
     /**
      RESPONSE DESCRIPTIOR CONFIGURATION
      **/
-    
     //ENTITY APPROACH
     RKEntityMapping *responseMapping = [RKEntityMapping mappingForEntityForName:@"Article" inManagedObjectStore:[[_wsConnectionApache objectManager] managedObjectStore]];
     responseMapping.identificationAttributes = @[@"articleId"];
@@ -154,7 +153,7 @@ static WSPromotionConnectorApache* _instance;
     //Nesting the blocks to handle the success or failire routines
     NSLog(@"store_id: %li, access_token: %@",(long)[postBody storeId],[postBody accessToken]);
     [[_wsConnectionApache objectManager]postObject:postBody
-                                                path:@"/CC/WS/WS_GetPromotionDetailsByStore.php"
+                                                path:@"/CC/WS/WS_GetPromotionsByStore.php"
                                           parameters:nil
                                              success: ^(RKObjectRequestOperation *operation, RKMappingResult *result){
                                                  
