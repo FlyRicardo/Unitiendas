@@ -27,7 +27,8 @@
 #import <CoreData/CoreData.h>
 
 
-static NSString *kSegueIdentifierEditCreatePromotion = @"EditCreatePromotionSegue";
+static NSString *kSegueIdentifierCreatePromotion = @"CreatePromotionSegue";
+static NSString *kSegueIdentifierEditPromotion = @"EditPromotionSegue";
 static NSString *kSegueIdentifierEditProfileSegue = @"EditUserProfileSegue";
 
 @interface ViewControllerPromotionList()<NSFetchedResultsControllerDelegate>
@@ -41,6 +42,7 @@ static NSString *kSegueIdentifierEditProfileSegue = @"EditUserProfileSegue";
 @property id wsPromotionConnector;
 
 @property (nonatomic) Store* store;
+@property (nonatomic) Promotion* selectedPromotion;
 
 @end
 
@@ -66,7 +68,6 @@ static NSString *kSegueIdentifierEditProfileSegue = @"EditUserProfileSegue";
  **/
 - (NSFetchedResultsController *)fetchedResultsController{
     if (!_fetchedResultsController) {
-        NSLog(@"Managed object context : %@", self.managedObjectContext);
         
         // Initialize Fetch Request
         //    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Promotion"];
@@ -77,7 +78,6 @@ static NSString *kSegueIdentifierEditProfileSegue = @"EditUserProfileSegue";
         
         // Add Sort Predicate
         [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"%K == %@", @"article.store.storeId",
-//                                    @(1)
                                     @([[NSUserDefaults standardUserDefaults]
                                        integerForKey:[Constants GET_LABEL_STORE_ID]])
                                     ]];
@@ -89,7 +89,6 @@ static NSString *kSegueIdentifierEditProfileSegue = @"EditUserProfileSegue";
                                          //                                     managedObjectContext:self.managedObjectContext
                                          sectionNameKeyPath:nil
                                          cacheName:nil];
-        
         
         // Configure this VC as Fetched Results Controller
         [self.fetchedResultsController setDelegate:self];
@@ -208,6 +207,11 @@ static NSString *kSegueIdentifierEditProfileSegue = @"EditUserProfileSegue";
     return cell;
 }
 
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    _selectedPromotion = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    [self performSegueWithIdentifier:kSegueIdentifierEditPromotion sender:self];
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     CGFloat kNormalCellHeigh = 94;
@@ -280,7 +284,7 @@ static NSString *kSegueIdentifierEditProfileSegue = @"EditUserProfileSegue";
 }
 
 - (IBAction)addPromotionButton:(id)sender {
-    [self performSegueWithIdentifier:kSegueIdentifierEditCreatePromotion sender:self];
+    [self performSegueWithIdentifier:kSegueIdentifierCreatePromotion sender:self];
 }
 
 
@@ -297,15 +301,24 @@ static NSString *kSegueIdentifierEditProfileSegue = @"EditUserProfileSegue";
     if([[segue identifier] isEqualToString: kSegueIdentifierEditProfileSegue]){
         
         ViewControllerCreateEditProfile *viewController = [segue destinationViewController];
-        
 //      Get entity description and set it on ManagedObjectContext
-
         [viewController setManagedObjectContext:_managedObjectContext];
         [viewController setIsCreationModeOn:NO];
-
         
-    }if([[segue identifier] isEqualToString: kSegueIdentifierEditCreatePromotion]){
+    }else if([[segue identifier] isEqualToString: kSegueIdentifierCreatePromotion]){
+        
         ViewControllerCreateEditPromotion *viewController = [segue destinationViewController];
+        [viewController setIsCreationModeOn:YES];
+        
+    }else if([[segue identifier] isEqualToString: kSegueIdentifierEditPromotion]){
+        
+        ViewControllerCreateEditPromotion *viewController = [segue destinationViewController];
+        [viewController setManagedObjectContext:self.managedObjectContext];
+        [viewController setPromotionId:[_selectedPromotion promotionId]];
+        [viewController setIsCreationModeOn:NO];
+        
+    }else{
+        
     }
 }
 

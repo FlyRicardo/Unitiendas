@@ -13,6 +13,9 @@
 
 #import "WebServiceAbstractFactory.h"
 
+#import "Promotion.h"
+#import "Article.h"
+
 #define kStartDateFieldTextIndex 6
 #define kEndDateFieldTextIndex 9
 
@@ -38,16 +41,8 @@
 @property (nonatomic) Boolean startDatePickerIsShowing;
 @property (nonatomic) Boolean endDatePickerIsShowing;
 
-@property (weak, nonatomic) IBOutlet UIDatePicker *startDatePicker;
-@property (weak, nonatomic) IBOutlet UIDatePicker *endDatePicker;
-
-@property (weak, nonatomic) IBOutlet UITextField *startDateFieldText;
-@property (weak, nonatomic) IBOutlet UITextField *endDateFieldText;
-
-@property (weak, nonatomic) IBOutlet UITextField *itemNameTextField;
-@property (weak, nonatomic) IBOutlet UITextField *percentageDiscountTextField;
-
 @property (strong, nonatomic) UITextField *activeTextField;
+@property (nonatomic) Promotion* promotion;
 
 @end
 
@@ -55,6 +50,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    if(!_isCreationModeOn){
+        [self initiateCoreDataComponets];
+    }
     [self initiateUIComponents];
     
     // Uncomment the following line to preserve selection between presentations.
@@ -90,17 +88,66 @@
     [self hideStartDatePickerCell];
     [self hideEndDatePickerCell];
     
-    /**Configure toolbar**/
+    // Configure toolbar
+    // Add button of Done (hideKeyBoard) and button space.
+    
     UIToolbar *toolBar=[[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 44)];
     [toolBar setTintColor:[UIColor grayColor]];
     UIBarButtonItem *doneBtn=[[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStylePlain target:self action:@selector(hideKeyboard)];
     UIBarButtonItem *space=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     [toolBar setItems:[NSArray arrayWithObjects:space,doneBtn, nil]];
     [[self percentageDiscountTextField] setInputAccessoryView:toolBar];
-    [[self itemNameTextField] setInputAccessoryView:toolBar];
+//  [[self itemNameTextField] setInputAccessoryView:toolBar];
+    
+    
     
     /**Configure navigation bar**/
     [self configureNavigationBar];
+}
+
+
+// Call all needs objects on core data
+
+-(void) initiateCoreDataComponets{
+    NSEntityDescription *entityDescription = [NSEntityDescription
+                                              entityForName:@"Promotion"
+                                              inManagedObjectContext:_managedObjectContext];
+    
+    // Initialize Fetch Request
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:entityDescription];
+    
+    // Add Sort Predicate
+    [request setPredicate:[NSPredicate predicateWithFormat:@"%K == %i", @"promotionId",[_promotionId integerValue]]];
+    
+    NSError *error;
+    NSArray *array = [_managedObjectContext executeFetchRequest:request error:&error];
+    if (array == nil || [array count] == 0){
+        NSLog(@"Error getting info of promotion with id: %li. Error: %@",(long)[_promotionId integerValue],error);
+    }else{
+        if([[array objectAtIndex:0] isKindOfClass:[Promotion class]]){
+            _promotion = [array objectAtIndex:0];
+        }
+    }
+    
+    // Init values of components
+    
+    NSDateFormatter *formatter=[[NSDateFormatter alloc]init];
+    [formatter setDateFormat:@"dd/MMM/YYYY"];
+    
+    [self setIsCreationModeOn:YES];
+    
+    [[self startDatePicker] setDate:[_promotion creationDate]];
+    [[self endDatePicker] setDate:[_promotion dueDate]];
+    
+    self.startDateFieldText.text = [NSString stringWithFormat:@"%@",[formatter stringFromDate:_promotion.creationDate]];
+    
+    self.endDateFieldText.text = [NSString stringWithFormat:@"%@",[formatter stringFromDate:_promotion.dueDate]];
+    
+
+    [[self itemNameTextField] setText:[_promotion name]];
+    [[self priceTextField] setText:[NSString stringWithFormat:@"%@ %@",@"$",[[[_promotion article] price] stringValue]]];
+    [[self percentageDiscountTextField] setText:[NSString stringWithFormat:@"%f%%",[[_promotion percentageDiscount] floatValue]]];
 }
 
 -(void) configureNavigationBar{
@@ -288,59 +335,4 @@
         [self requestCreateOrEditPromotion];
     }
 }
-
-/*
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
-    
-    // Configure the cell...
-    
-    return cell;
-}
-*/
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
 @end

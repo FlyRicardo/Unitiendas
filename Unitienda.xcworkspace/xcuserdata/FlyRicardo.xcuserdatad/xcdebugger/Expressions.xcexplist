@@ -3,17 +3,6 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "-[ViewControllerPromotionList requestGetPromotionsByStore]:ViewControllerPromotionList.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "[[NSUserDefaults standardUserDefaults] valueForKey:[Constants GET_LABEL_STORE_ID]]">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "-[ViewControllerPromotionList receivePromotionByStoreNotification:]:ViewControllerPromotionList.m">
-      </ContextState>
-      <ContextState
          contextName = "-[AppDelegate application:didFinishLaunchingWithOptions:]:AppDelegate.m">
          <PersistentStrings>
             <PersistentString
@@ -21,6 +10,20 @@
             </PersistentString>
             <PersistentString
                value = "[rootNavigationController viewControllers]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[ViewControllerPromotionList receivePromotionByStoreNotification:]:ViewControllerPromotionList.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[ViewControllerPromotionList requestGetPromotionsByStore]:ViewControllerPromotionList.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[[NSUserDefaults standardUserDefaults] valueForKey:[Constants GET_LABEL_STORE_ID]]">
+            </PersistentString>
+            <PersistentString
+               value = "[Constants GET_LABEL_STORE_ID]">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -45,6 +48,20 @@
       </ContextState>
       <ContextState
          contextName = "__55-[WSProfileConnectorApache createProfileWithStoreInfo:]_block_invoke:WSProfileConnectorApache.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[ViewControllerCreateEditPromotion initiateCoreDataComponets]:ViewControllerCreateEditPromotion.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[_promotion name]">
+            </PersistentString>
+            <PersistentString
+               value = "[_promotionId integerValue]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[ViewControllerPromotionList receivePromotionsByStoreNotification:]:ViewControllerPromotionList.m">
       </ContextState>
       <ContextState
          contextName = "-[ViewControllerLogin prepareForSegue:sender:]:ViewControllerLogin.m">
@@ -74,6 +91,9 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "__44-[WSProfileConnectorApache getProfileStore:]_block_invoke:WSProfileConnectorApache.m">
+      </ContextState>
+      <ContextState
          contextName = "-[ViewControllerCreateEditPromotion tableView:didSelectRowAtIndexPath:]:ViewControllerCreateEditPromotion.m">
          <PersistentStrings>
             <PersistentString
@@ -82,27 +102,38 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "__44-[WSProfileConnectorApache getProfileStore:]_block_invoke:WSProfileConnectorApache.m">
-      </ContextState>
-      <ContextState
-         contextName = "-[ViewControllerLogin receivedProfileStoreNotification:]:ViewControllerLogin.m">
-      </ContextState>
-      <ContextState
          contextName = "-[ViewControllerPromotionList prepareForSegue:sender:]:ViewControllerPromotionList.m">
          <PersistentStrings>
             <PersistentString
-               value = "[[NSUserDefaults standardUserDefaults] valueForKey:[Constants GET_LABEL_STORE_ID]]]]">
-            </PersistentString>
-            <PersistentString
-               value = "[store name]">
+               value = "[[_selectedPromotion promotionId] integerValue]">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[ViewControllerLogin receivedProfileStoreNotification:]:ViewControllerLogin.m">
       </ContextState>
       <ContextState
          contextName = "-[PromotionDataSyncImpl1 receivePromotionByStoreWsNotification:]:PromotionDataSyncImpl1.m">
       </ContextState>
       <ContextState
          contextName = "-[WSPromotionConnectorApache getPromotionsByStorePersistence:]:WSPromotionConnectorApache.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[ViewControllerCreateEditPromotion viewDidLoad]:ViewControllerCreateEditPromotion.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "_isCreationModeOn">
+            </PersistentString>
+            <PersistentString
+               value = "[_startDateFieldText text]">
+            </PersistentString>
+            <PersistentString
+               value = "_startDatePicker">
+            </PersistentString>
+            <PersistentString
+               value = "[_priceTextField text]">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "-[ViewControllerCreateEditProfile receiveLogoutNotification:]:ViewControllerCreateEditProfile.m">
@@ -144,18 +175,18 @@
          contextName = "-[ViewControllerCreateEditProfile receiveCreateProfileNotification:]:ViewControllerCreateEditProfile.m">
       </ContextState>
       <ContextState
-         contextName = "-[ViewControllerPromotionList configureElementsOnView]:ViewControllerPromotionList.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "[[self.fetchedResultsController sections] count]">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
          contextName = "-[ViewControllerPromotionList refreshPromotionFromWS:]:ViewControllerPromotionList.m">
          <PersistentStrings>
             <PersistentString
                value = "[[NSUserDefaults standardUserDefaults] valueForKey:[Constants GET_LABEL_STORE_ID]]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[ViewControllerPromotionList configureElementsOnView]:ViewControllerPromotionList.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[[self.fetchedResultsController sections] count]">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -177,10 +208,10 @@
                value = "[NSDate date]">
             </PersistentString>
             <PersistentString
-               value = "endDay-startDay">
+               value = "currentDate">
             </PersistentString>
             <PersistentString
-               value = "currentDate">
+               value = "endDay-startDay">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

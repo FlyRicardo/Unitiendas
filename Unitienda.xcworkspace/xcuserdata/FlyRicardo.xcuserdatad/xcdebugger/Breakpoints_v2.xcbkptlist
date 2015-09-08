@@ -6,16 +6,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Unitienda/WSPromotionConnectorApache.m"
-            timestampString = "462918328.103009"
+            filePath = "Unitienda/ViewControllers/ViewControllerCreateEditPromotion.m"
+            timestampString = "463352011.95356"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "155"
-            endingLineNumber = "155"
-            landmarkName = "-getPromotionsByStoreWS:"
+            startingLineNumber = "150"
+            endingLineNumber = "150"
+            landmarkName = "-initiateCoreDataComponets"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

@@ -10,6 +10,20 @@
 
 @interface ViewControllerCreateEditPromotion : UITableViewController<UITextFieldDelegate>
 
+@property (weak, nonatomic) IBOutlet UIDatePicker *startDatePicker;
+@property (weak, nonatomic) IBOutlet UIDatePicker *endDatePicker;
+
+@property (weak, nonatomic) IBOutlet UITextField *startDateFieldText;
+@property (weak, nonatomic) IBOutlet UITextField *endDateFieldText;
+
+@property (weak, nonatomic) IBOutlet UILabel *itemNameTextField;
+@property (weak, nonatomic) IBOutlet UILabel *priceTextField;
+@property (weak, nonatomic) IBOutlet UITextField *percentageDiscountTextField;
+
+@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+
 @property (nonatomic) BOOL isCreationModeOn;
+
+@property (nonatomic) NSNumber* promotionId;
 
 @end

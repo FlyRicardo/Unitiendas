@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4200F9DF1B9A5F5600E6817C /* Promotion.m in Sources */ = {isa = PBXBuildFile; fileRef = 4200F9DE1B9A5F5600E6817C /* Promotion.m */; };
 		4250078B1AEEE3F20003F230 /* RequestMO.m in Sources */ = {isa = PBXBuildFile; fileRef = 4250078A1AEEE3F20003F230 /* RequestMO.m */; };
 		4250078D1AEEE42E0003F230 /* MetaMO.m in Sources */ = {isa = PBXBuildFile; fileRef = 4250078C1AEEE42E0003F230 /* MetaMO.m */; };
 		4250079D1AEEE79E0003F230 /* StoreMO.m in Sources */ = {isa = PBXBuildFile; fileRef = 4250079C1AEEE79E0003F230 /* StoreMO.m */; };
@@ -87,7 +88,6 @@
 		42ED96FB1B796A200087EB23 /* CategoryClassification.m in Sources */ = {isa = PBXBuildFile; fileRef = 42ED96F11B796A200087EB23 /* CategoryClassification.m */; };
 		42ED96FC1B796A200087EB23 /* Icon.m in Sources */ = {isa = PBXBuildFile; fileRef = 42ED96F31B796A200087EB23 /* Icon.m */; };
 		42ED96FD1B796A200087EB23 /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = 42ED96F51B796A200087EB23 /* Photo.m */; };
-		42ED96FE1B796A200087EB23 /* Promotion.m in Sources */ = {isa = PBXBuildFile; fileRef = 42ED96F71B796A200087EB23 /* Promotion.m */; };
 		42ED96FF1B796A200087EB23 /* Store.m in Sources */ = {isa = PBXBuildFile; fileRef = 42ED96F91B796A200087EB23 /* Store.m */; };
 		42ED97021B796A610087EB23 /* Meta.m in Sources */ = {isa = PBXBuildFile; fileRef = 42ED97011B796A610087EB23 /* Meta.m */; };
 		42ED97051B796A610087EB23 /* UserProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 42ED97041B796A610087EB23 /* UserProfile.m */; };
@@ -115,6 +115,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4200F9DD1B9A5F5600E6817C /* Promotion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Promotion.h; sourceTree = "<group>"; };
+		4200F9DE1B9A5F5600E6817C /* Promotion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Promotion.m; sourceTree = "<group>"; };
 		421724981AE6BDE1003DE1F7 /* SelectVenueDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelectVenueDelegate.h; sourceTree = "<group>"; };
 		4250078A1AEEE3F20003F230 /* RequestMO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestMO.m; sourceTree = "<group>"; };
 		4250078C1AEEE42E0003F230 /* MetaMO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MetaMO.m; sourceTree = "<group>"; };
@@ -412,8 +414,6 @@
 		42ED96F31B796A200087EB23 /* Icon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Icon.m; sourceTree = "<group>"; };
 		42ED96F41B796A200087EB23 /* Photo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Photo.h; sourceTree = "<group>"; };
 		42ED96F51B796A200087EB23 /* Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Photo.m; sourceTree = "<group>"; };
-		42ED96F61B796A200087EB23 /* Promotion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Promotion.h; sourceTree = "<group>"; };
-		42ED96F71B796A200087EB23 /* Promotion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Promotion.m; sourceTree = "<group>"; };
 		42ED96F81B796A200087EB23 /* Store.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Store.h; sourceTree = "<group>"; };
 		42ED96F91B796A200087EB23 /* Store.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Store.m; sourceTree = "<group>"; };
 		42ED97001B796A610087EB23 /* Meta.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Meta.h; sourceTree = "<group>"; };
@@ -1256,14 +1256,14 @@
 				42ED96F31B796A200087EB23 /* Icon.m */,
 				42ED96F41B796A200087EB23 /* Photo.h */,
 				42ED96F51B796A200087EB23 /* Photo.m */,
-				42ED96F61B796A200087EB23 /* Promotion.h */,
-				42ED96F71B796A200087EB23 /* Promotion.m */,
 				42ED96F81B796A200087EB23 /* Store.h */,
 				42ED96F91B796A200087EB23 /* Store.m */,
 				42ED97031B796A610087EB23 /* UserProfile.h */,
 				42ED97041B796A610087EB23 /* UserProfile.m */,
 				42ED97001B796A610087EB23 /* Meta.h */,
 				42ED97011B796A610087EB23 /* Meta.m */,
+				4200F9DD1B9A5F5600E6817C /* Promotion.h */,
+				4200F9DE1B9A5F5600E6817C /* Promotion.m */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -1457,7 +1457,6 @@
 				42D59C761B8F9A2B0019F98B /* ELCAsset.m in Sources */,
 				42BC6FC81B79A88900EB58CF /* RefreshTokenHelper.m in Sources */,
 				425AD7161AE58A4200A81515 /* WebServiceApacheFactory.m in Sources */,
-				42ED96FE1B796A200087EB23 /* Promotion.m in Sources */,
 				42ED97211B796F970087EB23 /* ProfileRequestMO.m in Sources */,
 				42DAD1A51B458E9100B7A463 /* ArticleDataSyncImpl1.m in Sources */,
 				42B73BA71B46DF5300805F95 /* DataSyncServiceAbstractFactory.m in Sources */,
@@ -1517,6 +1516,7 @@
 				42ED97241B796F970087EB23 /* UserMO.m in Sources */,
 				42DAD1A81B458EA200B7A463 /* StoreDataSyncImpl1.m in Sources */,
 				42BC6FD41B79AA2900EB58CF /* ViewControllerCreateEditPromotion.m in Sources */,
+				4200F9DF1B9A5F5600E6817C /* Promotion.m in Sources */,
 				42BC6FCD1B79A88900EB58CF /* ViewControllerHome.m in Sources */,
 				42B73BAC1B46E06C00805F95 /* DataSyncServiceFactoryImpl1.m in Sources */,
 				42AF4A471B34832300A57375 /* IconMO.m in Sources */,

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14E46" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14F27" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Article" representedClassName="Article" syncable="YES">
         <attribute name="articleDescription" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="articleId" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
@@ -40,7 +40,7 @@
         <attribute name="creationDate" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="dueDate" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="effectiveness" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="name" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="percentageDiscount" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <attribute name="promotionId" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <relationship name="article" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Article" inverseName="promotion" inverseEntity="Article" syncable="YES"/>
@@ -62,13 +62,13 @@
         <relationship name="store" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Store" inverseName="userProfile" inverseEntity="Store" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Article" positionX="-423" positionY="-279" width="128" height="165"/>
-        <element name="CategoryClassification" positionX="-146" positionY="-315" width="128" height="133"/>
-        <element name="Icon" positionX="-297" positionY="-441" width="128" height="103"/>
-        <element name="Photo" positionX="-189" positionY="-162" width="128" height="118"/>
-        <element name="Promotion" positionX="-216" positionY="-4" width="128" height="148"/>
-        <element name="Store" positionX="-614" positionY="-234" width="128" height="133"/>
-        <element name="UserProfile" positionX="-819" positionY="-234" width="128" height="133"/>
-        <element name="Meta" positionX="-819" positionY="-0" width="128" height="88"/>
+        <element name="Article" positionX="0" positionY="0" width="128" height="165"/>
+        <element name="CategoryClassification" positionX="214" positionY="81" width="128" height="135"/>
+        <element name="Icon" positionX="378" positionY="111" width="128" height="105"/>
+        <element name="Meta" positionX="-486" positionY="351" width="128" height="90"/>
+        <element name="Photo" positionX="-252" positionY="15" width="128" height="120"/>
+        <element name="Promotion" positionX="-189" positionY="-198" width="128" height="148"/>
+        <element name="Store" positionX="-279" positionY="171" width="128" height="135"/>
+        <element name="UserProfile" positionX="-479" positionY="171" width="128" height="135"/>
     </elements>
 </model>

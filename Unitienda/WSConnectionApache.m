@@ -28,10 +28,10 @@ static WSConnectionApache* _instance;
 
 -(id)init{
     /**Configuration baseUrl to flyinc.co**/
-//    baseUrl = @"http://www.flyinc.co";
+    baseUrl = @"http://www.flyinc.co";  
     
     /**Configuration baseUrl to localhost:82**/
-    baseUrl = @"http://127.0.0.1:82";
+//    baseUrl = @"http://127.0.0.1:82";
     
    return [self initWithBaseUrl:baseUrl];
 }

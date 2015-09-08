@@ -142,7 +142,7 @@ static WSPromotionConnectorApache* _instance;
     //Setup response descriptor
     RKResponseDescriptor *responseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:responseMapping
                                                                                             method:RKRequestMethodPOST
-                                                                                        pathPattern:@"/CC/WS/WS_GetPromotionDetailsByStore.php"
+                                                                                        pathPattern:@"/CC/WS/WS_GetPromotionsByStore.php"
                                                                                             keyPath:@"response.Articles"
                                                                                         statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
     
@@ -153,7 +153,7 @@ static WSPromotionConnectorApache* _instance;
     //Nesting the blocks to handle the success or failire routines
     NSLog(@"store_id: %li, access_token: %@",(long)[postBody storeId],[postBody accessToken]);
     [[_wsConnectionApache objectManager]postObject:postBody
-                                                path:@"/CC/WS/WS_GetPromotionsByStore.php"
+                                              path:@"/CC/WS/WS_GetPromotionsByStore.php"
                                           parameters:nil
                                              success: ^(RKObjectRequestOperation *operation, RKMappingResult *result){
                                                  
@@ -167,13 +167,11 @@ static WSPromotionConnectorApache* _instance;
                                                  }else{
                                                      NSLog(@"Error, no object attached on response");
                                                  }
-                                                 
                                                  /**  Response using block as parameter of signature method <-(void) getPromotionsByStore:(NSInteger)storeId block:(void (^)(id))block>
                                                   
                                                   block(resulList);
                                                   
                                                   **/
-                                                 
                                             }
                                             failure:^(RKObjectRequestOperation *operation, NSError *error){
                                                 

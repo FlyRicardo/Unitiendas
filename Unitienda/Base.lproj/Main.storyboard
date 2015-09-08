@@ -173,11 +173,11 @@
                         <viewControllerLayoutGuide type="bottom" id="7wW-82-Rj6"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="yTy-Iw-sTG">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Aquí podrá crear y administrar promociones, así como también acceder a promociones ya realizadas." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="238" translatesAutoresizingMaskIntoConstraints="NO" id="gMp-iw-dcC" userLabel="No Promotions Found">
-                                <rect key="frame" x="181" y="241" width="238" height="55"/>
+                                <rect key="frame" x="181" y="273" width="238" height="55"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="55" id="G2S-aL-txQ"/>
@@ -188,7 +188,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="PPY-u1-92z">
-                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -301,7 +301,7 @@
                                 </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a7j-VY-GXf">
-                                <rect key="frame" x="0.0" y="489" width="600" height="30"/>
+                                <rect key="frame" x="0.0" y="553" width="600" height="30"/>
                                 <color key="backgroundColor" white="0.85786290320000003" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="luX-Ag-sJu"/>
@@ -363,7 +363,8 @@
                         <outlet property="promotionNotFoundLabel" destination="gMp-iw-dcC" id="Zqo-TG-pLf"/>
                         <outlet property="tableView" destination="PPY-u1-92z" id="3EP-g0-A20"/>
                         <segue destination="77h-fi-hEg" kind="show" identifier="EditUserProfileSegue" id="tp0-yy-NCe"/>
-                        <segue destination="2jK-ZL-8jO" kind="show" identifier="EditCreatePromotionSegue" id="Cal-3b-uw7"/>
+                        <segue destination="2jK-ZL-8jO" kind="show" identifier="CreatePromotionSegue" id="XDC-VY-4aQ"/>
+                        <segue destination="2jK-ZL-8jO" kind="show" identifier="EditPromotionSegue" id="53Y-j0-VTb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ETs-7M-GUK" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -375,7 +376,7 @@
             <objects>
                 <tableViewController id="2jK-ZL-8jO" customClass="ViewControllerCreateEditPromotion" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" rowHeight="40" sectionHeaderHeight="22" sectionFooterHeight="22" id="O2m-r6-ag9">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803915" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -505,7 +506,9 @@
                                                     <variation key="widthClass=compact" constant="-19"/>
                                                 </constraint>
                                                 <constraint firstItem="oRA-qe-TtT" firstAttribute="height" secondItem="caq-sP-VVT" secondAttribute="height" id="HF4-kZ-esx"/>
+                                                <constraint firstItem="caq-sP-VVT" firstAttribute="leading" relation="lessThanOrEqual" secondItem="oRA-qe-TtT" secondAttribute="trailing" constant="250" id="ce6-ea-Og0"/>
                                                 <constraint firstItem="oRA-qe-TtT" firstAttribute="centerY" secondItem="caq-sP-VVT" secondAttribute="centerY" id="lfa-pg-DAQ"/>
+                                                <constraint firstItem="caq-sP-VVT" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="oRA-qe-TtT" secondAttribute="trailing" id="sKQ-Lf-TjZ"/>
                                                 <constraint firstItem="oRA-qe-TtT" firstAttribute="leading" secondItem="kv9-dM-myM" secondAttribute="leadingMargin" constant="-8" id="vKl-T0-beP">
                                                     <variation key="widthClass=compact" constant="-3"/>
                                                 </constraint>
@@ -565,7 +568,7 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                     <connections>
-                                                        <outlet property="delegate" destination="2jK-ZL-8jO" id="coG-Kf-VI2"/>
+                                                        <outlet property="delegate" destination="2jK-ZL-8jO" id="AmJ-h0-3uo"/>
                                                     </connections>
                                                 </textField>
                                             </subviews>
@@ -667,6 +670,9 @@
                                                             <exclude reference="keX-ut-Hxv"/>
                                                         </mask>
                                                     </variation>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="2jK-ZL-8jO" id="f9e-yz-gbF"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -841,8 +847,10 @@
                     <connections>
                         <outlet property="endDateFieldText" destination="1ky-Dz-Oqe" id="zTD-yK-Qi8"/>
                         <outlet property="endDatePicker" destination="IyH-Yr-YJB" id="KtV-VB-bvd"/>
-                        <outlet property="percentageDiscountTextField" destination="cZx-wu-sjv" id="sIq-8A-Yna"/>
-                        <outlet property="startDateFieldText" destination="NEg-Be-Vv5" id="cF6-bA-ayx"/>
+                        <outlet property="itemNameTextField" destination="oRA-qe-TtT" id="bvp-Re-LNy"/>
+                        <outlet property="percentageDiscountTextField" destination="cZx-wu-sjv" id="6q9-VI-PCN"/>
+                        <outlet property="priceTextField" destination="caq-sP-VVT" id="cpK-mR-vzc"/>
+                        <outlet property="startDateFieldText" destination="NEg-Be-Vv5" id="Ydn-al-q4Q"/>
                         <outlet property="startDatePicker" destination="q8H-c3-5H7" id="M2g-w1-fVq"/>
                     </connections>
                 </tableViewController>
@@ -1344,10 +1352,10 @@
                                 <rect key="frame" x="0.0" y="0.0" width="10" height="10"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tfL-Io-mAf">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tfL-Io-mAf">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="44L-pZ-Mab" customClass="SVGKFastImageView">
+                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="44L-pZ-Mab" customClass="SVGKFastImageView">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
@@ -1663,7 +1671,8 @@
         <image name="login_icon" width="120" height="121"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="83Z-MH-kcz"/>
-        <segue reference="vFP-gY-qcW"/>
+        <segue reference="tp0-yy-NCe"/>
+        <segue reference="TqP-I0-fe3"/>
+        <segue reference="53Y-j0-VTb"/>
     </inferredMetricsTieBreakers>
 </document>
