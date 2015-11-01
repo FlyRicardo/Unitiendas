@@ -10,6 +10,7 @@
 #import "WSLoginConnectorApache.h"
 #import "WSProfileConnectorApache.h"
 #import "WSPromotionConnectorapache.h"
+#import "WSArticleConnectorApache.h"
 
 @implementation WebServiceApacheFactory
 
@@ -51,6 +52,10 @@ static WebServiceApacheFactory* _instance;
 +(id<WSPromotionConnector>) createWebServicePromotionConnection
 {
     return[WSPromotionConnectorApache getInstance];
+}
+
++(id<WSArticleConnector>) createWebServiceArticleConnection{
+    return [WSArticleConnectorApache getInstance];
 }
 
 @end

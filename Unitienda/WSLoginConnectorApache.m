@@ -195,7 +195,7 @@ static WSLoginConnectorApache* _instance;
                                                                                        statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
     //Adding response descripton
     [[_wsConnectionApache objectManager] addRequestDescriptor:requestDescriptor];
-    [[_wsConnectionApache objectManager]addResponseDescriptor:responseDescriptor];
+    [[_wsConnectionApache objectManager] addResponseDescriptor:responseDescriptor];
     
     
     //Execute query

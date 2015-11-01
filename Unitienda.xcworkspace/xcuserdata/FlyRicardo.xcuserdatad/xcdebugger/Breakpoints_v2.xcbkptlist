@@ -9,13 +9,29 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Unitienda/ViewControllers/ViewControllerCreateEditPromotion.m"
-            timestampString = "463352011.95356"
+            filePath = "Unitienda/WSProfileConnectorApache.m"
+            timestampString = "468041624.009512"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "150"
-            endingLineNumber = "150"
-            landmarkName = "-initiateCoreDataComponets"
+            startingLineNumber = "135"
+            endingLineNumber = "135"
+            landmarkName = "-stablishProfileConnectionWithUsername:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Unitienda/WSProfileConnectorApache.m"
+            timestampString = "468041627.903504"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "147"
+            endingLineNumber = "147"
+            landmarkName = "-stablishProfileConnectionWithUsername:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

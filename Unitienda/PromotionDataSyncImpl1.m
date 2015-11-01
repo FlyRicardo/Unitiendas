@@ -91,7 +91,7 @@ static PromotionDataSyncImpl1* _instance;
 /**
  *  Get detail of specific promotion
  **/
--(Promotion*) getPromotionDetail:(Promotion*) prmotion{
+-(Promotion*) getPromotionDetail:(Promotion*) promotion{
     return nil;
 }
 

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4200F9DF1B9A5F5600E6817C /* Promotion.m in Sources */ = {isa = PBXBuildFile; fileRef = 4200F9DE1B9A5F5600E6817C /* Promotion.m */; };
+		422C3A931B9F532F00B9F7B4 /* WSArticleConnectorApache.m in Sources */ = {isa = PBXBuildFile; fileRef = 422C3A921B9F532F00B9F7B4 /* WSArticleConnectorApache.m */; };
 		4250078B1AEEE3F20003F230 /* RequestMO.m in Sources */ = {isa = PBXBuildFile; fileRef = 4250078A1AEEE3F20003F230 /* RequestMO.m */; };
 		4250078D1AEEE42E0003F230 /* MetaMO.m in Sources */ = {isa = PBXBuildFile; fileRef = 4250078C1AEEE42E0003F230 /* MetaMO.m */; };
 		4250079D1AEEE79E0003F230 /* StoreMO.m in Sources */ = {isa = PBXBuildFile; fileRef = 4250079C1AEEE79E0003F230 /* StoreMO.m */; };
@@ -118,6 +119,9 @@
 		4200F9DD1B9A5F5600E6817C /* Promotion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Promotion.h; sourceTree = "<group>"; };
 		4200F9DE1B9A5F5600E6817C /* Promotion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Promotion.m; sourceTree = "<group>"; };
 		421724981AE6BDE1003DE1F7 /* SelectVenueDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelectVenueDelegate.h; sourceTree = "<group>"; };
+		422C399C1B9F51A800B9F7B4 /* WSArticleConnector.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WSArticleConnector.h; sourceTree = "<group>"; };
+		422C3A911B9F532F00B9F7B4 /* WSArticleConnectorApache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WSArticleConnectorApache.h; sourceTree = "<group>"; };
+		422C3A921B9F532F00B9F7B4 /* WSArticleConnectorApache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WSArticleConnectorApache.m; sourceTree = "<group>"; };
 		4250078A1AEEE3F20003F230 /* RequestMO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestMO.m; sourceTree = "<group>"; };
 		4250078C1AEEE42E0003F230 /* MetaMO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MetaMO.m; sourceTree = "<group>"; };
 		4250079C1AEEE79E0003F230 /* StoreMO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreMO.m; sourceTree = "<group>"; };
@@ -787,6 +791,7 @@
 				425AD70D1AE58A0700A81515 /* WSLoginConnector.h */,
 				425AD70E1AE58A0700A81515 /* WSProfileConnector.h */,
 				4285476C1B066321005C72E8 /* WSPromotionConnector.h */,
+				422C399C1B9F51A800B9F7B4 /* WSArticleConnector.h */,
 			);
 			name = Abstract;
 			sourceTree = "<group>";
@@ -811,6 +816,8 @@
 				425AD70A1AE589EE00A81515 /* WSProfileConnectorApache.m */,
 				428547691B0661CB005C72E8 /* WSPromotionConnectorApache.h */,
 				4285476A1B0661CB005C72E8 /* WSPromotionConnectorApache.m */,
+				422C3A911B9F532F00B9F7B4 /* WSArticleConnectorApache.h */,
+				422C3A921B9F532F00B9F7B4 /* WSArticleConnectorApache.m */,
 			);
 			name = Concrete;
 			sourceTree = "<group>";
@@ -1524,6 +1531,7 @@
 				42ED96FB1B796A200087EB23 /* CategoryClassification.m in Sources */,
 				42ED971E1B796F970087EB23 /* LogoutMetaMO.m in Sources */,
 				4285476B1B0661CB005C72E8 /* WSPromotionConnectorApache.m in Sources */,
+				422C3A931B9F532F00B9F7B4 /* WSArticleConnectorApache.m in Sources */,
 				42BC6FCB1B79A88900EB58CF /* ViewControllerCreateEditProfile.m in Sources */,
 				42BC6FCE1B79A88900EB58CF /* ViewControllerLogin.m in Sources */,
 				42ED96FF1B796A200087EB23 /* Store.m in Sources */,

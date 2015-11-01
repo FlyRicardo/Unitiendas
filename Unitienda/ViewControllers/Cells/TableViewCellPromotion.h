@@ -12,8 +12,8 @@
 
 @interface TableViewCellPromotion : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UIImageView *rowArticleImageView;
-@property (weak, nonatomic) IBOutlet UILabel *rowArticleNameLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *rowPromotionImageView;
+@property (weak, nonatomic) IBOutlet UILabel *rowPromotionNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *rowPercentageEffectivenessLabel;
 @property (weak, nonatomic) IBOutlet UILabel *rowDueDateLabel;
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;

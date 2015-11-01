@@ -9,11 +9,13 @@
 #import "WSLoginConnector.h"
 #import "WSProfileConnector.h"
 #import "WSPromotionConnector.h"
+#import "WSArticleConnector.h"
 
 @protocol WebServiceAbstracFactoryProtocol
 
 +(id<WSLoginConnector>) createWebServiceLoginConnection;
 +(id<WSProfileConnector>) createWebServiceProfileConnection;
 +(id<WSPromotionConnector>) createWebServicePromotionConnection;
++(id<WSArticleConnector>) createWebServiceArticleConnection;
 
 @end

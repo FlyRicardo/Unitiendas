@@ -185,7 +185,6 @@ static NSString *kSegueIdentifierPromotionList = @"CreateProfiileToPromotionList
             break;
         }
     }
-    
 }
 
 #pragma mark - NavigationController configuration
@@ -588,8 +587,8 @@ static NSString *kSegueIdentifierPromotionList = @"CreateProfiileToPromotionList
     UIAlertAction *otherAction;
     
     UIAlertController * alertController= [UIAlertController alertControllerWithTitle:@"Confirma que desea guardar su perfil?"
-                                                           message:nil
-                                                    preferredStyle:UIAlertControllerStyleAlert];
+                                                                             message:nil
+                                                                      preferredStyle:UIAlertControllerStyleAlert];
     
     destroyAction = [UIAlertAction actionWithTitle:@"Si"
                                              style:UIAlertActionStyleDefault

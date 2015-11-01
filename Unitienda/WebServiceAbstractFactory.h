@@ -10,6 +10,7 @@
 #import "WSLoginConnector.h"
 #import "WSProfileConnector.h"
 #import "WSPromotionConnector.h"
+#import "WSArticleConnector.h"
 
 typedef enum ouputTypes {
     ApacheType,
@@ -21,6 +22,9 @@ typedef enum ouputTypes {
 +(id<WSLoginConnector>) createWebServiceLoginConnection:(OutputTypes)type;
 +(id<WSProfileConnector>) createWebServiceProfileConnection:(OutputTypes)type;
 +(id<WSPromotionConnector>) createWebServicePromotionConnection:(OutputTypes)type;
++(id<WSArticleConnector>) createWebServiceArticleConnection:(OutputTypes)type;
+
++(id)getInstance;
 
 @end
 

@@ -26,7 +26,6 @@
 
 #import <CoreData/CoreData.h>
 
-
 static NSString *kSegueIdentifierCreatePromotion = @"CreatePromotionSegue";
 static NSString *kSegueIdentifierEditPromotion = @"EditPromotionSegue";
 static NSString *kSegueIdentifierEditProfileSegue = @"EditUserProfileSegue";

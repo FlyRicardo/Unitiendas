@@ -46,4 +46,13 @@ static WebServiceTomcatFactory* _instance;
     return nil;
 }
 
++(id<WSPromotionConnector>) createWebServicePromotionConnection
+{
+    return nil;
+}
+
++(id<WSArticleConnector>) createWebServiceArticleConnection{
+    return nil;
+}
+
 @end

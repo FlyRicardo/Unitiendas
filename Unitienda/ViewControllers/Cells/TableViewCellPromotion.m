@@ -63,7 +63,7 @@
     UIImage *cached_image = [[CacheManager sharedCacheController] getCachedImage:[NSString stringWithFormat:@"image-%@",[photo url]]];
     
     if(cached_image != nil){
-        [_rowArticleImageView setImage:cached_image];
+        [_rowPromotionImageView setImage:cached_image];
     }else{
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
             
@@ -87,7 +87,7 @@
             }
             
             dispatch_sync(dispatch_get_main_queue(), ^{
-                [_rowArticleImageView setImage: image];
+                [_rowPromotionImageView setImage: image];
                 [[CacheManager sharedCacheController] setCachedImage:image name:[NSString stringWithFormat:@"image-%@", [photo url]]];
             });
             
@@ -100,7 +100,7 @@
 }
 
 -(void) setArticle:(Article *)article{
-    [[self rowArticleNameLabel] setText:[article name]];
+    [[self rowPromotionNameLabel] setText:[article name]];
     [self setCacheImage:[article photo]];
 }
 

@@ -39,7 +39,6 @@ static DataSyncServiceFactoryImpl1* _instance;
 }
 
 
-
 #pragma mark - interface implementations
 
 +(id<DataChecker>) createDataChecker{

@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "361C45DF263D7D89AFB21C9DEB6D6ACE3E105E3E",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "361C45DF263D7D89AFB21C9DEB6D6ACE3E105E3E" : 0,
+    "EE5017F42780957232AFF14DD75D9A51833942BE" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "D17AE245-47A2-47A2-ACC7-B02BC226BF5A",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "361C45DF263D7D89AFB21C9DEB6D6ACE3E105E3E" : "Unitiendas",
+    "EE5017F42780957232AFF14DD75D9A51833942BE" : "Unitiendas\/tapkulibrary"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "Unitienda",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Unitienda.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/FlyRicardo\/Unitiendas.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "361C45DF263D7D89AFB21C9DEB6D6ACE3E105E3E"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/devinross\/tapkulibrary.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "EE5017F42780957232AFF14DD75D9A51833942BE"
+    }
+  ]
+}
